@@ -71,7 +71,7 @@
                         <li><a href="#"><i class="fa fa-home"></i>Home</a></li>
                         <li><a href="#">About</a></li>
                         <% if user_signed_in? %>
-                        <li><a href="#">Dashboard</a></li>
+                        <li><a href="<%= dashboard_index_path %>">Dashboard</a></li>
 						<% else %>
                         <li><a href="#">Sign in</a></li>
 						<% end %>

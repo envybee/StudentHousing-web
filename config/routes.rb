@@ -1,4 +1,9 @@
 Rails.application.routes.draw do
+
+  get 'housing_listing/index' => 'api_housing_listing#index'
+
+  get 'dashboard/index'
+
   devise_for :users
   get 'welcome/index'
 
