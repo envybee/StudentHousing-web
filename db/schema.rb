@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20150302024428) do
+ActiveRecord::Schema.define(version: 20150303030757) do
 
   create_table "housing_images", force: :cascade do |t|
     t.integer "housing_listing_id", limit: 4
@@ -29,13 +29,13 @@ ActiveRecord::Schema.define(version: 20150302024428) do
     t.string   "city",           limit: 50
     t.string   "province",       limit: 20
     t.string   "country",        limit: 20
-    t.integer  "lat",            limit: 4
-    t.integer  "lng",            limit: 4
+    t.float    "latitude",       limit: 24
+    t.float    "longitude",      limit: 24
     t.datetime "created_at"
     t.datetime "updated_at"
   end
 
-  add_index "housing_listings", ["lat", "lng"], name: "index_housing_listings_on_lat_and_lng", using: :btree
+  add_index "housing_listings", ["latitude", "longitude"], name: "index_housing_listings_on_latitude_and_longitude", using: :btree
 
   create_table "housing_settings", force: :cascade do |t|
     t.integer  "housing_listing_id", limit: 4

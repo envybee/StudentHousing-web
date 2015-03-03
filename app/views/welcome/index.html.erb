@@ -85,7 +85,7 @@
 	  				Let's find a great place for you.
 	  			</div>
 	  			<div class="form-horizontal">
-				    <input name="search" id="search"/>
+				    <input name="search" id="address_input"/>
 				    <button class="btn btn-info btn-lg">
 				    	<i class="fa fa-search"></i>
 				    	Search
@@ -95,3 +95,12 @@
 		</div>
 	</body>
 </html>
+
+<script type="text/javascript" src="https://maps.googleapis.com/maps/api/js?libraries=places"></script>
+<script>
+	var address_input = document.getElementById('address_input');
+
+    address_autocomplete = new google.maps.places.Autocomplete(address_input, {
+        types: ['(cities)']
+    });
+</script>
