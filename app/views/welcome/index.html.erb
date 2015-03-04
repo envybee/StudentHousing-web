@@ -68,12 +68,12 @@
                 </div>
 			    <div class="navbar-collapse collapse">
                     <ul class="nav navbar-nav navbar-right">
-                        <li><a href="#"><i class="fa fa-home"></i>Home</a></li>
+                        <li><a href="/"><i class="fa fa-home"></i>Home</a></li>
                         <li><a href="#">About</a></li>
                         <% if user_signed_in? %>
                         <li><a href="<%= dashboard_index_path %>">Dashboard</a></li>
 						<% else %>
-                        <li><a href="#">Sign in</a></li>
+                        <li><a id="sign_in_btn" href="#">Sign in</a></li>
 						<% end %>
                     </ul>
                 </div>
@@ -94,13 +94,74 @@
 			</div>
 		</div>
 	</body>
+
+	<div class="modal" id="login_modal" tabindex="-1" role="dialog" aria-labelledby="login_modal" aria-hidden="true">
+	    <div class="modal-dialog modal-sm">
+	        <div class="modal-content">
+	            <div class="modal-header">
+	              <h2>Login</h2>
+	            </div>
+	            <div class="modal-body">
+	              	<%= form_for(:user, :url => session_path(:user)) do |f| %>
+	              	<span>Email</span>
+	                    <input type="text" class="form-control" name="email" id="email" style="margin-bottom: 5px">
+	                    <span>Password</span>
+	                    <input type="password" class="form-control" name='password'>
+	                    <span class="help-block error" id="login_errors"></span>
+	                    <span>
+	                    	<input type="checkbox" name='remember_me' id='remember_me' checked> Remember me
+	                    	<span class="pull-right">
+	                    		<%= link_to "Forgot your password?", new_password_path(:user) %>
+	                    	</span>
+	                    </span>
+	                    <br />
+	                    <button class="btn btn-lg btn-primary btn-block" id="login_btn" type="submit" style="margin-top:5px">Login</button>
+					<% end %>
+	            </div>
+	            
+	        </div>
+	    </div>
+	</div><!-- end of login_modal -->
+
+	<div class="modal" id="register_modal" tabindex="-1" role="dialog" aria-labelledby="register_modal" aria-hidden="true">
+	    <div class="modal-dialog modal-md">
+	        <div class="modal-content">
+	            <div class="modal-header">
+	              <h2>Login</h2>
+	            </div>
+	            <div class="modal-body">
+	              	<%= form_for(:user, :url => registration_path(:user)) do |f| %>
+	              	<span>Email</span>
+	                    <input type="text" class="form-control" name="email" id="email" style="margin-bottom: 5px">
+	                    <span>Password</span>
+	                    <input type="password" class="form-control" name='password'>
+	                    <span class="help-block error" id="login_errors"></span>
+
+	                    <br />
+	                    <button class="btn btn-lg btn-primary btn-block" id="login_btn" type="submit">Login</button>
+					<% end %>
+	            </div>
+	            
+	        </div>
+	    </div>
+	</div><!-- end of register_modal -->
+
 </html>
 
 <script type="text/javascript" src="https://maps.googleapis.com/maps/api/js?libraries=places"></script>
+<script src="//code.jquery.com/jquery-1.11.2.min.js"></script>
+<script src="//code.jquery.com/jquery-migrate-1.2.1.min.js"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/js/bootstrap.min.js"></script>
 <script>
 	var address_input = document.getElementById('address_input');
 
     address_autocomplete = new google.maps.places.Autocomplete(address_input, {
         types: ['(cities)']
+    });
+
+    $("#sign_in_btn").on("click", function(e) {
+    	e.preventDefault();
+
+    	$("#login_modal").modal("show");
     });
 </script>
