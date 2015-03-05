@@ -1,5 +1,7 @@
 Rails.application.routes.draw do
 
+  get 'dashboard_housing_listing/new'
+
   get 'housing_listing/near' => 'api_housing_listing#near'
 
   get 'housing_listing/index' => 'api_housing_listing#index'
