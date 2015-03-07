@@ -5,7 +5,7 @@ class ApiHousingListingController < ApplicationController
   end
 
   def near
-  	test = HousingListing.near([48, 76], 200)
+  	test = HousingListing.near([43, -79], 200)
   	render json:test
   end
 end
