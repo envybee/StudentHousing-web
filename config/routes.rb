@@ -1,12 +1,12 @@
 Rails.application.routes.draw do
 
-  get 'housing_listings/near' => 'api_housing_listing#near'
+  get 'api/v1/housing_listings/near' => 'api_housing_listing#near'
 
-  get 'housing_listings/index' => 'api_housing_listing#index'
+  get 'api/v1/housing_listings/index' => 'api_housing_listing#index'
   
-  get 'housing_settings/index' => 'api_housing_setting#index'
+  get 'api/v1/housing_settings/index' => 'api_housing_setting#index'
   
-  get 'users/index' => 'api_user#index'
+  get 'api/v1/users/index' => 'api_user#index'
 
   get 'dashboard/index'
 
