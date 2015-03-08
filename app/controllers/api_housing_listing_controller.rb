@@ -24,6 +24,7 @@ class ApiHousingListingController < ApplicationController
     housing_listing.description = params[:description]
     housing_listing.location = params[:street_address] + " " + params[:city] + " " + params[:province] + " " + params[:country] + " " + params[:postal_code]
     housing_listing.price = params[:price]
+    housing_listing.street_address = params[:street_address]
     housing_listing.postal_code = params[:postal_code]
     housing_listing.city = params[:city]
     housing_listing.province = params[:province]

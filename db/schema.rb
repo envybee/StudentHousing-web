@@ -39,6 +39,7 @@ ActiveRecord::Schema.define(version: 20150308001204) do
     t.datetime "updated_at"
     t.integer  "user_id",        limit: 4
     t.boolean  "active",         limit: 1
+    t.string   "street_address", limit: 255
   end
 
   add_index "housing_listings", ["latitude", "longitude"], name: "index_housing_listings_on_latitude_and_longitude", using: :btree

@@ -38,6 +38,7 @@
     <!-- Latest compiled and minified CSS -->
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/css/bootstrap.min.css">
     <link rel="stylesheet" href="/assets/bootstrap-switch-master/dist/css/bootstrap3/bootstrap-switch.css">
+    <link rel="stylesheet" href="/assets/bootstrap-datepicker/css/datepicker.css">
 
     <!-- Optional theme -->
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/css/bootstrap-theme.min.css">
@@ -176,6 +177,20 @@
               Price</h4>
               <input id="housing_listing_price" class="form-text" type="text"></input>
             </div>
+            <div id="form-text-wrapper">
+              <h4>
+              <i class="fa fa-clock-o"></i>
+              Start Date
+              </h4>
+              <input id="housing_listing_start_date" class="datepicker form-text-area" data-date-format="mm/dd/yyyy">
+            </div>
+            <div id="form-text-wrapper">
+              <h4>
+              <i class="fa fa-clock-o"></i>
+              End Date
+              </h4>
+              <input id="housing_listing_end_date" class="datepicker form-text-area" data-date-format="mm/dd/yyyy">
+            </div>
           </section>
         </section>
       </div>
@@ -222,6 +237,7 @@
 <script src="//code.jquery.com/jquery-migrate-1.2.1.min.js"></script>
 <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/js/bootstrap.min.js"></script>
 <script src="/assets/bootstrap-switch-master/dist/js/bootstrap-switch.js"></script>
+<script src="/assets/bootstrap-datepicker/js/bootstrap-datepicker.js"></script>
 <script src="/assets/jquery.ui.widget"></script>
 <script src="/assets/jquery.iframe-transport"></script>
 <script src="/assets/jquery.fileupload"></script>
@@ -233,6 +249,14 @@
   var cloudinary_image_new_api = "<%= api_cloudinary_image_new_url %>";
   var housing_listing_create_api = "<%= api_create_housing_listing_url %>"
   var current_housing_listing_id = <%= @housing_listing.id %>;
+
+  $('.datepicker').datepicker({
+    format: "M dd, yyyy",
+    autoclose: true,
+    showToday: true,
+    sideBySide: true,
+    pickerPosition: "bottom-right"
+  })
 
   /*----------------------------------------------------------
   |                     Google Maps                          |
