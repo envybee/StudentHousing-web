@@ -1,0 +1,2 @@
+module ApiCloudinaryImageHelper
+end

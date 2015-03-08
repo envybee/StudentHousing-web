@@ -11,11 +11,15 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20150303030757) do
+ActiveRecord::Schema.define(version: 20150308001204) do
 
   create_table "housing_images", force: :cascade do |t|
     t.integer "housing_listing_id", limit: 4
     t.string  "url",                limit: 255
+    t.string  "title",              limit: 255
+    t.string  "description",        limit: 255
+    t.string  "secure_url",         limit: 255
+    t.string  "public_id",          limit: 255
   end
 
   create_table "housing_listings", force: :cascade do |t|
@@ -33,6 +37,8 @@ ActiveRecord::Schema.define(version: 20150303030757) do
     t.float    "longitude",      limit: 24
     t.datetime "created_at"
     t.datetime "updated_at"
+    t.integer  "user_id",        limit: 4
+    t.boolean  "active",         limit: 1
   end
 
   add_index "housing_listings", ["latitude", "longitude"], name: "index_housing_listings_on_latitude_and_longitude", using: :btree

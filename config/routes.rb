@@ -1,5 +1,10 @@
 Rails.application.routes.draw do
 
+  post 'api_cloudinary_image/new', as: 'api_cloudinary_image_new'
+
+  get 'dashboard_housing_listing/new/:id',to: 'dashboard_housing_listing#new', as: 'new_housing_listing'
+
+  # get 'housing_listing/near' => 'api_housing_listing#near'
   get 'api/v1/housing_listings/near' => 'api_housing_listing#near'
 
   get 'api/v1/housing_listings/index' => 'api_housing_listing#index'
@@ -7,6 +12,10 @@ Rails.application.routes.draw do
   get 'api/v1/housing_settings/index' => 'api_housing_setting#index'
   
   get 'api/v1/users/index' => 'api_user#index'
+
+  post 'api_housing_listing/new', as: 'api_new_housing_listing'
+
+  post 'api_housing_listing/create', as: 'api_create_housing_listing'
 
   get 'dashboard/index'
 
