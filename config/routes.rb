@@ -1,10 +1,16 @@
 Rails.application.routes.draw do
 
-  get 'dashboard_housing_listing/new'
+  post 'api_cloudinary_image/new', as: 'api_cloudinary_image_new'
+
+  get 'dashboard_housing_listing/new/:id',to: 'dashboard_housing_listing#new', as: 'new_housing_listing'
 
   get 'housing_listing/near' => 'api_housing_listing#near'
 
   get 'housing_listing/index' => 'api_housing_listing#index'
+
+  post 'api_housing_listing/new', as: 'api_new_housing_listing'
+
+  post 'api_housing_listing/create', as: 'api_create_housing_listing'
 
   get 'dashboard/index'
 
