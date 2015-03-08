@@ -356,6 +356,8 @@
     var furnished = $("#furnished_checkbox").is(":checked") ? 1 : 0;
     var type = $("#furnished_checkbox").is(":checked") ? 'Apartment' : 'House';
     var price = $("#housing_listing_price").val();
+    var start_date = $("#housing_listing_start_date").val();
+    var end_date = $("#housing_listing_end_date").val();
 
     $.ajax({
       async: false,
@@ -374,7 +376,9 @@
         bathrooms: bathrooms,
         furnished: furnished,
         type: type,
-        price: price
+        price: price,
+        start_date: start_date,
+        end_date: end_date
       },
       success: function(response){
         console.log(response);

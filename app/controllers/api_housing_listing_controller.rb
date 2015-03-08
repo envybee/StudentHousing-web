@@ -31,6 +31,18 @@ class ApiHousingListingController < ApplicationController
     housing_listing.country = params[:country]
     housing_listing.active = 1
     housing_listing.save
+    if(HousingSetting.find_by(housing_listing_id: id) != nil)
+    	housing_settings = HousingSetting.find_by(housing_listing_id: id)
+    else
+    	housing_settings = HousingSetting.new
+    end
+    housing_settings.housing_listing_id = id
+    housing_settings.rental_type = params[:type]
+    housing_settings.start_date = params[:start_date]
+    housing_settings.end_date = params[:end_date]
+    housing_settings.furnished = params[:furnished]
+    housing_settings.rooms_available = params[:bedrooms]
+    housing_settings.save
     render :json => {:status => 'success'}
   end
 
