@@ -4,9 +4,14 @@ Rails.application.routes.draw do
 
   get 'dashboard_housing_listing/new/:id',to: 'dashboard_housing_listing#new', as: 'new_housing_listing'
 
-  get 'housing_listing/near' => 'api_housing_listing#near'
+  # get 'housing_listing/near' => 'api_housing_listing#near'
+  get 'api/v1/housing_listings/near' => 'api_housing_listing#near'
 
-  get 'housing_listing/index' => 'api_housing_listing#index'
+  get 'api/v1/housing_listings/index' => 'api_housing_listing#index'
+  
+  get 'api/v1/housing_settings/index' => 'api_housing_setting#index'
+  
+  get 'api/v1/users/index' => 'api_user#index'
 
   post 'api_housing_listing/new', as: 'api_new_housing_listing'
 
