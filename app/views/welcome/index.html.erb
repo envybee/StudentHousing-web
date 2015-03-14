@@ -1,0 +1,195 @@
+<html>
+	<head>
+		<!-- Latest compiled and minified CSS -->
+		<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/css/bootstrap.min.css">
+
+		<!-- Optional theme -->
+		<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/css/bootstrap-theme.min.css">
+		<link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.min.css">
+		<!-- Latest compiled and minified JavaScript -->
+		<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/js/bootstrap.min.js"></script>
+
+		<style type="text/css">
+			.container {
+				/*max-width: 730px;
+				margin-right: auto;
+				margin-left: auto;
+				background-color: #000;
+				margin-top: 100px;
+    			opacity: 0.7;*/
+			}
+			.jumbotron {
+				text-align: center;
+				font-size: 30px;
+				margin-top: 50px;
+				color: #000;
+				font-family: Candara, Calibri, Segoe, 'Segoe UI', Optima, Arial, sans-serif;
+
+				max-width: 730px;
+				margin-right: auto;
+				margin-left: auto;
+				/*background-color: #000;*/
+				margin-top: 100px;
+    			opacity: 0.7;
+			}
+			.btn {
+				/*font-size: 24px;*/
+				font-family: Candara, Calibri, Segoe, 'Segoe UI', Optima, Arial, sans-serif;
+    			font-weight: 400;
+				color: #000;
+			}
+			#search {
+				margin-top: 10px;
+				margin-bottom: 50px;
+
+				background: none;
+			    border: 2px solid #4EABD3;
+			    /*color: #4EABD3;*/
+			}
+			.search_content_text {
+				/*color: #000;*/
+			}
+			body {
+				/*background-color: #3197D5*/
+				background-image: url("/images/homepage_bg.jpeg");
+				background-size: 100% auto;
+    			background-repeat: no-repeat;
+    			opacity: 0.8
+
+			}
+		</style>
+	</head>
+
+	<body>
+		<nav class="navbar navbar-default">
+		  	<div class="container-fluid">
+		    	<!-- Brand and toggle get grouped for better mobile display -->
+			    <div class="navbar-header">
+                </div>
+			    <div class="navbar-collapse collapse">
+                    <ul class="nav navbar-nav navbar-right">
+                        <li><a href="/"><i class="fa fa-home"></i>Home</a></li>
+                        <li><a href="#">About</a></li>
+                        <% if user_signed_in? %>
+                        <li><a href="<%= dashboard_index_path %>">Dashboard</a></li>
+						<% else %>
+                        <li><a id="sign_in_btn" href="#">Sign in</a></li>
+						<% end %>
+                    </ul>
+                </div>
+			</div>
+		</nav>
+	  	<div class="container">
+	  		<div class="jumbotron">
+	  			<div class="search_content_text">
+	  				Let's find a great place for you.
+	  			</div>
+	  			<div class="form-horizontal">
+				    <input name="search" id="address_input"/>
+				    <button class="btn btn-info btn-lg">
+				    	<i class="fa fa-search"></i>
+				    	Search
+				    </button>
+				</div>
+			</div>
+		</div>
+	</body>
+
+	<div class="modal" id="login_modal" tabindex="-1" role="dialog" aria-labelledby="login_modal" aria-hidden="true">
+	    <div class="modal-dialog modal-sm">
+	        <div class="modal-content">
+	            <div class="modal-header">
+	              <h2>Login</h2>
+	            </div>
+	            <div class="modal-body">
+	              	<%= form_for(:user, :url => session_path(:user)) do |f| %>
+	              	<span>Email</span>
+	                    <input type="text" class="form-control" name="email" id="email" style="margin-bottom: 5px">
+	                    <span>Password</span>
+	                    <input type="password" class="form-control" name='password'>
+	                    <span class="help-block error" id="login_errors"></span>
+	                    <span>
+	                    	<input type="checkbox" name='remember_me' id='remember_me' checked> Remember me
+	                    	<span class="pull-right">
+	                    		<%= link_to "Forgot your password?", new_password_path(:user) %>
+	                    	</span>
+	                    </span>
+	                    <br />
+	                    <button class="btn btn-lg btn-primary btn-block" id="login_btn" type="submit" style="margin-top:5px">Login</button>
+	                    <span>Don't have an account yet? <a href="#" id="register_btn">Register</a> </span>
+					<% end %>
+	            </div>
+	            
+	        </div>
+	    </div>
+	</div><!-- end of login_modal -->
+
+	<div class="modal" id="register_modal" tabindex="-1" role="dialog" aria-labelledby="register_modal" aria-hidden="true">
+	    <div class="modal-dialog modal-md">
+	        <div class="modal-content">
+	            <div class="modal-header">
+	              <h2>Sign up</h2>
+	            </div>
+	            <div class="modal-body">
+	              	<%= form_for(:user, :url => registration_path(:user)) do |f| %>
+	              	<span>Email</span>
+	                    <input type="text" class="form-control" name="user[email]" id="user_email" style="margin-bottom: 5px">
+
+	                    <div class="field">
+		                  <span>First Name</span> 
+		                  <input type="text" class="form-control" name="first_name" id="first_name" style="margin-bottom: 5px">
+		                </div>
+
+		                <div class="field">
+		                  <span>Last Name</span> 
+		                  <input type="text" class="form-control" name="last_name" id="last_name" style="margin-bottom: 5px">
+
+		                  <div class="field">
+	                    	<span>Password</span>
+			                  <% if @validatable %>
+			                  <em>(<%= @minimum_password_length %> characters minimum)</em>
+			                  <% end %><br />
+			                    <input type="password" class="form-control" name='user[password]' id="user_password">
+			                    <span class="help-block error" id="login_errors"></span>
+			                </div>
+
+			                <div class="field">
+	                    	<span>Password Confirmation</span>
+			                <input type="password" class="form-control" name='user[password_confirmation]' id="user_password_confirmation">
+                		 </div>
+
+	                    <br />
+	                    <button class="btn btn-lg btn-primary btn-block" id="login_btn" type="submit">Sign up</button>
+					<% end %>
+	            </div>
+	            
+	        </div>
+	    </div>
+	</div><!-- end of register_modal -->
+
+</html>
+
+<script type="text/javascript" src="https://maps.googleapis.com/maps/api/js?libraries=places"></script>
+<script src="//code.jquery.com/jquery-1.11.2.min.js"></script>
+<script src="//code.jquery.com/jquery-migrate-1.2.1.min.js"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/js/bootstrap.min.js"></script>
+<script>
+	var address_input = document.getElementById('address_input');
+
+    address_autocomplete = new google.maps.places.Autocomplete(address_input, {
+        types: ['(cities)']
+    });
+
+    $("#sign_in_btn").on("click", function(e) {
+    	e.preventDefault();
+
+    	$("#login_modal").modal("show");
+    });
+
+    $("#register_btn").on("click", function(e) {
+    	e.preventDefault(); 
+
+    	$("#login_modal").modal("hide");
+    	$("#register_modal").modal("show");
+    });
+</script>
