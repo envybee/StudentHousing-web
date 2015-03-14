@@ -50,4 +50,25 @@ class ApiHousingListingController < ApplicationController
   	test = HousingListing.near([43, -79], 200)
   	render json:test
   end
+  
+  def update
+	u_id = params[:id]
+	update_listing = HousingListing.find(u_id)
+	update_listing.name = params[:name]
+	update_listing.description = params[:description]
+	update_listing.location = params[:location]
+	update_listing.price = params[:price]
+	update_listing.street_address = params[:street_address]
+	update_listing.city = params[:city]
+	update_listing.province = params[:province]
+	update_listing.country = params[:country]
+	update_listing.postal_code = params[:postal_code]
+	update_listing.save
+  end
+  
+  def delete 
+	del_id = params[:id]
+	del_entry = HousingListing.find(del_id)
+	del_entry.destroy
+  end
 end

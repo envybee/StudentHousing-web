@@ -4,6 +4,6 @@ class HousingListing < ActiveRecord::Base
 	has_one :housing_setting 
 
 	def address
-	  [city, province, country].compact.join(', ')
+	  [street_address, city, province, postal_code].compact.join(', ')
 	end
 end
