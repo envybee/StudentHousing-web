@@ -1,5 +1,9 @@
 Rails.application.routes.draw do
 
+  get 'housing_listing/show'
+
+  get 'housing_listing/show/:city/:province/:country', to: 'housing_listing#show', as: 'housing_results'
+
   post 'api_cloudinary_image/new', as: 'api_cloudinary_image_new'
 
   get 'dashboard_housing_listing/new/:id',to: 'dashboard_housing_listing#new', as: 'new_housing_listing'
@@ -16,6 +20,8 @@ Rails.application.routes.draw do
   post 'api_housing_listing/new', as: 'api_new_housing_listing'
 
   post 'api_housing_listing/create', as: 'api_create_housing_listing'
+
+  post 'api_housing_listing/housing_with_filters', as: 'api_filter_housing_listing'
 
   get 'dashboard/index'
 

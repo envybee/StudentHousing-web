@@ -52,11 +52,11 @@
 			body {
 				/*background-color: #3197D5*/
 				background-image: url("/images/homepage_bg.jpeg");
-				background-size: 100% auto;
+				background-size: cover;
     			background-repeat: no-repeat;
     			opacity: 0.8
-
 			}
+			
 		</style>
 	</head>
 
@@ -79,7 +79,7 @@
                 </div>
 			</div>
 		</nav>
-	  	<div class="container">
+	  	<div class="container" id="homepage">
 	  		<div class="jumbotron">
 	  			<div class="search_content_text">
 	  				Let's find a great place for you.
@@ -88,7 +88,9 @@
 				    <input name="search" id="address_input"/>
 				    <button class="btn btn-info btn-lg">
 				    	<i class="fa fa-search"></i>
-				    	Search
+				    	<a id="location_search_btn" href="/housing_listing/show">
+				    		Search
+				    	</a>
 				    </button>
 				</div>
 			</div>
@@ -192,4 +194,40 @@
     	$("#login_modal").modal("hide");
     	$("#register_modal").modal("show");
     });
+
+    var place;
+
+    google.maps.event.addListener(address_autocomplete, 'place_changed', function() {
+
+	  place = address_autocomplete.getPlace();
+
+	});
+
+	$("#location_search_btn").on("click", function(e) {
+
+		e.preventDefault();
+
+		if(place) {
+			var address_components = place.address_components;
+			var city, province, country;
+
+		  for(var i = 0; i < place.address_components.length; i++) {
+			  var addressType = place.address_components[i].types[0];
+			  if(addressType == 'locality') {
+			  	city = place.address_components[i].short_name;
+			  } else if (addressType == 'administrative_area_level_1') {
+			  	province = place.address_components[i].short_name;
+			  } else if (addressType == 'country') {
+			  	country = place.address_components[i].long_name;
+			  }
+		  }
+
+		  console.log(city);
+		  console.log(province);
+		  console.log(country);
+
+		  window.location.href = "/housing_listing/show/" + city + "/" + province + "/" + country;
+
+		}
+	})
 </script>

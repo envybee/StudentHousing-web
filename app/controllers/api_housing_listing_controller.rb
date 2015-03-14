@@ -50,4 +50,16 @@ class ApiHousingListingController < ApplicationController
   	test = HousingListing.near([43, -79], 200)
   	render json:test
   end
+
+  def housing_with_filters
+    num_bedrooms = params[:num_bedrooms]
+    min_price = params[:min_price]
+    max_price = params[:max_price]
+    city = params[:city]
+    province = params[:province]
+    country = params[:country]
+    formatted_address = city + " " + province + ", " + country
+    housing_listings = HousingListing.near(formatted_address, 50).where('active = ? AND price >= ? AND price <= ?', 1, min_price, max_price)
+    render json:housing_listings
+  end
 end
