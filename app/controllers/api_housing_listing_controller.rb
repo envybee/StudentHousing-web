@@ -52,14 +52,15 @@ class ApiHousingListingController < ApplicationController
   end
   
   def housing_with_filters
-    num_bedrooms = params[:num_bedrooms]
+    min_num_bedrooms = params[:min_num_bedrooms]
+    max_num_bedrooms = params[:max_num_bedrooms]
     min_price = params[:min_price]
     max_price = params[:max_price]
     city = params[:city]
     province = params[:province]
     country = params[:country]
     formatted_address = city + " " + province + ", " + country
-    housing_listings = HousingListing.near(formatted_address, 50).where('active = ? AND price >= ? AND price <= ?', 1, min_price, max_price)
+    housing_listings = HousingListing.near(formatted_address, 50).joins('INNER JOIN housing_images ON housing_listings.id = housing_images.housing_listing_id INNER JOIN housing_settings ON housing_listings.id = housing_settings.housing_listing_id').where('active = ? AND price >= ? AND price <= ? AND housing_settings.rooms_available >= ? AND housing_settings.rooms_available <= ?', 1, min_price, max_price, min_num_bedrooms, max_num_bedrooms).group('housing_listings.id').select('housing_listings.*, housing_images.*, housing_settings.*')
     render json:housing_listings
   end
   
