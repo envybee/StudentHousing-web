@@ -21,9 +21,15 @@ Rails.application.routes.draw do
 
   post 'api_housing_listing/create', as: 'api_create_housing_listing'
 
+  post 'api_housing_listing/update', as: 'api_update_housing_listing'
+  
+  post 'api_housing_listing/delete', as: 'api_delete_housing_listing'
+
   post 'api_housing_listing/housing_with_filters', as: 'api_filter_housing_listing'
 
-  get 'dashboard/index'
+  get 'dashboard/index', as: 'dashboard_index'
+  
+  get 'dashboard/edit/:id', to: 'dashboard#edit', as: 'edit_housing_listing'
 
   devise_for :users
   get 'welcome/index'

@@ -1,102 +1,59 @@
 <head>
-	<link href="//maxcdn.bootstrapcdn.com/font-awesome/4.2.0/css/font-awesome.min.css" rel="stylesheet">
-	<!-- Latest compiled and minified CSS -->
-	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/css/bootstrap.min.css">
-
-	<!-- Optional theme -->
-	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/css/bootstrap-theme.min.css">
-	<link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.min.css">
-	<!-- Latest compiled and minified JavaScript -->
-	<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/js/bootstrap.min.js"></script>
-	<style type="text/css">
-	html,body{ height:100%}
-	.navbar {
-		margin-bottom: 0px;
-	}
+	<%= render 'shared/common_dash_head' %>
+	<style>
+		a:hover {
+			text-decoration: none;
+		}
+		#container {
+			padding-top: 10px;
+		}
 	</style>
 </head>
 <body>
-	<nav class="navbar navbar-default">
-	  	<div class="container-fluid">
-	    	<!-- Brand and toggle get grouped for better mobile display -->
-		    <div class="navbar-header">
-            </div>
-		    <div class="navbar-collapse collapse">
-		    	<div class="col-md-6">
-                	<a id="post_new_place_btn" href="/dashboard_housing_listing/new" class="btn btn-success" role="button">
-                		Post new place
-                	</a>
-                </div>
-                <div class="col-md-6">
-	                <ul class="nav navbar-nav navbar-right">
-	                    <li><a href="/"><i class="fa fa-home"></i>Home</a></li>
-	                    <li><a href="#">About</a></li>
-	                    <% if user_signed_in? %>
-							<div class="btn-group pull-right">
-								<button class="btn white-bg dropdown-toggle" data-toggle="dropdown" style="border: none">
-									<i class="fa fa-user"></i> envybhargava26@gmail.com
-									<i class="fa fa-caret-down"></i>
-								</button>
-								<ul class="dropdown-menu" role="menu">
-									<li>
-										<a href="#">Sign Out</a>
-									</li>
-								</ul>
-							</div>
-						<% else %>
-	                    <li><a id="sign_in_btn" href="#">Sign in</a></li>
-						<% end %>
-	                </ul>
-	            </div>
-            </div>
-		</div>
-	</nav>
-	<div class="col-xs-3 col-sm-3 col-md-2 sidebar" style="background-color: #000000; height: 100%">
-	  <ul class="nav nav-sidebar">
-	    <li>
-	    	<a href="#"><i class="fa fa-building"></i>
-	    		Your listings
-	    	</a>
-	    </li>
-
-	    <li>
-	    	<a href="#"><i class="fa fa-heart"></i>
-	    		Favorites
-	    	</a>
-	    </li>
-	    <li>
-	    	<a href="#"><i class="fa fa-wrench"></i>
-	    		Settings
-	    	</a>
-	    </li>
-	  </ul>
-	</div>
-	<div class="col-sm-9 col-md-10">
+	<%= render 'shared/common_dash_nav' %>
+	<div id="container" class="col-sm-9 col-md-10">
+		<h1><%= current_user.first_name %>'s Listings</h1>
+		</br>
+		<% if @my_listings.length != 0 %>
+			<table class="table table-striped">
+				<tr>
+					<th style="border-left: 1px solid #ddd;">
+						Name
+					</th>
+					<th>
+						Description
+					</th>
+					<th>
+						Location
+					</th>
+					<th>
+						Price
+					</th>
+					<th>
+						Rating
+					</th>
+					<th>
+						Address
+					</th>
+					<th style="border-right: 1px solid #ddd;">
+					</th>
+				</tr>
+				<% @my_listings.each do |l| %>
+				<tr>
+					<td style="border-left: 1px solid #ddd;"><%= l.name %></td>
+					<td><%= l.description %></td>
+					<td><%= l.location %></td>
+					<td><%= l.price %></td>
+					<td><%= l.overall_rating %></td>
+					<td><%= l.address %></td>
+					<td style="border-right: 1px solid #ddd;"><a href="edit/<%=l.id%>" class="btn-sm btn-primary" role="button">Edit</a></td>
+				</tr>
+				<%end%>
+			</table>
+		<% else %>
+			<p>No results found. Post your first entry by clicking on "Post New Place."</P>
+		<% end %>
+				
 	</div>
 </body>
-
-<script src="//code.jquery.com/jquery-1.11.2.min.js"></script>
-<script src="//code.jquery.com/jquery-migrate-1.2.1.min.js"></script>
-<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/js/bootstrap.min.js"></script>
-<script>
-
-var api_new_housing_listing = "<%= api_new_housing_listing_url %>";
-
-$("#post_new_place_btn").on("click", function(e) {
-	e.preventDefault();
-
-	$.ajax({
-      async: false,
-      method: 'post',
-      url: api_new_housing_listing,
-      success: function(response){
-        console.log(response);
-	   	window.location.href = response.redirect_url;
-      },
-      error: function(response) {
-        console.log(response);
-      }
-    });
-});
-
-</script>
+<%= render 'shared/common_dash_scripts' %>
