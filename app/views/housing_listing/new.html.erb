@@ -205,6 +205,23 @@
 
   </body>
 
+  <div class="modal fade" id="publish_diag" tabindex="-1" role="dialog" aria-labelledby="publish_diag_title" aria-hidden="true">
+      <div class="modal-dialog">
+      <div class="modal-content">
+          <div class="modal-header">
+          <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+          <h4 class="modal-title" id="publish_diag_title">Ad Published!</h4>
+          </div>
+          <div class="modal-body">
+          <p>You have successfully published your ad. You can find it at the following <a href="../show/<%= @housing_listing.id %>" target="_blank">link</a>.</p>
+          </div>
+          <div class="modal-footer">
+          <button id="publish_confirm" type="button" class="btn btn-primary">Got it!</button>
+          </div>
+      </div><!-- /.modal-content -->
+      </div><!-- /.modal-dialog -->
+  </div>
+
   <div class="modal" id="photos_modal" tabindex="-1" role="dialog" aria-labelledby="login_modal" aria-hidden="true">
       <div class="modal-dialog modal-sm">
           <div class="modal-content">
@@ -341,10 +358,21 @@
     $("#photo_upload_submit_btn").click();
   });
 
+  $('#publish_confirm').on("click", function(e) {
+      e.preventDefault();
+      $("#publish_diag").modal("hide");
+      window.location.href = dashboard_index;
+
+  });
+
   var dashboard_index = "<%= dashboard_index_url %>"; 
   $('#cancel_btn').on("click", function(e) {
     e.preventDefault();
     window.location.href = dashboard_index;
+  });
+
+  $("#publish_confirm").on("click", function(e) {
+      window.location.href = dashboard_index;
   });
 
   $("#publish_btn").on("click", function(e) {
@@ -388,7 +416,7 @@
       },
       success: function(response){
         console.log(response);
-        window.location.href = dashboard_index;
+        $("#publish_diag").modal("show");
       },
       error: function(response) {
         console.log(response);
