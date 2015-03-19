@@ -2,11 +2,13 @@ Rails.application.routes.draw do
 
   get 'housing_listing/show'
 
+  get 'housing_listing/edit/:id', to: 'housing_listing#edit', as: 'edit_housing_listing'
+
+  get 'housing_listing/new/:id', to: 'housing_listing#new', as: 'new_housing_listing'
+
   get 'housing_listing/show/:city/:province/:country', to: 'housing_listing#show', as: 'housing_results'
 
   post 'api_cloudinary_image/new', as: 'api_cloudinary_image_new'
-
-  get 'dashboard_housing_listing/new/:id',to: 'dashboard_housing_listing#new', as: 'new_housing_listing'
 
   # get 'housing_listing/near' => 'api_housing_listing#near'
   get 'api/v1/housing_listings/near' => 'api_housing_listing#near'
@@ -28,8 +30,6 @@ Rails.application.routes.draw do
   post 'api_housing_listing/housing_with_filters', as: 'api_filter_housing_listing'
 
   get 'dashboard/index', as: 'dashboard_index'
-  
-  get 'dashboard/edit/:id', to: 'dashboard#edit', as: 'edit_housing_listing'
 
   devise_for :users
   get 'welcome/index'

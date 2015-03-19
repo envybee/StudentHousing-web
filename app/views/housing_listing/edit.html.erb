@@ -108,6 +108,7 @@
 
 	var dashboard_index = "<%= dashboard_index_url %>";		
 	var housing_listing_id = <%= @edit_listing.id %>;
+	var housing_listing_active = "<%= @edit_listing.active %>";
 	
 	$("#del_confirm").on("click", function(e) {
 		deleteEntry();
