@@ -50,6 +50,32 @@ class ApiHousingListingController < ApplicationController
   	test = HousingListing.near([43, -79], 200)
   	render json:test
   end
+
+  def comment
+    housing_listing_id = params[:housing_listing_id]
+    comment = params[:comment]
+    rating = params[:rating]
+    housing_review = HousingReview.new
+    housing_review.housing_listing_id = housing_listing_id
+    housing_review.user_id = current_user.id
+    housing_review.comment = comment
+    housing_review.rating = rating
+    housing_review.save
+    housing_listing = HousingListing.find(housing_listing_id)
+    housing_listing.overall_rating = (housing_listing.housing_reviews.sum("rating")) / housing_listing.housing_reviews.count
+    housing_listing.save
+    render :json => {:status => 'success'}
+  end
+
+  def send_inquiry_email
+    housing_listing_id = params[:housing_listing_id]
+    email = params[:email]
+    message = params[:message]
+    housing_listing = HousingListing.find(housing_listing_id)
+    @user = housing_listing.user
+    UserMailer.housing_inquiry_email(@user, email, message).deliver_now
+    render :json => {:status => "success"}
+  end
   
   def housing_with_filters
     min_num_bedrooms = params[:min_num_bedrooms]

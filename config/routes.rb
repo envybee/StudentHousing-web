@@ -1,8 +1,12 @@
 Rails.application.routes.draw do
 
+  get 'housing_listing/index'
+
   get 'housing_listing/show'
 
-  get 'housing_listing/show/:city/:province/:country', to: 'housing_listing#show', as: 'housing_results'
+  get 'housing_listing/:id', to: 'housing_listing#show'
+
+  get 'housing_listing/index/:city/:province/:country', to: 'housing_listing#index', as: 'housing_results'
 
   post 'api_cloudinary_image/new', as: 'api_cloudinary_image_new'
 
@@ -16,6 +20,10 @@ Rails.application.routes.draw do
   get 'api/v1/housing_settings/index' => 'api_housing_setting#index'
   
   get 'api/v1/users/index' => 'api_user#index'
+
+  post 'api_housing_listing/comment', as: 'api_comment_housing_listing'
+
+  post 'api_housing_listing/send_inquiry_email', as: 'api_send_inquiry_email_housing_listing'
 
   post 'api_housing_listing/new', as: 'api_new_housing_listing'
 

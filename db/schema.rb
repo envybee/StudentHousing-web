@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20150308001204) do
+ActiveRecord::Schema.define(version: 20150319021147) do
 
   create_table "housing_images", force: :cascade do |t|
     t.integer "housing_listing_id", limit: 4
@@ -44,6 +44,15 @@ ActiveRecord::Schema.define(version: 20150308001204) do
 
   add_index "housing_listings", ["latitude", "longitude"], name: "index_housing_listings_on_latitude_and_longitude", using: :btree
 
+  create_table "housing_reviews", force: :cascade do |t|
+    t.integer  "housing_listing_id", limit: 4
+    t.integer  "user_id",            limit: 4
+    t.string   "comment",            limit: 255
+    t.integer  "rating",             limit: 4
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
   create_table "housing_settings", force: :cascade do |t|
     t.integer  "housing_listing_id", limit: 4
     t.string   "rental_type",        limit: 255
@@ -52,6 +61,7 @@ ActiveRecord::Schema.define(version: 20150308001204) do
     t.boolean  "furnished",          limit: 1
     t.integer  "total_rooms",        limit: 4
     t.integer  "rooms_available",    limit: 4
+    t.integer  "num_washrooms",      limit: 4
   end
 
   create_table "users", force: :cascade do |t|

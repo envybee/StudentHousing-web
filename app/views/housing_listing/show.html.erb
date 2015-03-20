@@ -2,15 +2,27 @@
 <html>
   <head>
 
+    <!-- Latest compiled and minified CSS -->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/css/bootstrap.min.css">
+    <link rel="stylesheet" href="/assets/bootstrap-switch-master/dist/css/bootstrap3/bootstrap-switch.css">
+    <link rel="stylesheet" href="/assets/bootstrap-datepicker/css/datepicker.css">
+
+    <!-- Optional theme -->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/css/bootstrap-theme.min.css">
+    <link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.min.css">
+    <!-- Latest compiled and minified JavaScript -->
+
+
     <style type="text/css">
-      html {
+      body, html {
         height: 100%;
         width: 100%;
+        background-color: #DEDEDE;
       }
-      body {  
+      #wrapper {
         height: 100%;
         width: 100%;
-        padding-bottom: 120px; 
+        background-color: #DEDEDE;
       }
       .form-text {
         width: 100%; 
@@ -38,107 +50,298 @@
       .btn {
         font-family: sans-serif;
       }
-      img {
-        max-width: none;
+      i {
+        color: #2E90E6;
+      }
+      .fa-star {
+        font-size: 50px;
+        color: #FFD700;
+        padding-right: 10px;
+      }
+      .comment {
+        margin-bottom: 10px;
+      }
+      .commenter_name {
+        color: #2E90E6;
       }
     </style>
-
-    <!-- Latest compiled and minified CSS -->
-    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/css/bootstrap.min.css">
-    <link rel="stylesheet" href="/assets/bootstrap-switch-master/dist/css/bootstrap3/bootstrap-switch.css">
-    <link rel="stylesheet" href="/assets/bootstrap-datepicker/css/datepicker.css">
-    <link rel="stylesheet" href="/assets/seiyria-bootstrap-slider/css/bootstrap-slider.css"></script>
-
-    <!-- Optional theme -->
-    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/css/bootstrap-theme.min.css">
-    <link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.min.css">
-    <!-- Latest compiled and minified JavaScript -->
   </head>
   <body>
+    <div id="wrapper">
 
-    <nav class="navbar navbar-default">
-        <div class="container-fluid">
-          <!-- Brand and toggle get grouped for better mobile display -->
-          <div class="navbar-header">
-          </div>
-          <div class="navbar-collapse collapse">
-            <ul class="nav navbar-nav navbar-right">
-              <li><a href="/"><i class="fa fa-home"></i>Home</a></li>
-              <li><a href="#">About</a></li>
-              <% if user_signed_in? %>
-              <li><a href="<%= dashboard_index_path %>">Dashboard</a></li>
+      <nav class="navbar navbar-default">
+          <div class="container-fluid">
+            <!-- Brand and toggle get grouped for better mobile display -->
+            <div class="navbar-header">
+                  </div>
+            <div class="navbar-collapse collapse">
+                      <ul class="nav navbar-nav navbar-right">
+                          <li><a href="/"><i class="fa fa-home"></i>Home</a></li>
+                          <li><a href="#">About</a></li>
+                          <% if user_signed_in? %>
+                          <li><a href="<%= dashboard_index_path %>">Dashboard</a></li>
               <% else %>
-              <li><a id="sign_in_btn" href="#">Sign in</a></li>
+                          <li><a id="sign_in_btn" href="#">Sign in</a></li>
               <% end %>
-            </ul>
+                      </ul>
+                  </div>
+        </div>
+      </nav>
+      <div class="container">
+        <div class="col-md-12 col-sm-12 col-xs-12" style="">
+          <div id="map-canvas" style="height:317px;"></div>
         </div>
       </div>
-    </nav>
-
-    <div class="col-md-9 col-sm-8 col-xs-7" style="height: 100%;">
-      <div id="map-canvas" style="height:100%;"></div>
-    </div>
-    <div id="housing_listing_results_wrapper" class="col-md-3 col-sm-4 col-xs-5" style="height: 100%; overflow: scroll; padding-left: 0px;">
-      <% @housing_listings.each do |housing_listing| %>
-      <div style="">
-        <section class='panel'>
-          <section class='panel-body'>
-            <a href="#">  
-              <img src="<%= housing_listing.housing_images.first.url %>" style="width: 275px; height: 230px;">
-              </img>
-            </a>
-            <div id="text" style="font-family: sans-serif; text-align:center; margin: 10px;">
-              <strong style="font-size: 22px;">
-              <%= housing_listing.name %>
-              </strong>
-            </div>
-            <div style="margin: 10px;">
-              <i class="fa fa-map-marker"></i>
-              <%= truncate(housing_listing.location, :length => 32) %>
-            </div>
-            <div id="text" class="col-md-6 col-xs-12" style="font-family: sans-serif; text-align:left;">
-              <i class="fa fa-bed"></i>
-              <%= housing_listing.housing_setting.rooms_available %> bedrooms
-            </div>
-            <div id="text" class="col-md-6 col-xs-12" style="font-family: sans-serif; text-align:right;">
-              <i class="fa fa-dollar"></i>
-              <%= housing_listing.price %>
-            </div>
+      <div class="container">
+        <div class="col-md-7" style="margin-top: 20px;">
+          <section class='panel'>
+            <section class="panel-heading">
+              <div id="form-text-wrapper" style="text-align: center;">
+                <h3>
+                  <i class="fa fa-building-o"></i>
+                  <%= @housing_listing.name %>
+                </h3>
+              </div>
+              <div id="form-text-wrapper" style="text-align: center; font-size: 15px;">
+                <%= @housing_listing.location %>
+              </div>
+            </section>
+            <section class='panel-body'>
+              <div class="col-md-12" id="" style="padding-left: 0px; padding-right: 0px; font-size: 22px;">
+                <i class="fa fa-pencil"></i>
+                Description
+              </div>
+              <div style="font-size: 18px;">
+                <%= @housing_listing.description %>
+              </div>
+            </section>
           </section>
-        </section>
+
+          <section class='panel'>
+            <section class="panel-heading">
+              <div id="form-text-wrapper" style="text-align: center;">
+                <h3>
+                  Amenities
+                </h3>
+              </div>
+            </section>
+            <section class="panel-body">
+              <div id="" class="col-md-6" style="font-size: 17px;">
+                <i class="fa fa-bed"></i>
+                <%= @housing_listing.housing_setting.furnished == 1 ? 'Furnished' : 'Unfurnished' %>
+              </div>
+            </section>
+          </section>
+
+          <section class='panel'>
+            <section class="panel-heading">
+              <div id="form-text-wrapper" style="text-align: center;">
+                <h3>
+                  Reviews
+                </h3>
+              </div>
+            </section>
+            <section class="panel-body">
+              <div id="comments_body">
+                <% if @housing_listing.housing_reviews.length > 0 %>
+
+                  <% @housing_listing.housing_reviews.each do |housing_review| %>
+                    <% if !housing_review.comment.empty? %>
+                    <div class="col-xs-9">
+                      <span class="commenter_name" style="font-size: 20px;">
+                        <%= housing_review.user.first_name %>
+                      </span> says
+                    </div>
+                    <div class="col-xs-3">
+                      <% housing_review.rating.to_i.times do%>
+                        <i class="fa fa-star" style="font-size: 15px; padding: 0px; margin: 0px;"></i>
+                      <% end %>
+                    </div>
+                    <div class="col-xs-12 comment" style="font-size: 18px;">
+                      <%= housing_review.comment %>
+                    </div>
+                    <% end %>
+                  <% end %>
+                <% else %>
+                  <div id="no_review_warning" class="col-xs-12">
+                    <div class="alert alert-warning">
+                      No reviews for this listing yet
+                    </div>
+                  </div>
+                <% end %>
+              </div>
+
+              <% if user_signed_in? %>
+                <div class="col-xs-12">
+                  <div class="input-group">
+                    <span class="input-group-addon">
+                      <input id="rating_input" type="number" data-max="5" data-min="1" data-empty-value="0" class="rating form-control input-group-addon" />
+                    </span>
+                    <span>
+                      <input id="comment_input" type="text" class="form-control" placeholder="Add a new comment...">
+                     </span>
+                    <span class="input-group-btn">
+                      <button id="comment_submit_btn" class="btn btn-default" type="button">Comment</button>
+                    </span>
+                  </div><!-- /input-group -->
+                </div>
+              <% end %>
+            </section>
+          </section>
+        </div>
+        <div class="col-md-5">
+          <div style="width: 100%;">
+            <h3>
+              <button id="send_message_btn" class="btn btn-lg btn-info"  style="width: 100%;">
+                <i class="fa fa-envelope" style="color: #FFF"></i>
+                Message
+              </button>
+            </h3>
+          </div>
+          <section class='panel'>
+            <section class="panel-heading">
+              <div id="form-text-wrapper" style="text-align: center;">
+                <h3>
+                  Details
+                </h3>
+              </div>
+            </section>
+            <section class='panel-body'>
+              <div class="col-md-12 col-sm-12 col-xs-12">
+                <div id="" class="col-md-6 col-sm-6 col-xs-6" style="padding-left: 0px;">
+                  <h4>
+                  <i class="fa fa-bed"></i>
+                   <%= @housing_listing.housing_setting.rooms_available %> Bedrooms
+                  </h4>
+                  <h4>
+                  <i class="fa fa-tint"></i>
+                    <%= @housing_listing.housing_setting.num_washrooms %> Bathrooms
+                  </h4>
+                </div>
+                <div id="" class="col-md-6 col-sm-6 col-xs-6" style="padding-right: 0px; padding-top:15px; height: 100%">
+                  <span id="" style="font-size: 25px;">
+                    $<%= @housing_listing.price %>
+                  </span>
+                  <span style="font-size: 15px;">
+                    per month
+                  </span>
+                </div>
+              </div>
+              <div class="col-md-12 col-sm-12 col-xs-12">
+                <div style="margin-top: 18px;">
+                  <i class="fa fa-clock-o"></i>
+                  Available
+                </div>
+                <div id="" style="font-size: 20px;">
+                  <h4>
+                    <%= @housing_listing.housing_setting.start_date.strftime("%B %e, %Y") %>
+                     to 
+                    <%= @housing_listing.housing_setting.end_date.strftime("%B %e, %Y") %>
+                  </h4>
+                </div>
+              </div>
+            </section>
+          </section>
+
+
+            <section class='panel'>
+              <section class='panel-body'>
+                <div id="carousel-example-generic" class="carousel slide" data-ride="carousel" style="height: 317px;">
+                  <!-- Indicators -->
+                  <ol id="carousel_indicators" class="carousel-indicators">
+                    <li data-target="#carousel-example-generic" data-slide-to="0" class="active"></li>
+                    <li data-target="#carousel-example-generic" data-slide-to="1"></li>
+                  </ol>
+
+                  <!-- Wrapper for slides -->
+                  <div id="carousel_inner" class="carousel-inner" role="listbox">
+                    <div class="item active">
+                      <img src="/images/homepage_bg.jpeg" alt="..."></img>
+                      <div class="carousel-caption">
+                      </div>
+                    </div>
+                    <div class="item">
+                      <img src="/images/homepage_bg.jpeg" alt="..."></img>
+                      <div class="carousel-caption">
+                        <h3>First bedroom</h3>
+                        <p>This is the master bedroom - Lots of sunlight and shit</p>
+                      </div>
+                    </div>
+                    <% @housing_listing.housing_images.each do |housing_image| %>
+                      <div class="item">
+                        <img src="<%= housing_image.url %>" alt="..." style="width: 100%; height: 317px;"></img>
+                        <div class="carousel-caption">
+                          <h3><%= housing_image.title %></h3>
+                          <p><%= housing_image.description %></p>
+                        </div>
+                      </div>
+                    <% end %>
+                  </div>
+
+                  <!-- Controls -->
+                  <a class="left carousel-control" href="#carousel-example-generic" role="button" data-slide="prev">
+                    <span class="glyphicon glyphicon-chevron-left" aria-hidden="true"></span>
+                    <span class="sr-only">Previous</span>
+                  </a>
+                  <a class="right carousel-control" href="#carousel-example-generic" role="button" data-slide="next">
+                    <span class="glyphicon glyphicon-chevron-right" aria-hidden="true"></span>
+                    <span class="sr-only">Next</span>
+                  </a>
+                </div>
+              </section>
+            </section>
+
+          <section class='panel'>
+            <section class="panel-heading">
+              <div id="form-text-wrapper" style="text-align: center;">
+                <h3>
+                  Rating
+                </h3>
+              </div>
+            </section>
+            <section class="panel-body" style="text-align: center;">
+              <% @housing_listing.overall_rating.to_i.times do %>
+                <i class="fa fa-star"></i>
+              <% end %>
+            </section>
+          </section>
+        </div>
       </div>
-      <% end %>
+      <div class="container">
+        <div class="col-md-12" style="margin-bottom: 40px;">
+          <div id="pano" style="width: 100%; height: 400px;"></div>
+        </div>
+      </div>
     </div>
-    <nav class="navbar navbar-default navbar-fixed-bottom">
-      <div style="text-align: center; margin:10px;">
-        <strong>
-          Filters
-        </strong>
-      </div>
-      <div class="container-fluid" style="margin: 10px; text-align: center;">
-        <span style="margin: 10px;">
-          <span style="margin: 10px;">
-          <i class="fa fa-dollar"></i>
-            Price        
-          </span>
-          <b>$0</b> <input id="price_slider" type="text" class="span2" value="" data-slider-min="0" data-slider-max="1500" data-slider-step="25" data-slider-value="[0,1500]"/> <b>$1500+</b>
-        </span>
-        <span style="margin: 10px;">
-          <span style="margin: 10px;">
-          <i class="fa fa-bed"></i>
-            Bedrooms        
-          </span>
-          <b>1</b> <input id="bedroom_slider" type="text" class="span2" value="" data-slider-min="1" data-slider-max="5" data-slider-step="1" data-slider-value="[1,5]"/> <b>5+</b>
-        </span>
-        <span>
-          <button id="filter_submit_btn" class="btn btn-success">
-            <i class="fa fa-rocket"></i>
-            Go!
-          </button>
-        </span>
-      </div>
-    </nav>
   </body>
+
+  <div class="modal" id="housing_inquiry_email_modal" tabindex="-1" role="dialog" aria-labelledby="housing_inquiry_email_modal" aria-hidden="true">
+      <div class="modal-dialog modal-sm">
+          <div class="modal-content">
+              <div class="modal-header">
+                <h4>Send Message</h4>
+              </div>
+              <div class="modal-body">
+                <div>
+                  Your email
+                  <% if user_signed_in?%>
+                    <input id="email_input" class="form-text" type="text" value="<%= current_user.email %>">
+                  <% else %>
+                    <input id="email_input" class="form-text" type="text" value="">
+                  <% end %>
+                </div>
+                <div>
+                  Message
+                  <textarea id="message_input" class="form-text-area" rows="5" id="photo_details"></textarea>
+                </div>
+                <div id="send_email_btn" class="btn btn-success" style="width: 100%;">
+                  Send
+                </div>
+              </div>
+              
+          </div>
+      </div>
+  </div><!-- end of photos_modal -->
 </html>
 
 <script type="text/javascript" src="https://maps.googleapis.com/maps/api/js?libraries=places"></script>
@@ -147,106 +350,34 @@
 <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/js/bootstrap.min.js"></script>
 <script src="/assets/bootstrap-switch-master/dist/js/bootstrap-switch.js"></script>
 <script src="/assets/bootstrap-datepicker/js/bootstrap-datepicker.js"></script>
-<script src="/assets/seiyria-bootstrap-slider/js/bootstrap-slider.js"></script>
+<script src="/assets/bootstrap-rating-input/src/bootstrap-rating-input.js"></script>
 <script src="/assets/jquery.ui.widget"></script>
 <script src="/assets/jquery.iframe-transport"></script>
 <script src="/assets/jquery.fileupload"></script>
 <script src="/assets/jquery.cloudinary"></script>
-<script type="text/javascript" src="http://google-maps-utility-library-v3.googlecode.com/svn/trunk/infobox/src/infobox.js"></script>
-
-<script type="text/javascript" src="http://google-maps-utility-library-v3.googlecode.com/svn/trunk/markerclustererplus/src/markerclusterer.js"></script>
-
 
 <script>
 
-function getContentString(image_url, name, rooms, price) {
-  return contentString = '<div id="" style="width: 175px;">' + 
-      '<a href="#">' +
-      '<img src="' + image_url + '" style="width: 175px; height: 150px; max-width: none;" ' +
-      '</img>' +
-      '</a>' +
-      '<div id="text" style="font-family: sans-serif; text-align:center; margin: 10px; color: #FFFFFF;">' +
-                  '<strong>' +
-                  name +
-                  '</strong>' +
-                '</div>' + 
-                  '<span id="text" style="font-family: sans-serif; text-align:left; margin-left: 5px; color: #FFFFFF;">' +
-                    '<i class="fa fa-bed" style="margin-right: 5px;"></i>' +
-                    + rooms + ' bedrooms' +
-                  '</span>' +
-                  '<span id="text" class="pull-right" style="font-family: sans-serif; text-align:right; margin-right: 5px; color: #FFFFFF;">' +
-                    '<i class="fa fa-dollar" style="margin-right: 5px;"></i>' +
-                    price +
-                  '</span>' +
-      '</div>';
-}
+  var cloudinary_image_new_api = "<%= api_cloudinary_image_new_url %>";
+  var housing_listing_create_api = "<%= api_create_housing_listing_url %>"
+  var current_housing_listing_id = <%= @housing_listing.id %>;
 
-function removeMarkers() {
-  for(var i = 0; i < markers.length; i++) {
-    markers[i].setMap(null);
-  }
-  markers = [];
-}
+  $('.datepicker').datepicker({
+    format: "M dd, yyyy",
+    autoclose: true,
+    showToday: true,
+    sideBySide: true,
+    pickerPosition: "bottom-right"
+  })
 
-function setClusterListener(markerCluster) {
-  google.maps.event.addListener(markerCluster, "clusterclick", function (cluster) {
- 
-    var clusterClicked = true;
-    var clusterMarkers = cluster.getMarkers();
-    var testString = "";
-    var lat = clusterMarkers[0].getPosition().lat();
-    var lng = clusterMarkers[0].getPosition().lng();
-    var isCloseEnough = true;
+  /*----------------------------------------------------------
+  |                     Google Maps                          |
+  -----------------------------------------------------------*/
 
-    for(var i = 0; i < clusterMarkers.length; i++) {
-      var clusterLatLng = clusterMarkers[i].getPosition();
-      if(clusterLatLng.lat() >= (lat - 0.0001) && clusterLatLng.lat() <= (lat + 0.0001) &&
-         clusterLatLng.lng() >= (lng - 0.0001) && clusterLatLng.lng() <= (lng + 0.0001) ) {
-        isCloseEnough = true;
-      } else {
-        isCloseEnough = false;
-        break;
-      }
-    }
-
-    if(isCloseEnough) {
-
-      this.setZoomOnClick(false);
-
-      for (var i = 0; i < clusterMarkers.length; i++) {
-        google.maps.event.trigger(clusterMarkers[i], 'click');
-      }
-
-    } else {
-      this.setZoomOnClick(true);
-    }
-  });
-}
-
-function getInfoBoxOptions(contentString) {
-  return myOptions = {
-     content: contentString
-    ,disableAutoPan: false
-    ,maxWidth: 0
-    ,pixelOffset: new google.maps.Size(-140, 0)
-    ,zIndex: null
-    ,boxStyle: { 
-      background: "#000000"
-      ,width: "175px"
-     }
-    ,closeBoxMargin: "2px 2px 2px 2px"
-    ,closeBoxURL: "http://www.google.com/intl/en_us/mapfiles/close.gif"
-    ,infoBoxClearance: new google.maps.Size(1, 1)
-    ,isHidden: false
-    ,pane: "floatPane"
-    ,enableEventPropagation: false
-  };
-}
-  
   var mapOptions = {
       center: new google.maps.LatLng(43.4304343, -80.4763151),
-      minZoom: 5,
-      zoom: 10,
+      minZoom: 10,
+      zoom: 14,
       maxZoom: 17,
       scrollwheel: false,
       streetViewControl: false,
@@ -255,142 +386,103 @@ function getInfoBoxOptions(contentString) {
   };
 
   var map = new google.maps.Map(document.getElementById('map-canvas'), mapOptions);
-  var markers = [];
-  var latlngArray = [];
-  var infoWindows = [];
-
-  <% @housing_listings.each do |housing_listing| %>
-
-    var myLatlng = new google.maps.LatLng(<%= housing_listing.latitude %>, <%= housing_listing.longitude%>);
-
-    var contentString = getContentString("<%= housing_listing.housing_images.first.url %>", "<%= housing_listing.name %>", "<%= housing_listing.housing_setting.rooms_available %>", "<%= housing_listing.price %>");
+  var myLatlng = new google.maps.LatLng(<%= @housing_listing.latitude %>, <%= @housing_listing.longitude%>);
 
     // set the marker position and display it
-    var marker = new google.maps.Marker({
+    marker = new google.maps.Marker({
         animation: google.maps.Animation.DROP,
         map: map,
         position: myLatlng
     });
 
-    markers.push(marker);
-    var infoBoxOptions = getInfoBoxOptions(contentString);
+    map.setCenter(myLatlng);
+    map.setZoom(17);
 
-    var infobox = new InfoBox(infoBoxOptions);
-    var content = contentString;
 
-    google.maps.event.addListener(marker,'click', (function(marker,content,infobox){ 
-        return function() {
-          infobox.open(map, marker);
-        };
-    })(marker,content,infobox));
-
-  <% end %>
-
-  var markerClustererOptions = {
-    'zoomOnClick': false
+  var panoramaOptions = {
+    position: myLatlng,
+    pov: {
+      heading: 0,
+      pitch: 0
+    }
   };
 
-  var markerCluster = new MarkerClusterer(map, markers);
+  var panorama = new google.maps.StreetViewPanorama(document.getElementById('pano'), panoramaOptions);
+  map.setStreetView(panorama);
 
-  setClusterListener(markerCluster);
-  
-    //clearMarkers on markerCluster in success is not working, this is just a workaround
-    var responseCluster = markerCluster;
+  /*---------------------------------------
+  |           Click listeners             |
+  ----------------------------------------*/
 
-  // Instantiate the sliders
-  var price_slider = $('#price_slider').slider();
-  var bedroom_slider = $('#bedroom_slider').slider();
-
-  $("#filter_submit_btn").on("click", function(e) {
+  $("#upload_photos_btn").on("click", function(e) {
     e.preventDefault();
 
-    var filter_price = price_slider.slider('getValue');
-    var filter_num_rooms = bedroom_slider.slider('getValue');
+    $("#photos_modal").modal("show");
 
-    var api_filter_housing_listing = "<%= api_filter_housing_listing_url %>";
+  });
+
+  $("#custom_photo_upload_submit_btn").on("click", function(e) {
+    e.preventDefault();
+
+    $("#photo_upload_submit_btn").click();
+  });
+
+  /*-----------------------------------------
+  |            Bootstrap Switches           |
+  ------------------------------------------*/
+
+  $("#furnished_checkbox").bootstrapSwitch({
+    onText: 'Furnished',
+    offText: 'Unfurnished',
+    onColor: 'success',
+    offColor: 'info',
+    size: 'small',
+  });
+
+  $("#housing_type_checkbox").bootstrapSwitch({
+    onText: 'Apartment',
+    offText: 'House',
+    onColor: 'success',
+    offColor: 'info',
+    size: 'small',
+  });
+
+  /*-----------------------------------------
+  |               Comments                   |
+  -------------------------------------------*/
+
+  var housing_listing_comment_api = "<%= api_comment_housing_listing_url %>";
+
+  $("#comment_submit_btn").on("click", function(e) {
+    e.preventDefault();
+
+    var housing_listing_id = "<%= @housing_listing.id %>";
+    var comment = $("#comment_input").val();
+    var rating = $("#rating_input").val();
 
     $.ajax({
       method: 'post',
-      url: api_filter_housing_listing,
+      url: housing_listing_comment_api,
       data: {
-        'min_price': filter_price[0],
-        'max_price': filter_price[1],
-        'min_num_bedrooms': filter_num_rooms[0],
-        'max_num_bedrooms': filter_num_rooms[1],
-        'city': "<%= @city %>",
-        'province': "<%= @province %>",
-        'country': "<%= @country %>"
+        housing_listing_id: housing_listing_id,
+        comment: comment,
+        rating: rating
       },
       success: function(response){
-        responseCluster.clearMarkers();
         console.log(response);
 
-        $("#housing_listing_results_wrapper").html("");
-        removeMarkers();
+        if(comment) {
 
-        if(response.length == 0) {
-          $("#housing_listing_results_wrapper").html("No housing listings available. Please use a broader range of filters to get more listings.");
-        }
-
-        for(var i = 0; i < response.length; i++) {
-          var housing_listing = response[i];
-          var section = "<section class='panel'><section class='panel-body'>";
-
-          var image_div = "<a href='#'> <img src='" + housing_listing['url'] + "' style='width: 275px; height: 230px;'> </img></a>";
-
-          var name_div = "<div id='text' style='font-family: sans-serif; text-align:center; margin: 10px;'> <strong style='font-size: 22px;'>" + housing_listing['name'] + "</strong></div>";
-
-          if(housing_listing['location'].length > 32) {
-            housing_listing_location = housing_listing['location'].substring(0, 31) + '...';
-          } else {
-            housing_listing_location = housing_listing['location'];
+          $("#comment_input").val('')
+          $("#no_review_warning").hide();
+          var rating_div = "<div class='col-xs-3'>";
+          for (var counter = 0; counter < rating; counter++) {
+            rating_div += "<i class='fa fa-star' style='font-size: 15px; padding: 0px; margin: 0px;'></i>";
           }
-
-          var location_div = "<div style='margin: 10px;'> <i class='fa fa-map-marker'></i> " + housing_listing_location + "</div>";
-
-          var bedrooms_div = "<div id='text' class='col-md-6 col-xs-12' style='font-family: sans-serif; text-align:left;'><i class='fa fa-bed'></i> " + housing_listing['rooms_available'] + " bedrooms </div>";
-
-          var price_div = "<div id='text' class='col-md-6 col-xs-12' style='font-family: sans-serif; text-align:right;'> <i class='fa fa-dollar'></i> " + housing_listing['price'] + "</div>"
-
-          var section_end = "</section></section>";
-
-          $("#housing_listing_results_wrapper").append(section + image_div + name_div + location_div + bedrooms_div + price_div + section_end);
-
-          /*------------------------------------------
-                      Google Maps Markers            |
-          -------------------------------------------*/
-
-          var myLatlng = new google.maps.LatLng(housing_listing['latitude'], housing_listing['longitude']);
-
-          var contentString = getContentString(housing_listing['url'], housing_listing['name'], housing_listing['rooms_available'], housing_listing['price']);
-
-          var infoBoxOptions = getInfoBoxOptions(contentString);
-
-          // set the marker position and display it
-          var marker = new google.maps.Marker({
-              animation: google.maps.Animation.DROP,
-              map: map,
-              position: myLatlng
-          });
-
-          markers.push(marker);
-
-          var infobox = new InfoBox(infoBoxOptions);
-          var content = contentString;
-
-          google.maps.event.addListener(marker,'click', (function(marker,content,infobox){ 
-              return function() {
-                infobox.open(map, marker);
-              };
-          })(marker,content,infobox));
+          rating_div += "</div>";
+          $("#comments_body").append("<div class='col-xs-9'><span class='commenter_name' style='font-size: 20px;'><%= current_user.first_name %></span> says</div>"+ rating_div + "<div class='col-xs-12 comment' style='font-size: 18px;'>" + comment + "</div>");
+    
         }
-
-        var markerCluster = new MarkerClusterer(map, markers);
-
-        setClusterListener(markerCluster);
-
-        responseCluster = markerCluster;
-        
       },
       error: function(response) {
         console.log(response);
@@ -398,5 +490,40 @@ function getInfoBoxOptions(contentString) {
     });
 
   })
+
+  /*--------------------------------------------
+  |             Send Inquiry Email             |
+  ---------------------------------------------*/
+
+  var housing_listing_id = "<%= @housing_listing.id %>";
+  var housing_listing_send_inquiry_email_api = "<%= api_send_inquiry_email_housing_listing_url %>";
+
+  $("#send_message_btn").on("click", function(e) {
+    e.preventDefault();
+
+    $("#housing_inquiry_email_modal").modal("show");
+  });
+
+  $("#send_email_btn").on("click", function(e) {
+    var message = $("#message_input").val();
+    var email = $("#email_input").val();
+
+    $.ajax({
+      method: 'post',
+      url: housing_listing_send_inquiry_email_api,
+      data: {
+        housing_listing_id: housing_listing_id,
+        message: message,
+        email: email
+      },
+      success: function(response){
+        console.log(response);
+      },
+      error: function(response) {
+        console.log(response);
+      }
+    });
+  });
+
 
 </script>

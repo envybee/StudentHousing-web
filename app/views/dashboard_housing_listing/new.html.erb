@@ -227,7 +227,23 @@
               
           </div>
       </div>
-  </div><!-- end of login_modal -->
+  </div><!-- end of photos_modal -->
+
+  <div class="modal" id="success_modal" tabindex="-1" role="dialog" aria-labelledby="login_modal" aria-hidden="true">
+      <div class="modal-dialog modal-sm">
+          <div class="modal-content">
+              <div class="modal-header" style="background-color: #51AA51">
+                <h4>Success</h4>
+              </div>
+              <div class="modal-body">
+                Your housing listing has been successfully published. You will be redirected to your published listing once you click OK.
+              </div>
+              <div class="modal-footer">
+                <button id="success_ok_btn" type="button" class="btn btn-success">OK</button>
+              </div>
+          </div>
+      </div>
+  </div><!-- end of success_modal -->
 
   <%= cl_image_upload_tag(:image_id, :html => {'id' => 'photo_upload_submit_btn'}) %>
 </html>
@@ -382,6 +398,7 @@
       },
       success: function(response){
         console.log(response);
+        $("#success_modal").modal("show");
       },
       error: function(response) {
         console.log(response);
