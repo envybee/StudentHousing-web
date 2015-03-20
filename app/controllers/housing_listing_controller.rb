@@ -11,4 +11,13 @@ class HousingListingController < ApplicationController
   	housing_listing_id = params[:id]
   	@housing_listing = HousingListing.find(housing_listing_id)
   end
+  def new
+  	new_housing_listing_id = params[:id]
+  	@housing_listing = HousingListing.find(new_housing_listing_id)
+  end
+
+  def edit
+	find_listing_by_id = HousingListing.find(params[:id])
+	@edit_listing = find_listing_by_id
+  end
 end

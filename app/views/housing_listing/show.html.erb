@@ -300,8 +300,12 @@
               </div>
             </section>
             <section class="panel-body" style="text-align: center;">
-              <% @housing_listing.overall_rating.to_i.times do %>
-                <i class="fa fa-star"></i>
+              <% if @housing_listing.overall_rating %>
+                <% @housing_listing.overall_rating.to_i.times do %>
+                  <i class="fa fa-star"></i>
+                <% end %>
+              <% else %>
+                No ratings for this listing yet.
               <% end %>
             </section>
           </section>
