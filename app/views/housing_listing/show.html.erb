@@ -239,6 +239,23 @@
               </button>
             </h3>
           </div>
+          <div style="width: 100%;">
+            <% if @show_favorite == true %>
+              <h3>
+                <button id="favorite_btn" class="btn btn-lg btn-info"  style="width: 100%;">
+                  <i class="fa fa-heart" style="color: red"></i>
+                  Favorite
+                </button>
+              </h3>
+              <div id="already_in_favorites" class="alert alert-warning" style="display:none; text-align: center;">
+                  In your favorites
+              </div>
+            <% else %>
+              <div id="already_in_favorites" class="alert alert-warning" style="text-align:center; ">
+                  In your favorites
+              </div>
+            <% end %>
+          </div>
           <section class='panel'>
             <section class="panel-heading">
               <div id="form-text-wrapper" style="text-align: center;">
@@ -570,5 +587,30 @@
     });
   });
 
+  /*--------------------------------------------
+  |                  Favorite                  |
+  ---------------------------------------------*/
+
+  var housing_favorite_api = "<%= api_v1_housing_favorites_path %>";
+
+  $("#favorite_btn").on("click", function(e) {
+    e.preventDefault();
+
+    $.ajax({
+      method: 'post',
+      url: housing_favorite_api,
+      data: {
+        housing_listing_id: housing_listing_id
+      },
+      success: function(response){
+        console.log(response);
+        $("#favorite_btn").slideUp();
+        $("#already_in_favorites").slideDown();
+      },
+      error: function(response) {
+        console.log(response);
+      }
+    });
+  })
 
 </script>

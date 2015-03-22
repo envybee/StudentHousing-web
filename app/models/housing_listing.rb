@@ -4,6 +4,7 @@ class HousingListing < ActiveRecord::Base
 	has_one :housing_setting 
 	has_many :housing_images, dependent: :destroy
 	has_many :housing_reviews, dependent: :destroy
+	has_many :housing_favorites, dependent: :destroy
 	belongs_to :user
 
 	def address

@@ -39,6 +39,19 @@ Rails.application.routes.draw do
 
   get 'dashboard/index', as: 'dashboard_index'
 
+  #Favorites
+  namespace :dashboard do
+    namespace :housing do
+      resources :favorites
+    end
+  end
+
+  namespace :api, :defaults => { :format => :json } do
+    namespace :v1 do
+      resources :housing_favorites
+    end
+  end
+
   devise_for :users
   get 'welcome/index'
 

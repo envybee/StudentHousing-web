@@ -11,7 +11,15 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20150322174519) do
+ActiveRecord::Schema.define(version: 20150322212143) do
+
+  create_table "housing_favorites", force: :cascade do |t|
+    t.integer "housing_listing_id", limit: 4
+    t.integer "user_id",            limit: 4
+  end
+
+  add_index "housing_favorites", ["housing_listing_id"], name: "fk_rails_0e6138bcc9", using: :btree
+  add_index "housing_favorites", ["user_id"], name: "fk_rails_71a25d3c97", using: :btree
 
   create_table "housing_images", force: :cascade do |t|
     t.integer "housing_listing_id", limit: 4
@@ -90,4 +98,6 @@ ActiveRecord::Schema.define(version: 20150322174519) do
   add_index "users", ["email"], name: "index_users_on_email", unique: true, using: :btree
   add_index "users", ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true, using: :btree
 
+  add_foreign_key "housing_favorites", "housing_listings"
+  add_foreign_key "housing_favorites", "users"
 end

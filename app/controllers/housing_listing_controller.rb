@@ -10,6 +10,11 @@ class HousingListingController < ApplicationController
   def show
   	housing_listing_id = params[:id]
   	@housing_listing = HousingListing.find(housing_listing_id)
+    if current_user.housing_favorites.exists?(:housing_listing_id => housing_listing_id)
+      @show_favorite = false
+    else
+      @show_favorite = true
+    end
   end
   def new
   	if current_user.can_access_listing(params[:id])
