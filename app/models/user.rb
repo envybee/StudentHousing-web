@@ -5,4 +5,13 @@ class User < ActiveRecord::Base
          :recoverable, :rememberable, :trackable, :validatable
   has_many :housing_reviews, dependent: :destroy
   has_many :housing_listings
+
+  def can_access_listing(housing_listing_id)
+  	housing_listing = HousingListing.find(housing_listing_id)
+  	if housing_listing.user_id == self.id
+  		return true
+  	else
+  		return false
+  	end
+  end
 end

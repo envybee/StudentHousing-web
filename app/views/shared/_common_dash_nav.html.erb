@@ -14,19 +14,9 @@
 					<li><a href="/"><i class="fa fa-home"></i>Home</a></li>
 					<li><a href="#">About</a></li>
 					<% if user_signed_in? %>
-						<div class="btn-group pull-right">
-							<button id="user_options_button" class="btn btn-primary dropdown-toggle" data-toggle="dropdown">
-								<i class="fa fa-user"></i> <%= current_user.email %>
-								<i class="fa fa-caret-down"></i>
-							</button>
-							<ul class="dropdown-menu" role="menu">
-								<li>
-									<a href="#">Sign Out</a>
-								</li>
-							</ul>
-						</div>
+						<li><a href="/users/sign_out" data-method="delete"><i class="fa fa-power-off" style="padding-right: 3px;"></i>Sign out</a></li>
 					<% else %>
-					<li><a id="sign_in_btn" href="#">Sign in</a></li>
+						<li><a id="sign_in_btn" href="#">Sign in</a></li>
 					<% end %>
 				</ul>
 			</div>
