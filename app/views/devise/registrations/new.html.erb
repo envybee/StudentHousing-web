@@ -4,8 +4,8 @@
   </head>
 
   <body>
+    <%= render 'shared/common_front_nav' %>
     <div class="container" id="homepage">
-      <%= render 'shared/common_front_nav' %>
       <div class="jumbotron">
         <h2>Sign up</h2>
         <%= form_for(resource, as: resource_name, url: registration_path(resource_name)) do |f| %>

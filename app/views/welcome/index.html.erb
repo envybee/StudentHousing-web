@@ -97,13 +97,13 @@
 	            </div>
 	            <div class="modal-body">
 	              	<%= form_for(:user, :url => session_path(:user)) do |f| %>
-	              	<span>Email</span>
-	                    <input type="text" class="form-control" name="email" id="email" style="margin-bottom: 5px">
+	              		<span>Email</span>
+	                    <input type="text" class="form-control" name="user[email]" id="email" style="margin-bottom: 5px">
 	                    <span>Password</span>
-	                    <input type="password" class="form-control" name='password'>
+	                    <input type="password" class="form-control" name='user[password]'>
 	                    <span class="help-block error" id="login_errors"></span>
 	                    <span>
-	                    	<input type="checkbox" name='remember_me' id='remember_me' checked> Remember me
+	                    	<input type="checkbox" name='user[remember_me]' id='remember_me' checked> Remember me
 	                    	<span class="pull-right">
 	                    		<%= link_to "Forgot your password?", new_password_path(:user) %>
 	                    	</span>
@@ -126,17 +126,17 @@
 	            </div>
 	            <div class="modal-body">
 	              	<%= form_for(:user, :url => registration_path(:user)) do |f| %>
-	              	<span>Email</span>
+	              		<span>Email</span>
 	                    <input type="text" class="form-control" name="user[email]" id="user_email" style="margin-bottom: 5px">
 
 	                    <div class="field">
 		                  <span>First Name</span> 
-		                  <input type="text" class="form-control" name="first_name" id="first_name" style="margin-bottom: 5px">
+		                  <input type="text" class="form-control" name="user[first_name]" id="first_name" style="margin-bottom: 5px">
 		                </div>
 
 		                <div class="field">
 		                  <span>Last Name</span> 
-		                  <input type="text" class="form-control" name="last_name" id="last_name" style="margin-bottom: 5px">
+		                  <input type="text" class="form-control" name="user[last_name]" id="last_name" style="margin-bottom: 5px">
 
 		                  <div class="field">
 	                    	<span>Password</span>

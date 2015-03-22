@@ -159,15 +159,66 @@
                     <i class="fa fa-building-o"></i>
                     Type
                   </h4>
-                  <input id="housing_type_checkbox" name="housing_type_checkbox" type="checkbox" name="housing_type_checkbox" checked>
+                  <input id="housing_type_checkbox" name="housing_type_checkbox" type="checkbox" name="housing_type_checkbox">
                 </div>
                 <div id="form-text-wrapper" class="col-md-6">
                   <h4>
                     <i class="fa fa-bed"></i>
                     Furniture
                   </h4>
-                  <input id="furnished_checkbox" name="furnished_checkbox" type="checkbox" name="furnished_checkbox" checked>
+                  <input id="furnished_checkbox" name="furnished_checkbox" type="checkbox" name="furnished_checkbox">
                 </div>
+              </div>
+              <div class="col-xs-12">
+                <div id="form-text-wrapper" class="col-md-6" style="padding-left: 0px;">
+                  <h4>
+                    <i class="fa fa-wifi"></i>
+                    Internet
+                  </h4>
+                  <input id="internet_checkbox" name="internet_checkbox" type="checkbox">
+                </div>
+                <div id="form-text-wrapper" class="col-md-6">
+                  <h4>
+                    <i class="fa fa-car"></i>
+                    Parking
+                  </h4>
+                  <input id="parking_checkbox" name="parking_checkbox" type="checkbox">
+                </div>
+              </div>
+              <div id="more_amenities" style="display:none">
+                <div id="" class="col-xs-12">
+                  <div id="form-text-wrapper" class="col-md-6" style="padding-left: 0px;">
+                    <h4>
+                      Ensuite Washroom
+                    </h4>
+                    <input id="ensuite_washroom_checkbox" name="ensuite_washroom_checkbox" type="checkbox">
+                  </div>
+                  <div id="form-text-wrapper" class="col-md-6">
+                    <h4>
+                      Washer/Dryer
+                    </h4>
+                    <input id="washer_dryer_checkbox" name="washer_dryer_checkbox" type="checkbox">
+                  </div>
+                </div>
+                <div class="col-xs-12">
+                  <div id="form-text-wrapper" class="col-md-6" style="padding-left: 0px;">
+                    <h4>
+                      Gym
+                    </h4>
+                    <input id="gym_checkbox" name="gym_checkbox" type="checkbox">
+                  </div>
+                  <div id="form-text-wrapper" class="col-md-6">
+                    <h4>
+                      Pet-friendly
+                    </h4>
+                    <input id="pet_friendly_checkbox" name="pet_friendly_checkbox" type="checkbox">
+                  </div>
+                </div>
+              </div>
+              <div class="col-xs-12" style="margin-top: 10px;">
+                <button id="more_amenities_btn" class="btn btn-success"><i class="fa fa-plus"></i>
+                  <span id="amenities_btn_text">More Amenities</span>
+                </button>
               </div>
               <div class="col-md-12" id="form-text-wrapper" style="padding-left: 0px; padding-right: 0px">
                 <h4>
@@ -411,6 +462,18 @@
       window.location.href = dashboard_index;
   });
 
+  $("#more_amenities_btn").on("click", function(e) {
+    e.preventDefault();
+
+    if($("#amenities_btn_text").text() === 'More Amenities') {
+      $("#more_amenities").slideDown();
+      $("#amenities_btn_text").html('Less Amenities');
+    } else {
+      $("#more_amenities").slideUp();
+      $("#amenities_btn_text").html('More Amenities');
+    }
+  })
+
   $("#publish_btn").on("click", function(e) {
     e.preventDefault();
 
@@ -427,6 +490,12 @@
       var bathrooms = $("#housing_listing_bathrooms").val();
       var furnished = $("#furnished_checkbox").is(":checked") ? 1 : 0;
       var type = $("#furnished_checkbox").is(":checked") ? 'Apartment' : 'House';
+      var internet = $("#internet_checkbox").is(":checked") ? 1 : 0;
+      var parking = $("#parking_checkbox").is(":checked") ? 1 : 0;
+      var ensuite_washroom = $("#ensuite_washroom_checkbox").is(":checked") ? 1 : 0;
+      var washer_dryer = $("#washer_dryer_checkbox").is(":checked") ? 1 : 0;
+      var gym = $("#gym_checkbox").is(":checked") ? 1 : 0;
+      var pet_friendly = $("#pet_friendly_checkbox").is(":checked") ? 1 : 0;
       var price = $("#housing_listing_price").val();
       var start_date = $("#housing_listing_start_date").val();
       var end_date = $("#housing_listing_end_date").val();
@@ -448,6 +517,12 @@
           bathrooms: bathrooms,
           furnished: furnished,
           type: type,
+          internet: internet,
+          parking: parking,
+          ensuite_washroom: ensuite_washroom,
+          washer_dryer: washer_dryer,
+          gym: gym,
+          pet_friendly: pet_friendly,
           price: price,
           start_date: start_date,
           end_date: end_date
@@ -481,6 +556,54 @@
   $("#housing_type_checkbox").bootstrapSwitch({
     onText: 'Apartment',
     offText: 'House',
+    onColor: 'success',
+    offColor: 'info',
+    size: 'small',
+  });
+
+  $("#internet_checkbox").bootstrapSwitch({
+    onText: 'Yes',
+    offText: 'No',
+    onColor: 'success',
+    offColor: 'info',
+    size: 'small',
+  });
+
+  $("#parking_checkbox").bootstrapSwitch({
+    onText: 'Yes',
+    offText: 'No',
+    onColor: 'success',
+    offColor: 'info',
+    size: 'small',
+  });
+
+  $("#ensuite_washroom_checkbox").bootstrapSwitch({
+    onText: 'Yes',
+    offText: 'No',
+    onColor: 'success',
+    offColor: 'info',
+    size: 'small',
+  });
+
+  $("#washer_dryer_checkbox").bootstrapSwitch({
+    onText: 'Yes',
+    offText: 'No',
+    onColor: 'success',
+    offColor: 'info',
+    size: 'small',
+  });
+
+  $("#gym_checkbox").bootstrapSwitch({
+    onText: 'Yes',
+    offText: 'No',
+    onColor: 'success',
+    offColor: 'info',
+    size: 'small',
+  });
+
+  $("#pet_friendly_checkbox").bootstrapSwitch({
+    onText: 'Yes',
+    offText: 'No',
     onColor: 'success',
     offColor: 'info',
     size: 'small',

@@ -4,13 +4,13 @@
   </head>
 
   <body>
+    <%= render 'shared/common_front_nav' %>
     <div class="container" id="homepage">
-      <%= render 'shared/common_front_nav' %>
-      
       <div class="jumbotron">
         <h2>Log in</h2>
 
         <%= form_for(resource, as: resource_name, url: session_path(resource_name)) do |f| %>
+        <%= devise_error_messages! %>
           <div class="field">
             <%= f.label :email %><br />
             <%= f.email_field :email, autofocus: true %>
