@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20150319021147) do
+ActiveRecord::Schema.define(version: 20150322174519) do
 
   create_table "housing_images", force: :cascade do |t|
     t.integer "housing_listing_id", limit: 4
@@ -62,6 +62,12 @@ ActiveRecord::Schema.define(version: 20150319021147) do
     t.integer  "total_rooms",        limit: 4
     t.integer  "rooms_available",    limit: 4
     t.integer  "num_washrooms",      limit: 4
+    t.boolean  "internet",           limit: 1,   default: false
+    t.boolean  "parking",            limit: 1,   default: false
+    t.boolean  "ensuite_washroom",   limit: 1,   default: false
+    t.boolean  "washer_dryer",       limit: 1,   default: false
+    t.boolean  "gym",                limit: 1,   default: false
+    t.boolean  "pet_friendly",       limit: 1,   default: false
   end
 
   create_table "users", force: :cascade do |t|

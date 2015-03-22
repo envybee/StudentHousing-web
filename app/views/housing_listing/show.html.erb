@@ -64,6 +64,9 @@
       .commenter_name {
         color: #2E90E6;
       }
+      .fa-check {
+        color: green;
+      }
     </style>
   </head>
   <body>
@@ -126,10 +129,48 @@
               </div>
             </section>
             <section class="panel-body">
+              <% if @housing_listing.housing_setting.furnished %>
               <div id="" class="col-md-6" style="font-size: 17px;">
-                <i class="fa fa-bed"></i>
-                <%= @housing_listing.housing_setting.furnished == 1 ? 'Furnished' : 'Unfurnished' %>
+                <i class="fa fa-check"></i>
+                Furnished
               </div>
+              <% end %>
+              <% if @housing_listing.housing_setting.internet %>
+                <div id="" class="col-md-6" style="font-size: 17px;">
+                  <i class="fa fa-check"></i>
+                  Internet
+                </div>
+              <% end %>
+              <% if @housing_listing.housing_setting.parking %>
+              <div id="" class="col-md-6" style="font-size: 17px;">
+                <i class="fa fa-check"></i>
+                Parking
+              </div>
+              <% end %>
+              <% if @housing_listing.housing_setting.ensuite_washroom %>
+              <div id="" class="col-md-6" style="font-size: 17px;">
+                <i class="fa fa-check"></i>
+                Ensuite Washroom
+              </div>
+              <% end %>
+              <% if @housing_listing.housing_setting.washer_dryer %>
+              <div id="" class="col-md-6" style="font-size: 17px;">
+                <i class="fa fa-check"></i>
+                Washer/Dryer
+              </div>
+              <% end %>
+              <% if @housing_listing.housing_setting.gym %>
+              <div id="" class="col-md-6" style="font-size: 17px;">
+                <i class="fa fa-check"></i>
+                Gym
+              </div>
+              <% end %>
+              <% if @housing_listing.housing_setting.pet_friendly %>
+              <div id="" class="col-md-6" style="font-size: 17px;">
+                <i class="fa fa-check"></i>
+                Pet Friendly
+              </div>
+              <% end %>
             </section>
           </section>
 

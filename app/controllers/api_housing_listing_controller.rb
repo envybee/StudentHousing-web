@@ -41,7 +41,14 @@ class ApiHousingListingController < ApplicationController
     housing_settings.start_date = params[:start_date]
     housing_settings.end_date = params[:end_date]
     housing_settings.furnished = params[:furnished]
+    housing_settings.internet = params[:internet]
+    housing_settings.parking = params[:parking]
+    housing_settings.ensuite_washroom = params[:ensuite_washroom]
+    housing_settings.washer_dryer = params[:washer_dryer]
+    housing_settings.gym = params[:gym]
+    housing_settings.pet_friendly = params[:pet_friendly]
     housing_settings.rooms_available = params[:bedrooms]
+    housing_settings.num_washrooms = params[:bathrooms]
     housing_settings.save
     render :json => {:status => 'success'}
   end
