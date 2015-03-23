@@ -267,7 +267,7 @@ function getInfoBoxOptions(contentString) {
     var myLatlng = new google.maps.LatLng(<%= housing_listing.latitude %>, <%= housing_listing.longitude%>);
     var url = "";
     <% if housing_listing.housing_images.first %>
-      url = housing_listing.housing_images.first.url;
+      url = "<%= housing_listing.housing_images.first.url %>";
     <% end %>
     var contentString = getContentString(url, "<%= housing_listing.name %>", "<%= housing_listing.housing_setting.rooms_available %>", "<%= housing_listing.price %>");
 
