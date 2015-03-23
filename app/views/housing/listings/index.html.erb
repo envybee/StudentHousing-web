@@ -84,7 +84,7 @@
         <section class='panel'>
           <section class='panel-body'>
             <div style="background-color: black;">
-                <a href="<%= housing_listing_details_url(housing_listing) %>" target="_blank">  <% if housing_listing.housing_images.first %>
+                <a href="<%= housing_listing_url(housing_listing) %>" target="_blank">  <% if housing_listing.housing_images.first %>
                   <img class="img-responsive center-block" src="<%= housing_listing.housing_images.first.url %>" style="max-height: 230px;">
                     </img>
                   <% end %>
@@ -162,9 +162,9 @@
 
 <script>
 
-function getContentString(image_url, name, rooms, price) {
+function getContentString(details_url, image_url, name, rooms, price) {
   return contentString = '<div id="" style="width: 175px;">' + 
-      '<a href="#">' +
+      '<a href="' + details_url + '">' +
       '<img src="' + image_url + '" style="width: 175px; height: 150px; max-width: none;" ' +
       '</img>' +
       '</a>' +
@@ -269,7 +269,7 @@ function getInfoBoxOptions(contentString) {
     <% if housing_listing.housing_images.first %>
       url = "<%= housing_listing.housing_images.first.url %>";
     <% end %>
-    var contentString = getContentString(url, "<%= housing_listing.name %>", "<%= housing_listing.housing_setting.rooms_available %>", "<%= housing_listing.price %>");
+    var contentString = getContentString("<%= housing_listing_url(housing_listing) %>" , url, "<%= housing_listing.name %>", "<%= housing_listing.housing_setting.rooms_available %>", "<%= housing_listing.price %>");
 
     // set the marker position and display it
     var marker = new google.maps.Marker({
@@ -313,7 +313,7 @@ function getInfoBoxOptions(contentString) {
     var filter_price = price_slider.slider('getValue');
     var filter_num_rooms = bedroom_slider.slider('getValue');
 
-    var api_filter_housing_listing = "<%= api_filter_housing_listing_url %>";
+    var api_filter_housing_listing = "<%= housing_with_filters_api_v1_housing_listings_url %>";
 
     $.ajax({
       method: 'post',
@@ -342,7 +342,7 @@ function getInfoBoxOptions(contentString) {
           var housing_listing = response[i];
           var section = "<section class='panel'><section class='panel-body'>";
 
-          var image_div = "<a href='#'> <img src='" + housing_listing['url'] + "' style='width: 275px; height: 230px;'> </img></a>";
+          var image_div = "<a href='" + "'> <img src='" + housing_listing['url'] + "' style='width: 275px; height: 230px;'> </img></a>";
 
           var name_div = "<div id='text' style='font-family: sans-serif; text-align:center; margin: 10px;'> <strong style='font-size: 22px;'>" + housing_listing['name'] + "</strong></div>";
 

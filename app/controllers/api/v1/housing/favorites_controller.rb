@@ -1,4 +1,4 @@
-class Api::V1::HousingFavoritesController < ApplicationController
+class Api::V1::Housing::FavoritesController < ApplicationController
   skip_before_filter :verify_authenticity_token
 
   def create

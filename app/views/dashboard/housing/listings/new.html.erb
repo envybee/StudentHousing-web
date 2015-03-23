@@ -275,7 +275,7 @@
           <h4 class="modal-title" id="publish_diag_title">Ad Published!</h4>
           </div>
           <div class="modal-body">
-          <p>You have successfully published your ad. You can find it at the following <a href="<%= housing_listing_details_url(@housing_listing) %>" target="_blank">link</a>.</p>
+          <p>You have successfully published your ad. You can find it at the following <a href="<%= housing_listings_url(@housing_listing) %>" target="_blank">link</a>.</p>
           </div>
           <div class="modal-footer">
           <button id="publish_confirm" type="button" class="btn btn-primary">Got it!</button>
@@ -350,8 +350,8 @@
     }
   });
 
-  var cloudinary_image_new_api = "<%= api_cloudinary_image_new_url %>";
-  var housing_listing_create_api = "<%= api_create_housing_listing_url %>"
+  var cloudinary_image_new_api = "<%= api_v1_cloudinary_images_url %>";
+  var housing_listing_create_api = "<%= api_v1_housing_listing_url(@housing_listing) %>"
   var current_housing_listing_id = <%= @housing_listing.id %>;
 
   $('.datepicker').datepicker({

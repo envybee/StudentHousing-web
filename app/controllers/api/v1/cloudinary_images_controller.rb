@@ -1,7 +1,10 @@
-class ApiCloudinaryImageController < ApplicationController
+class Api::V1::CloudinaryImagesController < ApplicationController
   skip_before_filter :verify_authenticity_token
   
-  def new
+  def show
+  end
+
+  def create
   	image_response = params[:cloudinary_upload_response]
   	image_title = params[:image_title]
   	image_description = params[:image_description]

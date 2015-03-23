@@ -1,54 +1,40 @@
 Rails.application.routes.draw do
 
-  get 'housing_listing/index'
+  resources :dashboard
 
-  get 'housing_listing/show'
-
-  get 'housing_listing/:id', to: 'housing_listing#show', as: 'housing_listing_details'
-
-  get 'housing_listing/index/:city/:province/:country', to: 'housing_listing#index', as: 'housing_results'
-
-  get 'housing_listing/edit/:id', to: 'housing_listing#edit', as: 'edit_housing_listing'
-
-  get 'housing_listing/new/:id', to: 'housing_listing#new', as: 'new_housing_listing'
-
-  post 'api_cloudinary_image/new', as: 'api_cloudinary_image_new'
-
-  # get 'housing_listing/near' => 'api_housing_listing#near'
-  get 'api/v1/housing_listings/near' => 'api_housing_listing#near'
-
-  get 'api/v1/housing_listings/index' => 'api_housing_listing#index'
-  
-  get 'api/v1/housing_settings/index' => 'api_housing_setting#index'
-  
-  get 'api/v1/users/index' => 'api_user#index'
-
-  post 'api_housing_listing/comment', as: 'api_comment_housing_listing'
-
-  post 'api_housing_listing/send_inquiry_email', as: 'api_send_inquiry_email_housing_listing'
-
-  post 'api_housing_listing/new', as: 'api_new_housing_listing'
-
-  post 'api_housing_listing/create', as: 'api_create_housing_listing'
-
-  post 'api_housing_listing/update', as: 'api_update_housing_listing'
-  
-  post 'api_housing_listing/delete', as: 'api_delete_housing_listing'
-
-  post 'api_housing_listing/housing_with_filters', as: 'api_filter_housing_listing'
-
-  get 'dashboard/index', as: 'dashboard_index'
+  namespace :housing do
+    resources :listings do
+      collection do
+        get '/index/:city/:province/:country', to: 'listings#index'
+      end
+    end
+  end
 
   #Favorites
   namespace :dashboard do
     namespace :housing do
       resources :favorites
+      resources :listings do
+        get 'new', to: 'listings#new'
+      end
     end
   end
 
   namespace :api, :defaults => { :format => :json } do
     namespace :v1 do
-      resources :housing_favorites
+      resources :cloudinary_images
+      namespace :housing do
+        resources :favorites
+        resources :users
+        resources :listings do
+          collection do
+            get 'near'
+            post 'send_inquiry_email'
+            post 'comment'
+            post 'housing_with_filters'
+          end
+        end
+      end
     end
   end
 

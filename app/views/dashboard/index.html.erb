@@ -61,13 +61,13 @@
 						<tbody>
 							<% @my_listings.each do |l| %>
 							<tr>
-								<td><a href="<%= housing_listing_details_url(l.id) %>"><%= l.name %></a></td>
+								<td><a href="<%= housing_listing_url(l.id) %>"><%= l.name %></a></td>
 								<td><%= l.description %></td>
 								<td><%= l.location %></td>
 								<td>$<%= l.price %></td>
 								<td><%= l.overall_rating %></td>
 								<td><%= l.address %></td>
-								<td><a href="../housing_listing/edit/<%=l.id%>" class="btn-sm btn-primary" role="button">Edit</a></td>
+								<td><a href=" <%= edit_dashboard_housing_listing_url(l.id) %>" class="btn-sm btn-primary" role="button">Edit</a></td>
 							</tr>
 							<%end%>
 						</tbody>

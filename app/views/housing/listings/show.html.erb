@@ -420,8 +420,6 @@
 
 <script>
 
-  var cloudinary_image_new_api = "<%= api_cloudinary_image_new_url %>";
-  var housing_listing_create_api = "<%= api_create_housing_listing_url %>"
   var current_housing_listing_id = <%= @housing_listing.id %>;
 
   $('.datepicker').datepicker({
@@ -513,7 +511,7 @@
   |               Comments                   |
   -------------------------------------------*/
 
-  var housing_listing_comment_api = "<%= api_comment_housing_listing_url %>";
+  var housing_listing_comment_api = "<%= comment_api_v1_housing_listings_url %>";
 
   $("#comment_submit_btn").on("click", function(e) {
     e.preventDefault();
@@ -558,7 +556,7 @@
   ---------------------------------------------*/
 
   var housing_listing_id = "<%= @housing_listing.id %>";
-  var housing_listing_send_inquiry_email_api = "<%= api_send_inquiry_email_housing_listing_url %>";
+  var housing_listing_send_inquiry_email_api = "<%= send_inquiry_email_api_v1_housing_listings_url %>";
 
   $("#send_message_btn").on("click", function(e) {
     e.preventDefault();
