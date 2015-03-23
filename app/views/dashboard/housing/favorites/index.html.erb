@@ -56,6 +56,9 @@
 			              <i class="fa fa-dollar"></i>
 			              <%= favorite.housing_listing.price %>
 			            </div>
+			            <button id="favorite_remove_btn" class="btn btn-warning" style="width: 100%" data-favorite-id="<%= favorite.id %>">
+			            	Remove
+			            </button>
 			          </section>
 			        </section>
 			    </div>
@@ -76,5 +79,25 @@
 		e.preventDefault();
 
 		createNewListing();
-	})
+	});
+
+	$("#favorite_remove_btn").on("click", function(e) {
+		e.preventDefault();
+
+		var favorite_id = $(this).data('favorite-id');
+		var housing_favorite_delete_api = "/api/v1/housing/favorites/" + favorite_id;
+		
+		$.ajax({
+		  async: false,
+		  method: 'delete',
+		  url: housing_favorite_delete_api,
+		  success: function(response){
+			window.location.reload();
+			console.log(response);
+		  },
+		  error: function(response) {
+			console.log(response);
+		  }
+		});
+	});
 </script>

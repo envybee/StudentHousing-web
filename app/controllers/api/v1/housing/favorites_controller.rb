@@ -10,6 +10,9 @@ class Api::V1::Housing::FavoritesController < ApplicationController
   end
 
   def destroy
-
+    del_id = params[:id]
+    del_entry = HousingFavorite.find(del_id)
+    del_entry.destroy
+    render :json => {:status => "success"}
   end
 end

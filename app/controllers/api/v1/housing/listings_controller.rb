@@ -109,9 +109,9 @@ class Api::V1::Housing::ListingsController < ApplicationController
   end
   
   def destroy 
-	del_id = params[:id]
-	del_entry = HousingListing.find(del_id)
-	del_entry.destroy
-  render :json => {:status => "success"}
+  	del_id = params[:id]
+  	del_entry = HousingListing.find(del_id)
+  	del_entry.destroy
+    render :json => {:status => "success"}
   end
 end

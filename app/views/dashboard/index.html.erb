@@ -61,7 +61,7 @@
 						<tbody>
 							<% @my_listings.each do |l| %>
 							<tr>
-								<td><a href="<%= housing_listing_url(l.id) %>"><%= l.name %></a></td>
+								<td><a href="<%= housing_listing_url(l.id) %>" target="_blank"><%= l.name %></a></td>
 								<td><%= l.description %></td>
 								<td><%= l.location %></td>
 								<td>$<%= l.price %></td>
