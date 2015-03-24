@@ -22,7 +22,7 @@ class Api::V1::Housing::ListingsController < ApplicationController
     housing_listing.name = ""
     housing_listing.user_id = current_user.id
     housing_listing.save
-    redirect_url = dashboard_housing_listing_new_url(housing_listing)
+    redirect_url = edit_dashboard_housing_listing_url(housing_listing)
     housing_listing_id = housing_listing.id
     render :json => {:redirect_url => redirect_url, 
                                   :housing_listing_id => housing_listing_id }
