@@ -36,6 +36,8 @@
 				            <a href="<%= housing_listing_url(favorite.housing_listing_id) %>" target="_blank">  <% if favorite.housing_listing.housing_images.first %>
 			            		<img class="img-responsive center-block" src="<%= favorite.housing_listing.housing_images.first.url %>" style="max-height: 300px;">
 				              	</img>
+			                  <% else %>
+			                  	<img class="img-responsive center-block" src="/images/no_photos_available.jpg" style="max-height: 300px;">
 				              <% end %>
 				            </a>
 				        </div>
