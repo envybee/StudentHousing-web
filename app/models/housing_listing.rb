@@ -8,7 +8,7 @@ class HousingListing < ActiveRecord::Base
 	belongs_to :user
 
 	def address
-	  [street_address, city, province, country].compact.join(', ')
+	  [street_address, city, province, postal_code, country].compact.join(', ')
 	end
 
 	def send_custom_alerts
