@@ -86,6 +86,6 @@ Rails.application.configure do
     authentication: "plain",
     enable_starttls_auto: true,
     user_name: "nvssproductions@gmail.com",
-    password: "supsup123"
+    password: "supsupsup123"
   }
 end

@@ -1,0 +1,52 @@
+<html>
+  	<head>
+   		<%= render 'shared/common_dash_head' %>
+  	</head>
+
+	<body>
+	    <%= render 'shared/common_dash_nav' %>
+	    <div class="col-xs-9">
+	    	<div class="container">		
+	    		<br />
+	    		<section class="panel">
+	    			<section class="panel-heading">
+					    <h3>
+					    	<i class="fa fa-user"></i>
+					    	Profile
+					    </h3>
+	    			</section>
+	    			<section class="panel-body">
+						<%= form_for(:user, as: :user, url: registration_path(:user), html: { method: :put }) do |f| %>
+
+						  <div class="field">
+						    <%= f.label :email %><br />
+						    <%= f.email_field :email, autofocus: true %>
+						  </div>
+
+						  <div class="field">
+						    <%= f.label :current_password %> <i>(we need your current password to confirm your changes)</i><br />
+						    <%= f.password_field :current_password, autocomplete: "off" %>
+						  </div>
+
+						  <div class="field">
+						    <%= f.label :password %> <i>(leave blank if you don't want to change it)</i><br />
+						    <%= f.password_field :password, autocomplete: "off" %>
+						  </div>
+
+						  <div class="field">
+						    <%= f.label :password_confirmation %><br />
+						    <%= f.password_field :password_confirmation, autocomplete: "off" %>
+						  </div>
+
+						  <div class="actions" style="margin-top: 10px;">
+						    <button class="btn btn-sm btn-info" type="submit">
+						    	Update
+						    </button>
+						  </div>
+						<% end %>
+					</section>
+				</section>
+			</div>
+		</div>
+	</body>
+</html>

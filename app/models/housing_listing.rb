@@ -10,4 +10,8 @@ class HousingListing < ActiveRecord::Base
 	def address
 	  [street_address, city, province, country].compact.join(', ')
 	end
+
+	def send_custom_alerts
+		CustomAlertsEmailsJob.delay(run_at: 2.minutes.from_now).perform_later(latitude, longitude)
+	end
 end

@@ -4,6 +4,6 @@ class UserMailer < ApplicationMailer
     @user = user
     @sender_email = sender_email
     @message = message
-    mail(from: 'envybhargava26@gmail.com', to: @user.email, subject: "You got a reply for your ad on _____")
+    mail(from: 'nvssproductions@gmail.com', to: @user.email, subject: "You got a reply for your ad on _____")
   end
 end

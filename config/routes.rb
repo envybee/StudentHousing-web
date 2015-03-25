@@ -1,6 +1,6 @@
 Rails.application.routes.draw do
 
-  resources :dashboard
+  resources :dashboard, :only => [:index]
 
   namespace :housing do
     resources :listings do
@@ -12,8 +12,10 @@ Rails.application.routes.draw do
 
   #Favorites
   namespace :dashboard do
+    resources :profile
     namespace :housing do
       resources :favorites
+      resources :alerts
       resources :listings do
         get 'new', to: 'listings#new'
       end
@@ -26,6 +28,7 @@ Rails.application.routes.draw do
       namespace :housing do
         resources :favorites, :only => [:create, :destroy]
         resources :users
+        resources :alerts
         resources :listings do
           collection do
             get 'near'

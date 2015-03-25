@@ -75,6 +75,11 @@ class Api::V1::Housing::ListingsController < ApplicationController
   def update
     id = params[:id]
     housing_listing = HousingListing.find(id)
+    if housing_listing.active == 0
+      send_alerts = false
+    else
+      send_alerts = true
+    end
     housing_listing.name = params[:name]
     housing_listing.description = params[:description]
     housing_listing.location = params[:street_address] + " " + params[:city] + " " + params[:province] + " " + params[:country] + " " + params[:postal_code]
@@ -105,6 +110,10 @@ class Api::V1::Housing::ListingsController < ApplicationController
     housing_settings.rooms_available = params[:bedrooms]
     housing_settings.num_washrooms = params[:bathrooms]
     housing_settings.save
+
+    if send_alerts
+      housing_listing.send_custom_alerts
+    end
     render :json => {:status => 'success'}
   end
   

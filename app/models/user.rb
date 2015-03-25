@@ -6,6 +6,7 @@ class User < ActiveRecord::Base
   has_many :housing_reviews, dependent: :destroy
   has_many :housing_listings
   has_many :housing_favorites
+  has_many :housing_alerts
 
   def can_access_listing(housing_listing_id)
   	housing_listing = HousingListing.find(housing_listing_id)
