@@ -121,7 +121,7 @@
               <div id="map-canvas" style="height:317px;"></div>
 
               <div id="form-text-wrapper">
-                <input id="address_input" name="address_input" class="form-text" type="text" placeholder="Type an address..." value="<%=@housing_listing.address%>">
+                <input id="address_input" name="address_input" class="form-text" type="text" placeholder="Type an address...">
               </div>
             </section>
           </section>
@@ -135,7 +135,7 @@
                 <h4>
                 <i class="fa fa-font"></i>
                 Title</h4>
-                <input id="housing_listing_title" name="housing_listing_title" class="form-text" type="text" value="<%=@housing_listing.name%>" required>
+                <input id="housing_listing_title" name="housing_listing_title" class="form-text" type="text" required>
               </div>
               <div class="col-xs-12">
                 <div id="form-text-wrapper" class="col-md-6 col-sm-6 col-xs-6" style="padding-left: 0px;">
@@ -143,14 +143,14 @@
                   <i class="fa fa-bed"></i>
                     Bedrooms
                   </h4>
-                  <input id="housing_listing_bedrooms" name="housing_listing_bedrooms" class="form-text" type="text" value="<%=@housing_setting.rooms_available%>">
+                  <input id="housing_listing_bedrooms" name="housing_listing_bedrooms" class="form-text" type="text">
                 </div>
                 <div id="form-text-wrapper" class="col-md-6 col-sm-6 col-xs-6" style="padding-right: 0px;">
                   <h4>
                   <i class="fa fa-tint"></i>
                     Bathrooms
                   </h4>
-                  <input id="housing_listing_bathrooms" name="housing_listing_bathrooms" class="form-text" type="text" value="<%=@housing_setting.num_washrooms%>">
+                  <input id="housing_listing_bathrooms" name="housing_listing_bathrooms" class="form-text" type="text">
                 </div>
               </div>
               <div class="col-xs-12">
@@ -236,21 +236,21 @@
                 <h4>
                 <i class="fa fa-dollar"></i>
                 Price</h4>
-                <input id="housing_listing_price" name="housing_listing_price" class="form-text" type="text" value="<%=@housing_listing.price%>"></input>
+                <input id="housing_listing_price" name="housing_listing_price" class="form-text" type="text">
               </div>
               <div id="form-text-wrapper">
                 <h4>
                 <i class="fa fa-clock-o"></i>
                 Start Date
                 </h4>
-                <input id="housing_listing_start_date" name="housing_listing_start_date" class="datepicker form-text-area" data-date-format="mm/dd/yyyy" value="<%=@housing_setting.start_date%>">
+                <input id="housing_listing_start_date" name="housing_listing_start_date" class="datepicker form-text-area" data-date-format="mm/dd/yyyy">
               </div>
               <div id="form-text-wrapper">
                 <h4>
                 <i class="fa fa-clock-o"></i>
                 End Date
                 </h4>
-                <input id="housing_listing_end_date" name="housing_listing_end_date" class="datepicker form-text-area" data-date-format="mm/dd/yyyy" value="<%=@housing_setting.end_date%>">
+                <input id="housing_listing_end_date" name="housing_listing_end_date" class="datepicker form-text-area" data-date-format="mm/dd/yyyy">
               </div>
             </section>
           </section>
@@ -328,25 +328,35 @@
   /*----------------------------------------------------------
   |                Load form (edit mode)                      |
   -----------------------------------------------------------*/
-  $(function() {
-    $("#furnished_checkbox").bootstrapSwitch('state', <%=@housing_setting.furnished%>);
-    var rental_type = (('<%=@housing_setting.rental_type%>' == "Apartment") ? 1 : 0);
-    $("#housing_type_checkbox").bootstrapSwitch('state', rental_type);
-    $("#internet_checkbox").bootstrapSwitch('state', <%=@housing_setting.internet%>);
-    $("#parking_checkbox").bootstrapSwitch('state', <%=@housing_setting.parking%>);
-    $("#ensuite_washroom_checkbox").bootstrapSwitch('state', <%=@housing_setting.ensuite_washroom%>);
-    $("#washer_dryer_checkbox").bootstrapSwitch('state', <%=@housing_setting.washer_dryer%>);
-    $("#gym_checkbox").bootstrapSwitch('state', <%=@housing_setting.gym%>);
-    $("#pet_friendly_checkbox").bootstrapSwitch('state', <%=@housing_setting.pet_friendly%>);
+  // If we are not in the edit mode, then we don't need to load the form
+  if (<%=@housing_listing.active%>) {
+    $(function() {
+      var isFurnished = <%= ((@housing_setting.furnished == nil) ? 0 : @housing_setting.furnished) %>;
+      $("#furnished_checkbox").bootstrapSwitch('state', isFurnished);
+      var rental_type = (('<%=@housing_setting.rental_type%>' == "Apartment") ? 1 : 0);
+      $("#housing_type_checkbox").bootstrapSwitch('state', rental_type);
+      $("#internet_checkbox").bootstrapSwitch('state', <%=@housing_setting.internet%>);
+      $("#parking_checkbox").bootstrapSwitch('state', <%=@housing_setting.parking%>);
+      $("#ensuite_washroom_checkbox").bootstrapSwitch('state', <%=@housing_setting.ensuite_washroom%>);
+      $("#washer_dryer_checkbox").bootstrapSwitch('state', <%=@housing_setting.washer_dryer%>);
+      $("#gym_checkbox").bootstrapSwitch('state', <%=@housing_setting.gym%>);
+      $("#pet_friendly_checkbox").bootstrapSwitch('state', <%=@housing_setting.pet_friendly%>);
 
-    var startDatePcs = "<%=@housing_setting.start_date%>";
-    startDatePcs = startDatePcs.split("-");
-    $('#housing_listing_start_date').datepicker('setDate', new Date(startDatePcs[0], startDatePcs[1]-1, startDatePcs[2].split(" ")[0]));
+      var startDatePcs = "<%=@housing_setting.start_date%>";
+      startDatePcs = startDatePcs.split("-");
+      $('#housing_listing_start_date').datepicker('setDate', new Date(startDatePcs[0], startDatePcs[1]-1, startDatePcs[2].split(" ")[0]));
 
-    var endDatePcs = "<%=@housing_setting.end_date%>";
-    endDatePcs = endDatePcs.split("-");
-    $('#housing_listing_end_date').datepicker('setDate', new Date(endDatePcs[0], endDatePcs[1]-1, endDatePcs[2].split(" ")[0]));
-  });
+      var endDatePcs = "<%=@housing_setting.end_date%>";
+      endDatePcs = endDatePcs.split("-");
+      $('#housing_listing_end_date').datepicker('setDate', new Date(endDatePcs[0], endDatePcs[1]-1, endDatePcs[2].split(" ")[0]));
+
+      $("#address_input").val("<%=@housing_listing.address%>");
+      $("#housing_listing_title").val("<%=@housing_listing.name%>");
+      $("#housing_listing_bedrooms").val("<%=@housing_setting.rooms_available%>");
+      $("#housing_listing_bathrooms").val("<%=@housing_setting.num_washrooms%>");
+      $("#housing_listing_price").val("<%=@housing_listing.price%>");
+    });
+  }
 
   /*----------------------------------------------------------
   |                     Validation                            |

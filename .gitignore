@@ -6,6 +6,9 @@
 
 # Ignore database config file
 /config/database.yml
+db/schema.rb
+Gemfile.lock
+Gemfile
 
 # Ignore bundler config.
 /.bundle
