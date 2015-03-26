@@ -56,6 +56,8 @@
 								</th>
 								<th>
 								</th>
+								<th>
+								</th>
 							</tr>
 						</thead>
 						<tbody>
@@ -67,7 +69,9 @@
 								<td>$<%= l.price %></td>
 								<td><%= l.overall_rating %></td>
 								<td><%= l.address %></td>
-								<td><a href=" <%= edit_dashboard_housing_listing_url(l.id) %>" class="btn-sm btn-primary" role="button">Edit</a></td>
+								<td><a href="<%= edit_dashboard_housing_listing_url(l.id) %>" class="btn btn-sm btn-primary" role="button">Edit</a></td>
+								<td><button type="button" class="btn btn-sm btn-danger del_btn" data-toggle="modal" data-target="#confirm_diag">Delete</button></td>
+								<input type="hidden" id="listing_id" value="<%=l.id%>"/>
 							</tr>
 							<%end%>
 						</tbody>
@@ -160,12 +164,33 @@
 			</div>
 		</div>
 	</div>
+	<div class="modal fade" id="confirm_diag" tabindex="-1" role="dialog" aria-labelledby="confirm_diag_title" aria-hidden="true">
+		<div class="modal-dialog">
+		<div class="modal-content">
+		  <div class="modal-header">
+			<button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+			<h4 class="modal-title" id="confirm_diag_title">Confirmation</h4>
+		  </div>
+		  <div class="modal-body">
+			<p>Are you sure you want to delete this ad?</p>
+		  </div>
+		  <div class="modal-footer">
+			<button type="button" class="btn btn-default" data-dismiss="modal">No</button>
+			<button id="del_confirm" type="button" class="btn btn-primary">Yes</button>
+		  </div>
+		</div><!-- /.modal-content -->
+	  </div><!-- /.modal-dialog -->
+	</div>
 </body>
 <%= render 'shared/common_dash_scripts' %>
 <!-- DataTables -->
 <script type="text/javascript" charset="utf8" src="//cdn.datatables.net/1.10.5/js/jquery.dataTables.js"></script>
 
 <script>
+
+  	var housing_listing_id = -1;
+    var dashboard_index = "<%= dashboard_index_url %>";
+
 	$(document).ready(function() {
 		$("#entry_listings").DataTable();
 	});
@@ -175,4 +200,34 @@
 
 		createNewListing();
 	})
+
+	$(".del_btn").on("click", function(e) {
+		housing_listing_id = $(this).parent().siblings('input').val();
+	});
+
+	$("#del_confirm").on("click", function(e) {
+	    deleteEntry();
+	    $("#confirm_diag").modal('hide');
+	  });
+	  
+	  function deleteEntry() {
+		var housing_listing_delete_api = "/api/v1/housing/listings/" + housing_listing_id;
+	    
+	    $.ajax({
+	      async: false,
+	      method: 'delete',
+	      url: housing_listing_delete_api,
+	      data: {
+	      id: housing_listing_id
+	      },
+	      success: function(response){
+	      window.location.href = dashboard_index;
+	      console.log(response);
+	      },
+	      error: function(response) {
+	      console.log(response);
+	      }
+	    });
+	  }
+
 </script>

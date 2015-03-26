@@ -224,7 +224,7 @@
                 <h4>
                 <i class="fa fa-pencil"></i>
                 Details</h4>
-                <textarea id="housing_listing_details" name="housing_listing_details" class="form-text-area" rows="5" id="details"><%=@housing_listing.description%></textarea>
+                <textarea id="housing_listing_details" name="housing_listing_details" class="form-text-area" rows="5" id="details"></textarea>
               </div>
             </section>
           </section>
@@ -355,6 +355,7 @@
       $("#housing_listing_bedrooms").val("<%=@housing_setting.rooms_available%>");
       $("#housing_listing_bathrooms").val("<%=@housing_setting.num_washrooms%>");
       $("#housing_listing_price").val("<%=@housing_listing.price%>");
+      $("#housing_listing_details").text("<%=@housing_listing.description%>");
     });
   }
 
