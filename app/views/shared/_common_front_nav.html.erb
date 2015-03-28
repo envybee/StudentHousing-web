@@ -3,12 +3,26 @@
     	<!-- Brand and toggle get grouped for better mobile display -->
 	    <div class="navbar-header">
         </div>
-	    <div class="navbar-collapse collapse">
+	    <div class="navbar-collapse">
             <ul class="nav navbar-nav navbar-right">
-                <li><a href="/"><i class="fa fa-home"></i>Home</a></li>
-                <li><a href="#">About</a></li>
+                <li>
+                    <a href="/">
+                        <i class="fa fa-home"></i>
+                        Home
+                    </a>
+                </li>
+                <li>
+                    <a href="#">
+                        About
+                    </a>
+                </li>
                 <% if user_signed_in? %>
-                <li><a href="<%= dashboard_index_path %>">Dashboard</a></li>
+                <li>
+                    <a href="<%= dashboard_index_path %>">
+                        <i class="fa fa-dashboard"></i>
+                        Dashboard
+                    </a>
+                </li>
 				<% else %>
                 <li><a id="sign_in_btn" href="#">Sign in</a></li>
 				<% end %>

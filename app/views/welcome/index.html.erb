@@ -8,6 +8,7 @@
 		<link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.min.css">
 		<!-- Latest compiled and minified JavaScript -->
 		<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/js/bootstrap.min.js"></script>
+		<link rel="stylesheet" href="/assets/ladda/dist/ladda-themeless.min.css">
 
 		<style type="text/css">
 			.jumbotron {
@@ -53,24 +54,7 @@
 	</head>
 
 	<body>
-		<nav class="navbar navbar-default">
-		  	<div class="container-fluid">
-		    	<!-- Brand and toggle get grouped for better mobile display -->
-			    <div class="navbar-header">
-                </div>
-			    <div class="navbar-collapse collapse">
-                    <ul class="nav navbar-nav navbar-right">
-                        <li><a href="/"><i class="fa fa-home"></i>Home</a></li>
-                        <li><a href="#">About</a></li>
-                        <% if user_signed_in? %>
-                        <li><a href="<%= dashboard_index_path %>">Dashboard</a></li>
-						<% else %>
-                        <li><a id="sign_in_btn" href="#">Sign in</a></li>
-						<% end %>
-                    </ul>
-                </div>
-			</div>
-		</nav>
+		<%= render 'shared/common_front_nav' %>
 	  	<div class="container" id="homepage">
 	  		<div class="jumbotron">
 	  			<div class="search_content_text">
@@ -78,11 +62,9 @@
 	  			</div>
 	  			<div class="form-horizontal">
 				    <input name="search" id="address_input"/>
-				    <button class="btn btn-info btn-lg">
+				    <button id="location_search_btn" href="/housing_listing/show" class="ladda-button btn btn-info btn-lg" data-style="slide-right">
 				    	<i class="fa fa-search"></i>
-				    	<a id="location_search_btn" href="/housing_listing/show">
 				    		Search
-				    	</a>
 				    </button>
 				</div>
 			</div>
@@ -167,59 +149,70 @@
 <script src="//code.jquery.com/jquery-1.11.2.min.js"></script>
 <script src="//code.jquery.com/jquery-migrate-1.2.1.min.js"></script>
 <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/js/bootstrap.min.js"></script>
+<script src="/assets/ladda/dist/spin.min.js"></script>
+<script src="/assets/spin.js/jquery.spin.js"></script>
+<script src="/assets/ladda/dist/ladda.min.js"></script>
 <script>
-	var address_input = document.getElementById('address_input');
 
-    address_autocomplete = new google.maps.places.Autocomplete(address_input, {
-        types: ['(cities)']
-    });
+$( document ).ready(function() {
 
-    $("#sign_in_btn").on("click", function(e) {
-    	e.preventDefault();
+		var address_input = document.getElementById('address_input');
 
-    	$("#login_modal").modal("show");
-    });
+	    address_autocomplete = new google.maps.places.Autocomplete(address_input, {
+	        types: ['(cities)']
+	    });
 
-    $("#register_btn").on("click", function(e) {
-    	e.preventDefault(); 
+	    $("#sign_in_btn").on("click", function(e) {
+	    	e.preventDefault();
 
-    	$("#login_modal").modal("hide");
-    	$("#register_modal").modal("show");
-    });
+	    	$("#login_modal").modal("show");
+	    });
 
-    var place;
+	    $("#register_btn").on("click", function(e) {
+	    	e.preventDefault(); 
 
-    google.maps.event.addListener(address_autocomplete, 'place_changed', function() {
+	    	$("#login_modal").modal("hide");
+	    	$("#register_modal").modal("show");
+	    });
 
-	  place = address_autocomplete.getPlace();
+	    var place;
 
-	});
+	    google.maps.event.addListener(address_autocomplete, 'place_changed', function() {
 
-	$("#location_search_btn").on("click", function(e) {
+		  place = address_autocomplete.getPlace();
 
-		e.preventDefault();
+		});
 
-		if(place) {
-			var address_components = place.address_components;
-			var city, province, country;
+		$("#location_search_btn").on("click", function(e) {
 
-		  for(var i = 0; i < place.address_components.length; i++) {
-			  var addressType = place.address_components[i].types[0];
-			  if(addressType == 'locality') {
-			  	city = place.address_components[i].short_name;
-			  } else if (addressType == 'administrative_area_level_1') {
-			  	province = place.address_components[i].short_name;
-			  } else if (addressType == 'country') {
-			  	country = place.address_components[i].long_name;
+			e.preventDefault();
+  			var l = Ladda.create( document.querySelector( '#location_search_btn' ) );
+  			l.start();
+
+			if(place) {
+				var address_components = place.address_components;
+				var city, province, country;
+
+			  for(var i = 0; i < place.address_components.length; i++) {
+				  var addressType = place.address_components[i].types[0];
+				  if(addressType == 'locality') {
+				  	city = place.address_components[i].short_name;
+				  } else if (addressType == 'administrative_area_level_1') {
+				  	province = place.address_components[i].short_name;
+				  } else if (addressType == 'country') {
+				  	country = place.address_components[i].long_name;
+				  }
 			  }
-		  }
 
-		  console.log(city);
-		  console.log(province);
-		  console.log(country);
+			  console.log(city);
+			  console.log(province);
+			  console.log(country);
 
-		  window.location.href = "/housing/listings/index/" + city + "/" + province + "/" + country;
+			  window.location.href = "/housing/listings/index/" + city + "/" + province + "/" + country;
 
-		}
-	})
+			}
+
+			l.stop();
+		})
+	});
 </script>
