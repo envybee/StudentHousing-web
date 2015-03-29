@@ -32,6 +32,7 @@ Rails.application.routes.draw do
         resources :listings do
           collection do
             get 'near'
+            get 'compare_nearby_listings_price'
             post 'send_inquiry_email'
             post 'comment'
             post 'housing_with_filters'

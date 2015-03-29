@@ -127,4 +127,16 @@ class Api::V1::Housing::ListingsController < ApplicationController
   	del_entry.destroy
     render :json => {:status => "success"}
   end
+
+  def compare_nearby_listings_price
+    listing_id = params[:id]
+    housing_listing = HousingListing.find(listing_id)
+    nearby_listings = HousingListing.near(housing_listing.location, 3)
+    # render :json => {:status => nearby_listings.average(:price)}
+    render :json => {:average_price => nearby_listings.average(:price), 
+                    :listing_price => housing_listing.price,
+                    :max_price => nearby_listings.maximum(:price),
+                    :address => housing_listing.location.truncate(32)
+                    }
+  end
 end
