@@ -41,10 +41,11 @@ Rails.application.routes.draw do
     end
   end
 
-  devise_for :users, :path_names => { :sign_in => "login", :sign_out => "logout", :sign_up => "register" } 
+  devise_for :users, :controllers => { :registrations => :registrations }
 
-  get "register", to: "devise/registrations#new"
-
+  devise_scope :user do 
+    # get "/dashboard/profile", to: "devise/registrations#edit"
+  end
 
   get 'welcome/index'
 
