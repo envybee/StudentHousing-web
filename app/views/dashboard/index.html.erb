@@ -10,7 +10,46 @@
 		}
 		#chartdiv a {
 			display: none;
-		}							
+		}
+		#pchart_pgviews, #pchart_sources {
+			width		: 100%;
+			height		: 500px;
+			font-size	: 11px;
+		}	
+		.large {
+			font-size: 36px;
+			color: white;
+			float: right;
+		}
+		.subtext {
+			color: white;
+			text-align: right;
+		}
+		.panel-secondary {
+			border-color: #5cb85c;
+		}
+		.panel-secondary > .panel-heading {
+			background-color: #5cb85c;
+		}	
+		.panel-tertiary {
+			border-color: #f0ad4e;
+		}
+		.panel-tertiary > .panel-heading {
+			background-color: #f0ad4e;
+		}		
+		.panel-heading {
+			text-align: center;
+		}			
+		.panel-quaternary {
+			border-color: #d9534f;
+		}
+		.panel-quaternary > .panel-heading {
+			background-color: #d9534f;
+		}			
+		.custom-fa {
+			margin-left: -40px;
+			color: white;
+		}
 	</style>
 </head>
 <body>
@@ -30,14 +69,71 @@
 			<p>No results found. Post your first entry by clicking <a id="click_here_create_listing" href="#">here</a></P>
 		<% end %>
 		<div id="my-tab-content" class="tab-content">
-			<div id="listing_analyticsss" class="tab-pane active">
-				<section class="panel">
-					<section class="panel-heading">
+			<section class="panel">
+				<section class="panel-body">
+					<div id="listing_analyticsss" class="tab-pane active">
+						<div class="row placeholders">
+							<div class="col-lg-3 col-md-6">
+								<div class="panel panel-primary">
+									<div class="panel-heading">
+										<i class="fa fa-binoculars fa-4x custom-fa"></i>
+										<div class="large">30</div>
+										<div class="subtext">Page Views</div>
+									</div>
+								</div>
+							</div>
+							<div class="col-lg-3 col-md-6">
+								<div class="panel panel-secondary">
+									<div class="panel-heading">
+										<i class="fa fa-bell fa-4x custom-fa"></i>
+										<div class="large">56</div>
+										<div class="subtext">Alerts Sent</div>
+									</div>
+								</div>
+							</div>
+							<div class="col-lg-3 col-md-6">
+								<div class="panel panel-tertiary">
+									<div class="panel-heading">
+										<i class="fa fa-star fa-4x custom-fa"></i>
+										<div class="large">3</div>
+										<div class="subtext">Rating</div>
+									</div>
+								</div>
+							</div>
+							<div class="col-lg-3 col-md-6">
+								<div class="panel panel-quaternary">
+									<div class="panel-heading">
+										<i class="fa fa-heart fa-4x custom-fa"></i>
+										<div class="large">10</div>
+										<div class="subtext">Favourited</div>
+									</div>
+								</div>
+							</div>
+						</div>
 					</section>
+				</section>
+				<section class="panel panel-default">
+					<section class="panel-heading"><h3 class="panel-title">Comparing Nearby Listings</h3></section>
 					<section class="panel-body">
 						<div id="chartdiv"></div>
 					</section>
 				</section>
+				<div class="col-lg-6 col-md-6">
+					<section class="panel panel-default">
+						<section class="panel-heading"><h3 class="panel-title">Page Views by Location</h3></section>
+						<section class="panel-body" style="padding-left: 0px; padding-right: 0px;">
+							<div id="pchart_pgviews"></div>
+						</section>
+					</section>
+				</div>
+				<div class="col-lg-6 col-md-6">
+					<section class="panel panel-default">
+						<section class="panel-heading"><h3 class="panel-title">Sources</h3></section>
+						<section class="panel-body" style="padding-left: 0px; padding-right: 0px;">
+							<div id="pchart_sources"></div>
+						</section>
+					</section>
+				</div>
 			</div>
 		</div>
 	</div>
@@ -45,6 +141,7 @@
 <%= render 'shared/common_dash_scripts' %>
 <script type="text/javascript" src="http://www.amcharts.com/lib/3/amcharts.js"></script>
 <script type="text/javascript" src="http://www.amcharts.com/lib/3/serial.js"></script>
+<script type="text/javascript" src="http://www.amcharts.com/lib/3/pie.js"></script>
 <script type="text/javascript" src="http://www.amcharts.com/lib/3/themes/none.js"></script>
 
 <script>
@@ -98,6 +195,53 @@
 		});	
 	}
 
+	function showPageViewsByLocPie() {
+
+		var chart = AmCharts.makeChart("pchart_pgviews", {
+		    "type": "pie",
+		    "theme": "none",
+		    "dataProvider": [{
+		        "title": "Toronto",
+		        "value": 4852
+		    }, {
+		        "title": "Waterloo",
+		        "value": 9899
+		    }],
+		    "titleField": "title",
+		    "valueField": "value",
+		    "labelRadius": 5,
+
+		    "radius": "42%",
+		    "innerRadius": "60%",
+		    "labelText": "[[title]]"
+		});	
+	}
+
+	function showSourcesbyLocPie() {
+
+		var chart = AmCharts.makeChart("pchart_sources", {
+		    "type": "pie",
+		    "theme": "none",
+		    "dataProvider": [{
+		        "title": "Facebook",
+		        "value": 4852
+		    }, {
+		        "title": "Referral",
+		        "value": 899
+		    }, {
+		        "title": "Other",
+		        "value": 9899
+		    }],
+		    "titleField": "title",
+		    "valueField": "value",
+		    "labelRadius": 5,
+
+		    "radius": "42%",
+		    "innerRadius": "60%",
+		    "labelText": "[[title]]"
+		});	
+	}
+
 	function callCompareNearbyListingsPrice(listing_id) {
 		$.ajax({
 	      method: 'get',
@@ -114,13 +258,25 @@
 	      }
 	    });
 	}
+
+	function callPageViewsByLocation() {
+		showPageViewsByLocPie();
+	}
+
+	function callSourcesByLocation() {
+		showSourcesbyLocPie();
+	}
   
   var compare_nearby_listings_price_api = "/api/v1/housing/listings/compare_nearby_listings_price";
   
   callCompareNearbyListingsPrice(<%= @my_listings.first.id %>);
+  callPageViewsByLocation();
+  callSourcesByLocation();
 
  $(document).on('shown.bs.tab', 'a[data-toggle="tab"]', function (e) {
     var listing_id = $(this).data('listing-id');
     callCompareNearbyListingsPrice(listing_id);
+    callPageViewsByLocation();
+    callSourcesByLocation();
 })
 </script>
