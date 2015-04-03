@@ -1,0 +1,38 @@
+.jumbotron {
+	text-align: center;
+	font-size: 30px;
+	margin-top: 50px;
+	color: #000;
+	font-family: Candara, Calibri, Segoe, 'Segoe UI', Optima, Arial, sans-serif;
+
+	max-width: 730px;
+	margin-right: auto;
+	margin-left: auto;
+	/*background-color: #000;*/
+	margin-top: 100px;
+	opacity: 0.7;
+}
+.btn {
+	/*font-size: 24px;*/
+	font-family: Candara, Calibri, Segoe, 'Segoe UI', Optima, Arial, sans-serif;
+	font-weight: 400;
+	color: #000;
+}
+#search {
+	margin-top: 10px;
+	margin-bottom: 50px;
+
+	background: none;
+    border: 2px solid #4EABD3;
+    /*color: #4EABD3;*/
+}
+.search_content_text {
+	/*color: #000;*/
+}
+body {
+	/*background-color: #3197D5*/
+	background-image: url("/images/homepage_bg.jpeg");
+	background-size: cover;
+	background-repeat: no-repeat;
+	opacity: 0.8
+}

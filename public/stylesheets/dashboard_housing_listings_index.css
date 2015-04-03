@@ -1,0 +1,17 @@
+body {
+	height: 100%;
+}
+a:hover {
+	text-decoration: none;
+}
+#container {
+	padding-top: 10px;
+	padding-left: 40px;
+	padding-right: 30px;
+}
+table.dataTable thead th, table.dataTable thead td {
+	border-bottom: 2px solid #DDD;
+}
+table.dataTable.no-footer {
+	border-bottom: 0px;
+}

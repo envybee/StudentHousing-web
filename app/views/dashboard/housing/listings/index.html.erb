@@ -3,25 +3,7 @@
 	<!-- DataTables CSS -->
 	<link rel="stylesheet" type="text/css" href="//cdn.datatables.net/1.10.5/css/jquery.dataTables.css">
 	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.4/css/bootstrap-theme.min.css">
-	<style>
-		body {
-			height: 100%;
-		}
-		a:hover {
-			text-decoration: none;
-		}
-		#container {
-			padding-top: 10px;
-			padding-left: 40px;
-			padding-right: 30px;
-		}
-		table.dataTable thead th, table.dataTable thead td {
-			border-bottom: 2px solid #DDD;
-		}
-		table.dataTable.no-footer {
-			border-bottom: 0px;
-		}
-	</style>
+	<%= stylesheet_link_tag 'dashboard_housing_listings_index.css'%>
 </head>
 <body>
 	<%= render 'shared/common_dash_nav' %>

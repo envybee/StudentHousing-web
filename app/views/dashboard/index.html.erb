@@ -3,54 +3,7 @@
 	<!-- DataTables CSS -->
 	<link rel="stylesheet" type="text/css" href="//cdn.datatables.net/1.10.5/css/jquery.dataTables.css">
 	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.4/css/bootstrap-theme.min.css">
-	<style>
-		#chartdiv {
-			width	: 100%;
-			height	: 400px;
-		}
-		#chartdiv a {
-			display: none;
-		}
-		#pchart_pgviews, #pchart_sources {
-			width		: 100%;
-			height		: 500px;
-			font-size	: 11px;
-		}	
-		.large {
-			font-size: 36px;
-			color: white;
-			float: right;
-		}
-		.subtext {
-			color: white;
-			text-align: right;
-		}
-		.panel-secondary {
-			border-color: #5cb85c;
-		}
-		.panel-secondary > .panel-heading {
-			background-color: #5cb85c;
-		}	
-		.panel-tertiary {
-			border-color: #f0ad4e;
-		}
-		.panel-tertiary > .panel-heading {
-			background-color: #f0ad4e;
-		}		
-		.panel-heading {
-			text-align: center;
-		}			
-		.panel-quaternary {
-			border-color: #d9534f;
-		}
-		.panel-quaternary > .panel-heading {
-			background-color: #d9534f;
-		}			
-		.custom-fa {
-			margin-left: -40px;
-			color: white;
-		}
-	</style>
+	<%= stylesheet_link_tag 'dashboard_index.css'%>
 </head>
 <body>
 	<%= render 'shared/common_dash_nav' %>
@@ -143,7 +96,6 @@
 <script type="text/javascript" src="http://www.amcharts.com/lib/3/serial.js"></script>
 <script type="text/javascript" src="http://www.amcharts.com/lib/3/pie.js"></script>
 <script type="text/javascript" src="http://www.amcharts.com/lib/3/themes/none.js"></script>
-
 <script>
 	function showPriceComparisonChart(avg_price, your_price, max_price, address) {
 
