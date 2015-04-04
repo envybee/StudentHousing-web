@@ -66,35 +66,4 @@
 <%= render 'shared/common_dash_scripts' %>
 <!-- DataTables -->
 <script type="text/javascript" charset="utf8" src="//cdn.datatables.net/1.10.5/js/jquery.dataTables.js"></script>
-
-<script>
-	$(document).ready(function() {
-		$("#entry_listings").DataTable();
-	});
-
-	$("#click_here_create_listing").on("click", function(e) {
-		e.preventDefault();
-
-		createNewListing();
-	});
-
-	$("#favorite_remove_btn").on("click", function(e) {
-		e.preventDefault();
-
-		var favorite_id = $(this).data('favorite-id');
-		var housing_favorite_delete_api = "/api/v1/housing/favorites/" + favorite_id;
-		
-		$.ajax({
-		  async: false,
-		  method: 'delete',
-		  url: housing_favorite_delete_api,
-		  success: function(response){
-			window.location.reload();
-			console.log(response);
-		  },
-		  error: function(response) {
-			console.log(response);
-		  }
-		});
-	});
-</script>
+<%= javascript_include_tag "/javascripts/dashboard_housing_favorites_index" %>

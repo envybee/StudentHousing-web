@@ -172,48 +172,10 @@
 <script type="text/javascript" charset="utf8" src="//cdn.datatables.net/1.10.5/js/jquery.dataTables.js"></script>
 <script src="/assets/amcharts_3.13.3.free/amcharts/amcharts.js"></script>
 
-<script>
-
-  	var housing_listing_id = -1;
-    var dashboard_index = "<%= dashboard_index_url %>";
-
-	$(document).ready(function() {
-		$("#entry_listings").DataTable();
-	});
-
-	$("#click_here_create_listing").on("click", function(e) {
-		e.preventDefault();
-
-		createNewListing();
-	})
-
-	$(".del_btn").on("click", function(e) {
-		housing_listing_id = $(this).parent().siblings('input').val();
-	});
-
-	$("#del_confirm").on("click", function(e) {
-	    deleteEntry();
-	    $("#confirm_diag").modal('hide');
-	  });
-	  
-	  function deleteEntry() {
-		var housing_listing_delete_api = "/api/v1/housing/listings/" + housing_listing_id;
-	    
-	    $.ajax({
-	      async: false,
-	      method: 'delete',
-	      url: housing_listing_delete_api,
-	      data: {
-	      id: housing_listing_id
-	      },
-	      success: function(response){
-	      window.location.href = dashboard_index;
-	      console.log(response);
-	      },
-	      error: function(response) {
-	      console.log(response);
-	      }
-	    });
-	  }
-
+<script type="text/javascript">
+	/*
+		VARIABLES FOR SCRIPTS
+	*/
+	var dashboard_index = "<%= dashboard_index_url %>";
 </script>
+<%= javascript_include_tag "/javascripts/dashboard_housing_listings_index" %>
