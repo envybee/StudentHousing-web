@@ -1,7 +1,7 @@
 var housing_listing_id = -1;
 
 $(document).ready(function() {
-	$("#entry_listings").DataTable();
+	$("#entry_listings, #draft_listings_table").DataTable();
 });
 
 $("#click_here_create_listing").on("click", function(e) {
@@ -20,21 +20,21 @@ $("#del_confirm").on("click", function(e) {
 });
 
 function deleteEntry() {
-var housing_listing_delete_api = "/api/v1/housing/listings/" + housing_listing_id;
+	var housing_listing_delete_api = "/api/v1/housing/listings/" + housing_listing_id;
 
 	$.ajax({
 	  async: false,
 	  method: 'delete',
 	  url: housing_listing_delete_api,
 	  data: {
-	  id: housing_listing_id
+	  	id: housing_listing_id
 	  },
 	  success: function(response){
-	  window.location.href = dashboard_index;
-	  console.log(response);
+		window.location.href = dashboard_index;
+		console.log(response);
 	  },
 	  error: function(response) {
-	  console.log(response);
+	  	console.log(response);
 	  }
 	});
 }

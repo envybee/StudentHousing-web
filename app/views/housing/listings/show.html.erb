@@ -252,32 +252,37 @@
                 <div id="carousel-example-generic" class="carousel slide" data-ride="carousel" style="height: 317px;">
                   <!-- Indicators -->
                   <ol id="carousel_indicators" class="carousel-indicators">
-                    <li data-target="#carousel-example-generic" data-slide-to="0" class="active"></li>
-                    <li data-target="#carousel-example-generic" data-slide-to="1"></li>
+                  <% i = 0%>
+                  <% @housing_listing.housing_images.each do |housing_image| %>
+                      <% if housing_image == @housing_listing.housing_images.first%>
+                    <li data-slide-to="<%=i%>" class="active"></li>
+                      <% else %>
+                    <li data-slide-to="<%=i%>"></li>
+                      <% end %>
+                      <%i = i + 1%>
+                  <% end %>
                   </ol>
 
                   <!-- Wrapper for slides -->
                   <div id="carousel_inner" class="carousel-inner" role="listbox">
-                    <div class="item active">
-                      <img src="/images/homepage_bg.jpeg" alt="..."></img>
-                      <div class="carousel-caption">
-                      </div>
-                    </div>
-                    <div class="item">
-                      <img src="/images/homepage_bg.jpeg" alt="..."></img>
-                      <div class="carousel-caption">
-                        <h3>First bedroom</h3>
-                        <p>This is the master bedroom - Lots of sunlight and shit</p>
-                      </div>
-                    </div>
-                    <% @housing_listing.housing_images.each do |housing_image| %>
-                      <div class="item">
-                        <img src="<%= housing_image.url %>" alt="..." style="width: 100%; height: 317px;"></img>
-                        <div class="carousel-caption">
-                          <h3><%= housing_image.title %></h3>
-                          <p><%= housing_image.description %></p>
+                    <% if @housing_listing.housing_images.length > 0%>
+                      <% @housing_listing.housing_images.each do |housing_image| %>
+                        <% if housing_image == @housing_listing.housing_images.first%>
+                        <div class="item active">
+                        <% else %>
+                        <div class="item">
+                        <% end %>
+                          <img src="<%= housing_image.url %>" alt="..." style="width: 100%; height: 317px;"></img>
+                          <div class="carousel-caption">
+                            <h3><%= housing_image.title %></h3>
+                            <p><%= housing_image.description %></p>
+                          </div>
                         </div>
-                      </div>
+                      <% end %>
+                    <% else %>
+                    <div id="no_photos_available" class="item active">
+                      <img alt="..." style="width: 100%; height: 317px;" src="/images/no_photos_available.jpg"></img>
+                    </div>
                     <% end %>
                   </div>
 

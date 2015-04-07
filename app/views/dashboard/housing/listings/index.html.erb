@@ -40,8 +40,10 @@
 									Address
 								</th>
 								<th>
+									Edit
 								</th>
 								<th>
+									Delete
 								</th>
 							</tr>
 						</thead>
@@ -54,7 +56,7 @@
 								<td>$<%= l.price %></td>
 								<td><%= l.overall_rating %></td>
 								<td><%= l.address %></td>
-								<td><a href="<%= edit_dashboard_housing_listing_url(l.id) %>" class="btn btn-sm btn-primary" role="button">Edit</a></td>
+								<td><a href="<%= edit_dashboard_housing_listing_url(l.id) %>" class="btn btn-sm btn-primary">Edit</a></td>
 								<td><button type="button" class="btn btn-sm btn-danger del_btn" data-toggle="modal" data-target="#confirm_diag">Delete</button></td>
 								<input type="hidden" id="listing_id" value="<%=l.id%>"/>
 							</tr>
@@ -67,7 +69,7 @@
 			</div>
 			<div id="draft_listings" class="tab-pane">
 				<% if @my_inactive_listings.length != 0 %>
-					<table id="draft_listings" class="table table-striped table-hover display">
+					<table id="draft_listings_table" class="table table-striped table-hover display">
 						<thead>
 							<tr>
 								<th>
@@ -89,6 +91,10 @@
 									Address
 								</th>
 								<th>
+									Edit
+								</th>
+								<th>
+									Delete
 								</th>
 							</tr>
 						</thead>
@@ -138,7 +144,12 @@
 									<% end %>
 								</td>
 								<td>
-									<a href="../housing_listing/edit/<%=l.id%>" class="btn-sm btn-primary" role="button">Edit</a></td>
+									<a href="<%= edit_dashboard_housing_listing_url(l.id) %>" class="btn-sm btn-primary" role="button">Edit</a>
+								</td>
+								<td>
+									<button type="button" class="btn btn-sm btn-danger del_btn" data-toggle="modal" data-target="#confirm_diag">Delete</button>
+								</td>
+								<input type="hidden" id="listing_id" value="<%=l.id%>"/>
 							</tr>
 							<%end%>
 						</tbody>
