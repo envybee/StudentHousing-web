@@ -1,6 +1,7 @@
 body, html {
   height: 100%;
   width: 100%;
+  background-color: #DEDEDE;
 }
 .form-text {
   width: 100%; 
@@ -8,6 +9,11 @@ body, html {
   padding-right: 12px;
   height: 40px;
   background-color: #CFCFCF;
+}
+#wrapper {
+  height: 100%;
+  width: 100%;
+  background-color: #DEDEDE;
 }
 .form-text-area {
   width: 100%; 
