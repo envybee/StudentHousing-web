@@ -36,9 +36,6 @@
 											Rating
 										</th>
 										<th>
-											Address
-										</th>
-										<th>
 											Edit
 										</th>
 										<th>
@@ -54,7 +51,6 @@
 										<td><%= l.location %></td>
 										<td>$<%= l.price %></td>
 										<td><%= l.overall_rating %></td>
-										<td><%= l.address %></td>
 										<td><a href="<%= edit_dashboard_housing_listing_url(l.id) %>" class="btn btn-sm btn-primary">Edit</a></td>
 										<td><button type="button" class="btn btn-sm btn-danger del_btn" data-toggle="modal" data-target="#confirm_diag">Delete</button></td>
 										<input type="hidden" id="listing_id" value="<%=l.id%>"/>
@@ -85,9 +81,6 @@
 										</th>
 										<th>
 											Rating
-										</th>
-										<th>
-											Address
 										</th>
 										<th>
 											Edit
@@ -131,13 +124,6 @@
 										<td>
 											<% if l.overall_rating %>
 													<%= l.overall_rating %>
-											<% else %>
-												--
-											<% end %>
-										</td>
-										<td>
-											<% if l.address %>
-													<%= l.address %>
 											<% else %>
 												--
 											<% end %>
