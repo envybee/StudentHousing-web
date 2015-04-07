@@ -1,50 +1,62 @@
-<nav id="nav" class="navbar navbar-default">
-	<div class="container-fluid">
-		<!-- Brand and toggle get grouped for better mobile display -->
-		<div class="navbar-header">
-		</div>
-		<div class="navbar-collapse collapse">
-			<div class="col-md-6">
-				<button id="post_new_place_btn" href="#" class="ladda-button btn btn-primary" data-style="slide-right">
-					<i class="fa fa-plus" style="padding-right: 3px;"></i>
-					Post new place
-				</button>
+<header class="main-header">
+	<a href="#" class="logo">
+    <!-- LOGO -->
+    	StudentHousing
+  	</a>
+	<div class="main-header">
+		<nav id="nav" class="navbar navbar-static-top" role="navigation">
+			<div class="navbar-custom-menu">
+				<!-- <div class="col-md-7">
+					<button id="post_new_place_btn" href="#" class="ladda-button btn btn-primary" data-style="slide-right">
+						<i class="fa fa-plus" style="padding-right: 3px;"></i>
+						Post new place
+					</button>
+				</div> -->
+				<!-- <div class="col-md-4"> -->
+					<ul class="nav navbar-nav navbar-right">
+						<li><button id="post_new_place_btn" href="#" class="ladda-button btn btn-primary" data-style="slide-right">
+						<i class="fa fa-plus" style="padding-right: 3px;"></i>
+						Post new place
+					</button></li>
+						<li><a href="/"><i class="fa fa-home"></i>Home</a></li>
+						<li><a href="#">About</a></li>
+						<% if user_signed_in? %>
+							<li><a href="/users/sign_out" data-method="delete"><i class="fa fa-power-off" style="padding-right: 3px;"></i>Sign out</a></li>
+						<% else %>
+							<li><a id="sign_in_btn" href="#">Sign in</a></li>
+						<% end %>
+					</ul>
+				<!-- </div> -->
 			</div>
-			<div class="col-md-6">
-				<ul class="nav navbar-nav navbar-right">
-					<li><a href="/"><i class="fa fa-home"></i>Home</a></li>
-					<li><a href="#">About</a></li>
-					<% if user_signed_in? %>
-						<li><a href="/users/sign_out" data-method="delete"><i class="fa fa-power-off" style="padding-right: 3px;"></i>Sign out</a></li>
-					<% else %>
-						<li><a id="sign_in_btn" href="#">Sign in</a></li>
-					<% end %>
-				</ul>
-			</div>
-		</div>
+		</nav>
 	</div>
-</nav>
-<div id="nav_container" class="col-xs-3 col-sm-3 col-md-2 sidebar" style="height: 100%;">
-  <ul class="nav nav-sidebar" style="margin-top: 20px; height: 100%">
-	<li>
-		<a href="/dashboard/housing/listings"><i class="fa fa-building"></i>
-			Your listings
-		</a>
-	</li>
-	<li>
-		<a href="<%= dashboard_housing_favorites_path %>"><i class="fa fa-heart"></i>
-			Favorites
-		</a>
-	</li>
-	<li>
-		<a href="<%= dashboard_housing_alerts_path %>"><i class="fa fa-bell"></i>
-			Custom Alerts
-		</a>
-	</li>
-	<li>
-		<a href="/dashboard/profile"><i class="fa fa-user"></i>
-			Profile
-		</a>
-	</li>
-  </ul>
-</div>
+</header>
+
+<!-- Left side column. contains the sidebar -->
+<aside class="main-sidebar">
+    <!-- sidebar: style can be found in sidebar.less -->
+    <section class="sidebar">
+		  <ul class="sidebar-menu" style="margin-top: 20px; height: 100%">
+			<li>
+				<a href="/dashboard/housing/listings"><i class="fa fa-building"></i>
+					Your listings
+				</a>
+			</li>
+			<li>
+				<a href="<%= dashboard_housing_favorites_path %>"><i class="fa fa-heart"></i>
+					Favorites
+				</a>
+			</li>
+			<li>
+				<a href="<%= dashboard_housing_alerts_path %>"><i class="fa fa-bell"></i>
+					Custom Alerts
+				</a>
+			</li>
+			<li>
+				<a href="/dashboard/profile"><i class="fa fa-user"></i>
+					Profile
+				</a>
+			</li>
+		  </ul>
+	</section>
+</aside>
