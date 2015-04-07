@@ -5,160 +5,159 @@
 	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.4/css/bootstrap-theme.min.css">
 	<%= stylesheet_link_tag 'dashboard_housing_listings_index.css'%>
 </head>
-<body>
+<body class="skin-blue sidebar-mini">
 	<%= render 'shared/common_dash_nav' %>
-	<div id="container" class="col-sm-9 col-md-10">
-		</br>
-		<ul id="tabs" role="tablist" class="nav nav-tabs" data-tabs="tabs">			
-		  <li class="active"><a href="#active_listings" aria-controls="active_listings" role="tab" data-toggle="tab">Active</a></li>
-		  <li><a href="#draft_listings" aria-controls="draft_listings" role="tab" data-toggle="tab">Drafts</a></li>
-		</ul>
-		</br>
-		</br>
-		<div id="my-tab-content" class="tab-content">
-			<div id="active_listings" class="tab-pane active">
-				<% if @my_listings.length != 0 %>
-					<table id="entry_listings" class="table table-striped table-hover display">
-						<thead>
-							<tr>
-								<th>
-									Name
-								</th>
-								<th>
-									Description
-								</th>
-								<th>
-									Location
-								</th>
-								<th>
-									Price
-								</th>
-								<th>
-									Rating
-								</th>
-								<th>
-									Address
-								</th>
-								<th>
-									Edit
-								</th>
-								<th>
-									Delete
-								</th>
-							</tr>
-						</thead>
-						<tbody>
-							<% @my_listings.each do |l| %>
-							<tr>
-								<td><a href="<%= housing_listing_url(l.id) %>" target="_blank"><%= l.name %></a></td>
-								<td><%= l.description %></td>
-								<td><%= l.location %></td>
-								<td>$<%= l.price %></td>
-								<td><%= l.overall_rating %></td>
-								<td><%= l.address %></td>
-								<td><a href="<%= edit_dashboard_housing_listing_url(l.id) %>" class="btn btn-sm btn-primary">Edit</a></td>
-								<td><button type="button" class="btn btn-sm btn-danger del_btn" data-toggle="modal" data-target="#confirm_diag">Delete</button></td>
-								<input type="hidden" id="listing_id" value="<%=l.id%>"/>
-							</tr>
-							<%end%>
-						</tbody>
-					</table>
-				<% else %>
-					<p>No results found. Post your first entry by clicking <a id="click_here_create_listing" href="#">here</a></P>
-				<% end %>
+	<div class="content-wrapper">
+		<section class="content">
+			<ul id="tabs" role="tablist" class="nav nav-tabs" data-tabs="tabs">			
+			  <li class="active"><a href="#active_listings" aria-controls="active_listings" role="tab" data-toggle="tab">Active</a></li>
+			  <li><a href="#draft_listings" aria-controls="draft_listings" role="tab" data-toggle="tab">Drafts</a></li>
+			</ul>
+			<div id="my-tab-content" class="tab-content">
+				<div id="active_listings" class="tab-pane active">
+					<% if @my_listings.length != 0 %>
+						<table id="entry_listings" class="table table-striped table-hover display">
+							<thead>
+								<tr>
+									<th>
+										Name
+									</th>
+									<th>
+										Description
+									</th>
+									<th>
+										Location
+									</th>
+									<th>
+										Price
+									</th>
+									<th>
+										Rating
+									</th>
+									<th>
+										Address
+									</th>
+									<th>
+										Edit
+									</th>
+									<th>
+										Delete
+									</th>
+								</tr>
+							</thead>
+							<tbody>
+								<% @my_listings.each do |l| %>
+								<tr>
+									<td><a href="<%= housing_listing_url(l.id) %>" target="_blank"><%= l.name %></a></td>
+									<td><%= l.description %></td>
+									<td><%= l.location %></td>
+									<td>$<%= l.price %></td>
+									<td><%= l.overall_rating %></td>
+									<td><%= l.address %></td>
+									<td><a href="<%= edit_dashboard_housing_listing_url(l.id) %>" class="btn btn-sm btn-primary">Edit</a></td>
+									<td><button type="button" class="btn btn-sm btn-danger del_btn" data-toggle="modal" data-target="#confirm_diag">Delete</button></td>
+									<input type="hidden" id="listing_id" value="<%=l.id%>"/>
+								</tr>
+								<%end%>
+							</tbody>
+						</table>
+					<% else %>
+						<p>No results found. Post your first entry by clicking <a id="click_here_create_listing" href="#">here</a></p>
+					<% end %>
+				</div>
+				<div id="draft_listings" class="tab-pane">
+					<% if @my_inactive_listings.length != 0 %>
+						<table id="draft_listings_table" class="table table-striped table-hover display">
+							<thead>
+								<tr>
+									<th>
+										Name
+									</th>
+									<th>
+										Description
+									</th>
+									<th>
+										Location
+									</th>
+									<th>
+										Price
+									</th>
+									<th>
+										Rating
+									</th>
+									<th>
+										Address
+									</th>
+									<th>
+										Edit
+									</th>
+									<th>
+										Delete
+									</th>
+								</tr>
+							</thead>
+							<tbody>
+								<% @my_inactive_listings.each do |l| %>
+								<tr>
+									<td>
+										<% if l.name.empty? %>
+											--
+										<% else %>
+											<%= l.name %>
+										<% end %>
+									</td>
+									<td>
+										<% if l.description %>
+												<%= l.description %>
+										<% else %>
+											--
+										<% end %>
+									</td>
+									<td>
+										<% if l.location %>
+												<%= l.location %>
+										<% else %>
+											--
+										<% end %>
+									</td>
+									<td>
+										<% if l.price %>
+												$<%= l.price %>
+										<% else %>
+											--
+										<% end %>
+									</td>
+									<td>
+										<% if l.overall_rating %>
+												<%= l.overall_rating %>
+										<% else %>
+											--
+										<% end %>
+									</td>
+									<td>
+										<% if l.address %>
+												<%= l.address %>
+										<% else %>
+											--
+										<% end %>
+									</td>
+									<td>
+										<a href="<%= edit_dashboard_housing_listing_url(l.id) %>" class="btn-sm btn-primary" role="button">Edit</a>
+									</td>
+									<td>
+										<button type="button" class="btn btn-sm btn-danger del_btn" data-toggle="modal" data-target="#confirm_diag">Delete</button>
+									</td>
+									<input type="hidden" id="listing_id" value="<%=l.id%>"/>
+								</tr>
+								<%end%>
+							</tbody>
+						</table>
+					<% else %>
+						<p>You do not have any drafts at this moment.</p>
+					<% end %>
+				</div>
 			</div>
-			<div id="draft_listings" class="tab-pane">
-				<% if @my_inactive_listings.length != 0 %>
-					<table id="draft_listings_table" class="table table-striped table-hover display">
-						<thead>
-							<tr>
-								<th>
-									Name
-								</th>
-								<th>
-									Description
-								</th>
-								<th>
-									Location
-								</th>
-								<th>
-									Price
-								</th>
-								<th>
-									Rating
-								</th>
-								<th>
-									Address
-								</th>
-								<th>
-									Edit
-								</th>
-								<th>
-									Delete
-								</th>
-							</tr>
-						</thead>
-						<tbody>
-							<% @my_inactive_listings.each do |l| %>
-							<tr>
-								<td>
-									<% if l.name.empty? %>
-										--
-									<% else %>
-										<%= l.name %>
-									<% end %>
-								</td>
-								<td>
-									<% if l.description %>
-											<%= l.description %>
-									<% else %>
-										--
-									<% end %>
-								</td>
-								<td>
-									<% if l.location %>
-											<%= l.location %>
-									<% else %>
-										--
-									<% end %>
-								</td>
-								<td>
-									<% if l.price %>
-											$<%= l.price %>
-									<% else %>
-										--
-									<% end %>
-								</td>
-								<td>
-									<% if l.overall_rating %>
-											<%= l.overall_rating %>
-									<% else %>
-										--
-									<% end %>
-								</td>
-								<td>
-									<% if l.address %>
-											<%= l.address %>
-									<% else %>
-										--
-									<% end %>
-								</td>
-								<td>
-									<a href="<%= edit_dashboard_housing_listing_url(l.id) %>" class="btn-sm btn-primary" role="button">Edit</a>
-								</td>
-								<td>
-									<button type="button" class="btn btn-sm btn-danger del_btn" data-toggle="modal" data-target="#confirm_diag">Delete</button>
-								</td>
-								<input type="hidden" id="listing_id" value="<%=l.id%>"/>
-							</tr>
-							<%end%>
-						</tbody>
-					</table>
-				<% else %>
-					<p>You do not have any drafts at this moment.</P>
-				<% end %>
-			</div>
-		</div>
+		</section>
 	</div>
 	<div class="modal fade" id="confirm_diag" tabindex="-1" role="dialog" aria-labelledby="confirm_diag_title" aria-hidden="true">
 		<div class="modal-dialog">

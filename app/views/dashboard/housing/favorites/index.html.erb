@@ -5,62 +5,73 @@
 	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.4/css/bootstrap-theme.min.css">
 	<%= stylesheet_link_tag 'dashboard_housing_favorites_index.css'%>
 </head>
-<body>
+<body class="skin-blue sidebar-mini">
 	<%= render 'shared/common_dash_nav' %>
-	<div id="container" class="col-sm-9 col-md-10">
-		<% if @my_favorites.length == 0 %>
-			<div class="alert alert-warning">
-				You do not have any favorites at this moment.
-			</div>
-		<% else %>
-			<h3>
-				<i class="fa fa-heart"></i>
-				Favorites
-			</h3>
-			<% @my_favorites.each do |favorite| %>
-				<div class="col-xs-12 col-sm-12 col-md-6">
-			        <section class='panel'>
-			          <section class='panel-body'>
-			            <a href="<%= housing_listing_url(favorite.housing_listing_id) %>" target="_blank"> 
-			            <% if favorite.housing_listing.housing_images.first %>
-		            		<div class="center-block" style="height: 275px; width: auto; background-color: black; background-size: auto 300px; background-repeat: no-repeat; background-position: center; background-image: url(<%= cl_image_path(favorite.housing_listing.housing_images.first.public_id, :background=>'#171515', :opacity=>51, :width=>440, :height=>275, :crop=>:fill, :effect=>'blur:175') %>)">
-		                <% else %>
-		          			<div class="center-block" style="height: 275px; width: auto; background-color: black; background-size: 275px auto; background-repeat: no-repeat; background-position: center; ">
-			            <% end %>
-			            		<div class="row">
-						            <div class="col-md-12 favorite_text" id="text" style="font-family: sans-serif; margin: 10px;">
-						              <strong style="font-size: 22px;">
-						              <h2><%= favorite.housing_listing.name %></h2>
-						              </strong>
-						            </div>
-						        </div>
-			            		<div class="row">
-						            <div class="col-md-12 favorite_text" style="margin: 10px;">
-						              <h4>
-						              	<i class="fa fa-map-marker"></i>
-						              	<%= truncate(favorite.housing_listing.location, :length => 32) %>
-						          	  </h4>
-						          	  <h5>
-						          	  	<i class="fa fa-bed"></i>
-						              <%= favorite.housing_listing.housing_setting.rooms_available %> bedrooms
-						          	  </h5>
-						          	  <h5>
-							              <i class="fa fa-dollar"></i>
-							              <%= favorite.housing_listing.price %>
-							          </h5>
-						            </div>
-						        </div>
-				       		</div>
-				    	</a>
-			            <button id="favorite_remove_btn" class="btn btn-danger" style="width: 100%" data-favorite-id="<%= favorite.id %>">
-			            	<i class="fa fa-trash"></i>
-			            	Remove
-			            </button>
-			          </section>
-			        </section>
-			    </div>
-			<% end %>
-		<% end %>
+	<div class="content-wrapper">
+		<section class="content">
+			<section class="panel">
+				<section class="panel-heading">
+					<h4>
+						<i class="fa fa-heart"></i>
+						Favorites
+					</h4>
+				</section>
+				<section class="panel-body">
+					<% if @my_favorites.length == 0 %>
+						<div class="callout callout-warning">
+							You do not have any favorites at this moment.
+						</div>
+					<% else %>
+						<h3>
+							<i class="fa fa-heart"></i>
+							Favorites
+						</h3>
+						<% @my_favorites.each do |favorite| %>
+							<div class="col-xs-12 col-sm-12 col-md-6">
+						        <section class='panel'>
+						          <section class='panel-body'>
+						            <a href="<%= housing_listing_url(favorite.housing_listing_id) %>" target="_blank"> 
+						            <% if favorite.housing_listing.housing_images.first %>
+					            		<div class="center-block" style="height: 275px; width: auto; background-color: black; background-size: auto 300px; background-repeat: no-repeat; background-position: center; background-image: url(<%= cl_image_path(favorite.housing_listing.housing_images.first.public_id, :background=>'#171515', :opacity=>51, :width=>440, :height=>275, :crop=>:fill, :effect=>'blur:175') %>)">
+					                <% else %>
+					          			<div class="center-block" style="height: 275px; width: auto; background-color: black; background-size: 275px auto; background-repeat: no-repeat; background-position: center; ">
+						            <% end %>
+						            		<div class="row">
+									            <div class="col-md-12 favorite_text" id="text" style="font-family: sans-serif; margin: 10px;">
+									              <strong style="font-size: 22px;">
+									              <h2><%= favorite.housing_listing.name %></h2>
+									              </strong>
+									            </div>
+									        </div>
+						            		<div class="row">
+									            <div class="col-md-12 favorite_text" style="margin: 10px;">
+									              <h4>
+									              	<i class="fa fa-map-marker"></i>
+									              	<%= truncate(favorite.housing_listing.location, :length => 32) %>
+									          	  </h4>
+									          	  <h5>
+									          	  	<i class="fa fa-bed"></i>
+									              <%= favorite.housing_listing.housing_setting.rooms_available %> bedrooms
+									          	  </h5>
+									          	  <h5>
+										              <i class="fa fa-dollar"></i>
+										              <%= favorite.housing_listing.price %>
+										          </h5>
+									            </div>
+									        </div>
+							       		</div>
+							    	</a>
+						            <button id="favorite_remove_btn" class="btn btn-danger" style="width: 100%" data-favorite-id="<%= favorite.id %>">
+						            	<i class="fa fa-trash"></i>
+						            	Remove
+						            </button>
+						          </section>
+						        </section>
+						    </div>
+						<% end %>
+					<% end %>
+				</section>
+		</section>
 	</div>
 </body>
 <%= render 'shared/common_dash_scripts' %>
