@@ -16,10 +16,14 @@ class Api::V1::Housing::AlertsController < ApplicationController
   end
 
   def destroy
-    del_id = params[:id]
-    del_entry = HousingAlert.find(del_id)
-    del_entry.destroy
-    render :json => {:status => "success"}
+    if current_user.can_access_alert(params[:id])
+      del_id = params[:id]
+      del_entry = HousingAlert.find(del_id)
+      del_entry.destroy
+      render :json => {:status => "success"}
+    else  
+      render :json => {:message => "error"}, :status => 400
+    end
   end
 
 end

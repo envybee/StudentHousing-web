@@ -10,9 +10,13 @@ class Api::V1::Housing::FavoritesController < ApplicationController
   end
 
   def destroy
-    del_id = params[:id]
-    del_entry = HousingFavorite.find(del_id)
-    del_entry.destroy
-    render :json => {:status => "success"}
+    if current_user.can_access_favorite(params[:id])
+      del_id = params[:id]
+      del_entry = HousingFavorite.find(del_id)
+      del_entry.destroy
+      render :json => {:status => "success"}
+    else
+      render :json => {:message => "error"}, :status => 400
+    end
   end
 end
