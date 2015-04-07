@@ -10,33 +10,18 @@
     <!-- Optional theme -->
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/css/bootstrap-theme.min.css">
     <link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.min.css">
+    <link rel="stylesheet" href="/assets/AdminLTE/dist/css/AdminLTE.min.css">
+    <link href="/assets/AdminLTE/dist/css/skins/_all-skins.min.css" rel="stylesheet" type="text/css" />
     <!-- Latest compiled and minified JavaScript -->
 
     <%= stylesheet_link_tag 'housing_listings_show.css'%>
   </head>
-  <body>
+  <body class="skin-blue sidebar-mini">
     <div id="wrapper">
 
-      <nav class="navbar navbar-default">
-          <div class="container-fluid">
-            <!-- Brand and toggle get grouped for better mobile display -->
-            <div class="navbar-header">
-                  </div>
-            <div class="navbar-collapse collapse">
-                      <ul class="nav navbar-nav navbar-right">
-                          <li><a href="/"><i class="fa fa-home"></i>Home</a></li>
-                          <li><a href="#">About</a></li>
-                          <% if user_signed_in? %>
-                          <li><a href="<%= dashboard_index_path %>">Dashboard</a></li>
-              <% else %>
-                          <li><a id="sign_in_btn" href="#">Sign in</a></li>
-              <% end %>
-                      </ul>
-                  </div>
-        </div>
-      </nav>
+      <%= render 'shared/common_front_nav' %>
       <div class="container">
-        <div class="col-md-12 col-sm-12 col-xs-12" style="">
+        <div class="col-md-12 col-sm-12 col-xs-12">
           <div id="map-canvas" style="height:317px;"></div>
         </div>
       </div>
@@ -211,7 +196,7 @@
             </section>
             <section class='panel-body'>
               <div class="col-md-12 col-sm-12 col-xs-12">
-                <div id="" class="col-md-6 col-sm-6 col-xs-6" style="padding-left: 0px;">
+                <!-- <div id="" class="col-md-6 col-sm-6 col-xs-6" style="padding-left: 0px;">
                   <h4>
                   <i class="fa fa-bed"></i>
                    <%= @housing_listing.housing_setting.rooms_available %> Bedrooms
@@ -228,9 +213,49 @@
                   <span style="font-size: 15px;">
                     per month
                   </span>
+                </div> -->
+                <div class="col-xs-12">
+                  <div class="info-box">
+                    <span class="info-box-icon bg-red"><i class="fa fa-bed"></i></span>
+                    <div class="info-box-content">
+                      <span class="info-box-text">Bedrooms</span>
+                      <span class="info-box-number"><%= @housing_listing.housing_setting.rooms_available %></span>
+                    </div><!-- /.info-box-content -->
+                  </div><!-- /.info-box -->
+                </div>
+                <div class="col-xs-12">
+                  <div class="info-box">
+                    <span class="info-box-icon bg-yellow"><i class="fa fa-tint"></i></span>
+                    <div class="info-box-content">
+                      <span class="info-box-text">Bathrooms</span>
+                      <span class="info-box-number"><%= @housing_listing.housing_setting.num_washrooms %></span>
+                    </div><!-- /.info-box-content -->
+                  </div><!-- /.info-box -->
+                </div>
+                <div class="col-xs-12">
+                  <div class="info-box">
+                    <span class="info-box-icon bg-teal"><i class="fa fa-dollar"></i></span>
+                    <div class="info-box-content">
+                      <span class="info-box-text">Price</span>
+                      <span class="info-box-number"><%= @housing_listing.price %></span>
+                    </div><!-- /.info-box-content -->
+                  </div><!-- /.info-box -->
+                </div>
+                <div class="col-xs-12">
+                  <div class="info-box">
+                    <span class="info-box-icon bg-blue"><i class="fa fa-calendar"></i></span>
+                    <div class="info-box-content">
+                      <span class="info-box-text">Available</span>
+                      <span class="info-box-number">
+                        <%= @housing_listing.housing_setting.start_date.strftime("%B %e, %Y") %>
+                         to 
+                        <%= @housing_listing.housing_setting.end_date.strftime("%B %e, %Y") %>
+                      </span>
+                    </div><!-- /.info-box-content -->
+                  </div><!-- /.info-box -->
                 </div>
               </div>
-              <div class="col-md-12 col-sm-12 col-xs-12">
+              <!-- <div class="col-md-12 col-sm-12 col-xs-12">
                 <div style="margin-top: 18px;">
                   <i class="fa fa-clock-o"></i>
                   Available
@@ -242,7 +267,7 @@
                     <%= @housing_listing.housing_setting.end_date.strftime("%B %e, %Y") %>
                   </h4>
                 </div>
-              </div>
+              </div> -->
             </section>
           </section>
 
@@ -367,6 +392,7 @@
 <script src="/assets/jquery.iframe-transport"></script>
 <script src="/assets/jquery.fileupload"></script>
 <script src="/assets/jquery.cloudinary"></script>
+<script src="/assets/AdminLTE/dist/js/app.min.js"></script>
 
 <script type="text/javascript">
   var current_housing_listing_id = <%= @housing_listing.id %>;

@@ -9,11 +9,13 @@
 		<!-- Latest compiled and minified JavaScript -->
 		<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/js/bootstrap.min.js"></script>
 		<link rel="stylesheet" href="/assets/ladda/dist/ladda-themeless.min.css">
+		<link rel="stylesheet" href="/assets/AdminLTE/dist/css/AdminLTE.min.css">
+		<link href="/assets/AdminLTE/dist/css/skins/_all-skins.min.css" rel="stylesheet" type="text/css" />
 
 		<%= stylesheet_link_tag 'welcome_index.css'%>
 	</head>
 
-	<body>
+	<body class="skin-blue sidebar-mini">
 		<%= render 'shared/common_front_nav' %>
 	  	<div class="container" id="homepage">
 	  		<div class="jumbotron">
@@ -111,6 +113,7 @@
 	<script src="/assets/ladda/dist/spin.min.js"></script>
 	<script src="/assets/spin.js/jquery.spin.js"></script>
 	<script src="/assets/ladda/dist/ladda.min.js"></script>
+	<script src="/assets/AdminLTE/dist/js/app.min.js"></script>
 	<%= javascript_include_tag "/javascripts/welcome_index" %>
 
 </html>
