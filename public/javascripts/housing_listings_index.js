@@ -2,7 +2,7 @@
 function getContentString(details_url, image_url, name, rooms, price) {
   return contentString = '<div id="" style="width: 175px;">' + 
       '<a href="' + details_url + '">' +
-      '<img src="' + image_url + '" style="width: 175px; height: 150px; max-width: none;" ' +
+      '<img src="' + image_url + '" style="width: 175px; height: 130px; max-width: none;" ' +
       '</img>' +
       '</a>' +
       '<div id="text" style="font-family: sans-serif; text-align:center; margin: 10px; color: #FFFFFF;">' +
@@ -122,7 +122,17 @@ function getInfoBoxOptions(contentString) {
           var housing_listing = response[i];
           var section = "<section class='panel'><section class='panel-body'>";
 
-          var image_div = "<a href='" + "'> <img src='" + housing_listing['url'] + "' style='width: 275px; height: 230px;'> </img></a>";
+          var image_wrapper_div = "<div style='background-color: black;'><a href='/housing/listings/" + housing_listing['id'] + "' target='_blank'> ";
+          
+          if(housing_listing['url']) {
+            var image_div = "<img class='img-responsive center-block' src='" + housing_listing['url'] + "' style='max-height: 230px;'> </img>"
+          } else {
+            var image_div = "<img class='img-responsive center-block' src='/images/no_photos_available.jpg' style='max-height: 230px;'> </img>";
+          }
+
+          var image_wrapper_end_div = "</a></div>";
+
+          image_div = image_wrapper_div + image_div + image_wrapper_end_div;
 
           var name_div = "<div id='text' style='font-family: sans-serif; text-align:center; margin: 10px;'> <strong style='font-size: 22px;'>" + housing_listing['name'] + "</strong></div>";
 
@@ -148,7 +158,11 @@ function getInfoBoxOptions(contentString) {
 
           var myLatlng = new google.maps.LatLng(housing_listing['latitude'], housing_listing['longitude']);
 
-          var contentString = getContentString(housing_listing['url'], housing_listing['name'], housing_listing['rooms_available'], housing_listing['price']);
+          if(housing_listing['url']) {
+            var contentString = getContentString('/housing/listings/' + housing_listing['id'], housing_listing['url'], housing_listing['name'], housing_listing['rooms_available'], housing_listing['price']);
+          } else {
+            var contentString = getContentString('/housing/listings/' + housing_listing['id'], '/images/no_photos_available.jpg', housing_listing['name'], housing_listing['rooms_available'], housing_listing['price']);
+          }
 
           var infoBoxOptions = getInfoBoxOptions(contentString);
 

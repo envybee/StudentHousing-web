@@ -34,7 +34,6 @@ $('.datepicker').datepicker({
     map.setCenter(myLatlng);
     map.setZoom(17);
 
-
   var panoramaOptions = {
     position: myLatlng,
     pov: {

@@ -147,6 +147,8 @@
     var url = "";
     <% if housing_listing.housing_images.first %>
       url = "<%= housing_listing.housing_images.first.url %>";
+    <% else %>
+      url = "/images/no_photos_available.jpg"
     <% end %>
     var contentString = getContentString("<%= housing_listing_url(housing_listing) %>" , url, "<%= housing_listing.name %>", "<%= housing_listing.housing_setting.rooms_available %>", "<%= housing_listing.price %>");
 
