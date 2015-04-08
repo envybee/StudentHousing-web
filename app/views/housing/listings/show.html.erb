@@ -31,7 +31,11 @@
             <section class="panel-heading">
               <div id="form-text-wrapper" style="text-align: center;">
                 <h3>
+                  <% if @housing_listing.housing_setting.rental_type == "Apartment"%>
                   <i class="fa fa-building-o"></i>
+                  <% else %>
+                  <i class="fa fa-home"></i>
+                  <% end %>
                   <%= @housing_listing.name %>
                 </h3>
               </div>
@@ -171,19 +175,21 @@
           </div>
           <div style="width: 100%;">
             <% if @show_favorite == true %>
-              <h3>
-                <button id="favorite_btn" class="btn btn-lg btn-info"  style="width: 100%;">
-                  <i class="fa fa-heart" style="color: red"></i>
-                  Favorite
-                </button>
-              </h3>
-              <div id="already_in_favorites" class="callout callout-warning" style="display:none; text-align: center;">
-                  In your favorites
-              </div>
-            <% else %>
-              <div id="already_in_favorites" class="callout callout-warning" style="text-align:center; ">
-                  In your favorites
-              </div>
+              <% if @already_in_favorites%>
+                <div id="already_in_favorites" class="callout callout-warning" style="text-align:center; ">
+                    In your favorites
+                </div>
+              <% else %>
+                <h3>
+                  <button id="favorite_btn" class="btn btn-lg btn-info"  style="width: 100%;">
+                    <i class="fa fa-heart" style="color: red"></i>
+                    Favorite
+                  </button>
+                </h3>
+                <div id="already_in_favorites" class="callout callout-warning" style="display:none; text-align: center;">
+                    In your favorites
+                </div>
+              <% end %>
             <% end %>
           </div>
           <section class='panel'>
@@ -400,7 +406,9 @@
   var housing_listing_long = <%= @housing_listing.longitude%>;
   var housing_listing_comment_api = "<%= comment_api_v1_housing_listings_url %>";
   var housing_listing_id = "<%= @housing_listing.id %>";
+  <% if user_signed_in? %>
   var current_user_first_name = "<%= current_user.first_name %>";
+  <% end %>
   var housing_listing_id = "<%= @housing_listing.id %>";
   var housing_listing_send_inquiry_email_api = "<%= send_inquiry_email_api_v1_housing_listings_url %>";
   var housing_favorite_api = "<%= api_v1_housing_favorites_path %>";

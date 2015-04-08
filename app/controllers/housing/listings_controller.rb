@@ -11,10 +11,15 @@ class Housing::ListingsController < ApplicationController
   	housing_listing_id = params[:id]
     if HousingListing.exists?(housing_listing_id)
     	@housing_listing = HousingListing.find(housing_listing_id)
-      if current_user.housing_favorites.exists?(:housing_listing_id => housing_listing_id)
+      if !user_signed_in?
         @show_favorite = false
       else
         @show_favorite = true
+        if current_user.housing_favorites.exists?(:housing_listing_id => housing_listing_id)
+          @already_in_favorites = true
+        else
+          @already_in_favorites = false
+        end
       end
     else
       render plain: "This listing is either not available or has been removed.", status: 404
