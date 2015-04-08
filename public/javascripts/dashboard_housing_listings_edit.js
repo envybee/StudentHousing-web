@@ -98,7 +98,7 @@ google.maps.event.addListener(address_autocomplete, 'place_changed', function() 
 
   var place = address_autocomplete.getPlace();
 
-  var componentForm = {
+  var short_long_names = {
       street_number: 'short_name',
       route: 'long_name',
       locality: 'short_name',
@@ -111,8 +111,8 @@ google.maps.event.addListener(address_autocomplete, 'place_changed', function() 
   for (var i = 0; i < place.address_components.length; i++) {
       var addressType = place.address_components[i].types[0];
 
-      if(componentForm[addressType]) {
-          address_parts[addressType] = place.address_components[i][componentForm[addressType]];
+      if(short_long_names[addressType]) {
+          address_parts[addressType] = place.address_components[i][short_long_names[addressType]];
       }
   }
 
@@ -131,6 +131,51 @@ google.maps.event.addListener(address_autocomplete, 'place_changed', function() 
   map.setZoom(17);
 
 });
+
+var mapAddress = function() {
+  var geocoder = new google.maps.Geocoder();
+  
+  if(address_active != '') {
+      geocoder.geocode({
+          'address' : address_active
+      }, function(results, status) {
+          if(status == google.maps.GeocoderStatus.OK) {
+              map.setCenter(results[0].geometry.location);
+              map.setZoom(17);
+
+              var place = results[0];
+
+              var short_long_names = {
+                  street_number: 'short_name',
+                  route: 'long_name',
+                  locality: 'short_name',
+                  administrative_area_level_1: 'short_name',
+                  postal_code: 'short_name',
+                  postal_code_prefix: 'short_name',
+                  country: 'short_name'
+              };
+
+              for (var i = 0; i < place.address_components.length; i++) {
+                  var addressType = place.address_components[i].types[0];
+
+                  if(short_long_names[addressType]) {
+                      address_parts[addressType] = place.address_components[i][short_long_names[addressType]];
+                  }
+              }
+
+              var marker = new google.maps.Marker({
+                  animation: google.maps.Animation.DROP,
+                  map: map,
+                  position: results[0].geometry.location
+              });
+          }
+      });
+  }
+};
+
+if(address_active){
+  mapAddress(address_active);
+}
 
 /*---------------------------------------
 |           Click listeners             |
