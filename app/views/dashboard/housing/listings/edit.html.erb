@@ -7,32 +7,18 @@
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/css/bootstrap.min.css">
     <link rel="stylesheet" href="/assets/bootstrap-switch-master/dist/css/bootstrap3/bootstrap-switch.css">
     <link rel="stylesheet" href="/assets/bootstrap-datepicker/css/datepicker.css">
+    <link rel="stylesheet" href="/assets/AdminLTE/dist/css/AdminLTE.min.css">
+    <link href="/assets/AdminLTE/dist/css/skins/_all-skins.min.css" rel="stylesheet" type="text/css" />
 
     <!-- Optional theme -->
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/css/bootstrap-theme.min.css">
     <link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.min.css">
     <!-- Latest compiled and minified JavaScript -->
   </head>
-  <body>
+  <body class="skin-blue sidebar-mini">
     <div id="wrapper">
-      <nav class="navbar navbar-default">
-          <div class="container-fluid">
-            <!-- Brand and toggle get grouped for better mobile display -->
-            <div class="navbar-header">
-                  </div>
-            <div class="navbar-collapse collapse">
-                      <ul class="nav navbar-nav navbar-right">
-                          <li><a href="/"><i class="fa fa-home"></i>Home</a></li>
-                          <li><a href="#">About</a></li>
-                          <% if user_signed_in? %>
-                          <li><a href="<%= dashboard_index_path %>">Dashboard</a></li>
-              <% else %>
-                          <li><a id="sign_in_btn" href="#">Sign in</a></li>
-              <% end %>
-                      </ul>
-                  </div>
-        </div>
-      </nav>
+      
+      <%= render 'shared/common_front_nav' %>
     
       <form id="create_listing_form">
         <div class="col-md-12">
@@ -300,6 +286,7 @@
 <script src="/assets/jquery.iframe-transport"></script>
 <script src="/assets/jquery.fileupload"></script>
 <script src="/assets/jquery.cloudinary"></script>
+<script src="/assets/AdminLTE/dist/js/app.min.js"></script>
 
     <%= cloudinary_js_config %>
 <script type="text/javascript">

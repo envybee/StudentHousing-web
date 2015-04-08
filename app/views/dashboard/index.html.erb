@@ -6,98 +6,100 @@
 	<%= stylesheet_link_tag 'dashboard_index.css'%>
 </head>
 <body class="skin-blue sidebar-mini">
-	<%= render 'shared/common_dash_nav' %>
-	<div class="content-wrapper">
-		<section class="content">
-			<div class="nav-tabs-custom">
-				<% if @my_listings.length != 0 %>
-		  			<ul class="nav nav-tabs" role="tablist">
-						<% @my_listings.each do |l| %>
-							<% if @my_listings.first == l %>
-							<li role="presentation" class="active"><a href="#listing_analytics" aria-controls="listing_analytics" role="tab" data-toggle="tab" data-listing-id="<%= l.id %>"><%= l.name %></a></li>
-							<% else %>
-							<li role="presentation"><a href="#listing_analytics" aria-controls="listing_analytics" role="tab" data-toggle="tab" data-listing-id="<%= l.id %>"><%= l.name %></a></li>
+	<div class="wrapper">
+		<%= render 'shared/common_dash_nav' %>
+		<div class="content-wrapper">
+			<section class="content">
+				<div class="nav-tabs-custom">
+					<% if @my_listings.length != 0 %>
+			  			<ul class="nav nav-tabs" role="tablist">
+							<% @my_listings.each do |l| %>
+								<% if @my_listings.first == l %>
+								<li role="presentation" class="active"><a href="#listing_analytics" aria-controls="listing_analytics" role="tab" data-toggle="tab" data-listing-id="<%= l.id %>"><%= l.name %></a></li>
+								<% else %>
+								<li role="presentation"><a href="#listing_analytics" aria-controls="listing_analytics" role="tab" data-toggle="tab" data-listing-id="<%= l.id %>"><%= l.name %></a></li>
+								<% end %>
 							<% end %>
-						<% end %>
-		  			</ul>
-				<% else %>
-					<p>No results found. Post your first entry by clicking <a id="click_here_create_listing" href="#">here</a></P>
-				<% end %>
-				<div id="my-tab-content" class="tab-content">
-					<section class="panel">
-						<section class="panel-body">
-							<div id="listing_analyticsss" class="tab-pane active">
-								<div class="row placeholders">
-									<!-- <div class="col-lg-3 col-md-6">
-										<div class="panel panel-primary">
-											<div class="panel-heading">
-												<i class="fa fa-binoculars fa-4x custom-fa"></i>
-												<div class="large">30</div>
-												<div class="subtext">Page Views</div>
+			  			</ul>
+					<% else %>
+						<p>No results found. Post your first entry by clicking <a id="click_here_create_listing" href="#">here</a></P>
+					<% end %>
+					<div id="my-tab-content" class="tab-content">
+						<section class="panel">
+							<section class="panel-body">
+								<div id="listing_analyticsss" class="tab-pane active">
+									<div class="row placeholders">
+										<!-- <div class="col-lg-3 col-md-6">
+											<div class="panel panel-primary">
+												<div class="panel-heading">
+													<i class="fa fa-binoculars fa-4x custom-fa"></i>
+													<div class="large">30</div>
+													<div class="subtext">Page Views</div>
+												</div>
 											</div>
-										</div>
-									</div> -->
-									<div class="col-lg-4 col-md-3">
-										<div class="small-box bg-aqua">
-							                <div class="inner">
-							                  <h3>56</h3>
-							                  <p>Alerts Sent</p>
-							                </div>
-							                <div class="icon">
-							                  <i class="fa fa-bell"></i>
-							                </div>
-							            </div>
-							        </div>
-							        <div class="col-lg-4 col-md-3">
-										<div class="small-box bg-teal">
-							                <div class="inner">
-							                  <h3>3</h3>
-							                  <p>Rating</p>
-							                </div>
-							                <div class="icon">
-							                  <i class="fa fa-star"></i>
-							                </div>
-							            </div>
-							        </div>
-							        <div class="col-lg-4 col-md-3">
-										<div class="small-box bg-red">
-							                <div class="inner">
-							                  <h3>10</h3>
-							                  <p>Favorited</p>
-							                </div>
-							                <div class="icon">
-							                  <i class="fa fa-heart"></i>
-							                </div>
-							            </div>
-							        </div>
+										</div> -->
+										<div class="col-lg-4 col-md-3">
+											<div class="small-box bg-aqua">
+								                <div class="inner">
+								                  <h3>56</h3>
+								                  <p>Alerts Sent</p>
+								                </div>
+								                <div class="icon">
+								                  <i class="fa fa-bell"></i>
+								                </div>
+								            </div>
+								        </div>
+								        <div class="col-lg-4 col-md-3">
+											<div class="small-box bg-teal">
+								                <div class="inner">
+								                  <h3>3</h3>
+								                  <p>Rating</p>
+								                </div>
+								                <div class="icon">
+								                  <i class="fa fa-star"></i>
+								                </div>
+								            </div>
+								        </div>
+								        <div class="col-lg-4 col-md-3">
+											<div class="small-box bg-red">
+								                <div class="inner">
+								                  <h3>10</h3>
+								                  <p>Favorited</p>
+								                </div>
+								                <div class="icon">
+								                  <i class="fa fa-heart"></i>
+								                </div>
+								            </div>
+								        </div>
+									</div>
 								</div>
-							</div>
-						</section>
-					</section>
-					<section class="panel panel-default">
-						<section class="panel-body">
-							<div id="chartdiv"></div>
-						</section>
-					</section>
-					<!-- <div class="col-lg-6 col-md-6">
-						<section class="panel panel-default">
-							<section class="panel-heading"><h3 class="panel-title">Page Views by Location</h3></section>
-							<section class="panel-body" style="padding-left: 0px; padding-right: 0px;">
-								<div id="pchart_pgviews"></div>
 							</section>
 						</section>
+						<section class="panel panel-default">
+							<section class="panel-body">
+								<div id="chartdiv"></div>
+							</section>
+						</section>
+						<!-- <div class="col-lg-6 col-md-6">
+							<section class="panel panel-default">
+								<section class="panel-heading"><h3 class="panel-title">Page Views by Location</h3></section>
+								<section class="panel-body" style="padding-left: 0px; padding-right: 0px;">
+									<div id="pchart_pgviews"></div>
+								</section>
+							</section>
+						</div>
+						<div class="col-lg-6 col-md-6">
+							<section class="panel panel-default">
+								<section class="panel-heading"><h3 class="panel-title">Sources</h3></section>
+								<section class="panel-body" style="padding-left: 0px; padding-right: 0px;">
+									<div id="pchart_sources"></div>
+								</section>
+							</section>
+						</div> -->
 					</div>
-					<div class="col-lg-6 col-md-6">
-						<section class="panel panel-default">
-							<section class="panel-heading"><h3 class="panel-title">Sources</h3></section>
-							<section class="panel-body" style="padding-left: 0px; padding-right: 0px;">
-								<div id="pchart_sources"></div>
-							</section>
-						</section>
-					</div> -->
 				</div>
-			</div>
-		</section>
+			</section>
+		</div>
 	</div>
 </body>
 <%= render 'shared/common_dash_scripts' %>

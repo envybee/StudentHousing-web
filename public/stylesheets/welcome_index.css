@@ -3,7 +3,7 @@
 	font-size: 30px;
 	margin-top: 50px;
 	color: #000;
-	font-family: Candara, Calibri, Segoe, 'Segoe UI', Optima, Arial, sans-serif;
+	/*font-family: Candara, Calibri, Segoe, 'Segoe UI', Optima, Arial, sans-serif;*/
 
 	max-width: 730px;
 	margin-right: auto;
@@ -14,7 +14,7 @@
 }
 .btn {
 	/*font-size: 24px;*/
-	font-family: Candara, Calibri, Segoe, 'Segoe UI', Optima, Arial, sans-serif;
+	/*font-family: Candara, Calibri, Segoe, 'Segoe UI', Optima, Arial, sans-serif;*/
 	font-weight: 400;
 	color: #000;
 }
