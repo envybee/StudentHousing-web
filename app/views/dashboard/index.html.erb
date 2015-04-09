@@ -15,9 +15,9 @@
 			  			<ul class="nav nav-tabs" role="tablist">
 							<% @my_listings.each do |l| %>
 								<% if @my_listings.first == l %>
-								<li role="presentation" class="active"><a href="#listing_analytics" aria-controls="listing_analytics" role="tab" data-toggle="tab" data-listing-id="<%= l.id %>"><%= l.name %></a></li>
+								<li role="presentation" class="active"><a href="#listing_analytics" aria-controls="listing_analytics" role="tab" data-toggle="tab" data-listing-id="<%= l.id %>"><%= truncate(l.name, length: 32) %></a></li>
 								<% else %>
-								<li role="presentation"><a href="#listing_analytics" aria-controls="listing_analytics" role="tab" data-toggle="tab" data-listing-id="<%= l.id %>"><%= l.name %></a></li>
+								<li role="presentation"><a href="#listing_analytics" aria-controls="listing_analytics" role="tab" data-toggle="tab" data-listing-id="<%= l.id %>"><%= truncate(l.name, length: 32) %></a></li>
 								<% end %>
 							<% end %>
 			  			</ul>

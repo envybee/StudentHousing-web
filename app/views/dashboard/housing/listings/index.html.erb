@@ -47,9 +47,10 @@
 								<tbody>
 									<% @my_listings.each do |l| %>
 									<tr>
-										<td><a href="<%= housing_listing_url(l.id) %>" target="_blank"><%= l.name %></a></td>
-										<td><%= l.description %></td>
-										<td><%= l.location %></td>
+										<td><a href="<%= housing_listing_url(l.id) %>" target="_blank">
+											<%= truncate(l.name, length: 32) %></a></td>
+										<td><%= truncate(l.description, length: 32) %></td>
+										<td><%= truncate(l.location, length: 32) %></td>
 										<td>$<%= l.price %></td>
 										<% if l.overall_rating.nil? %>
 											<td> -- </td>
@@ -102,19 +103,19 @@
 											<% if l.name.empty? %>
 												--
 											<% else %>
-												<%= l.name %>
+												<%= truncate(l.name, length: 32) %>
 											<% end %>
 										</td>
 										<td>
 											<% if l.description %>
-													<%= l.description %>
+												<%= truncate(l.description, length: 32) %>
 											<% else %>
 												--
 											<% end %>
 										</td>
 										<td>
 											<% if l.location %>
-													<%= l.location %>
+												<%= truncate(l.location, length: 32) %>
 											<% else %>
 												--
 											<% end %>

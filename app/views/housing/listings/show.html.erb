@@ -16,7 +16,7 @@
 
     <%= stylesheet_link_tag 'housing_listings_show.css'%>
   </head>
-  <body class="skin-blue sidebar-mini">
+  <body class="skin-blue">
     <div id="wrapper">
 
       <%= render 'shared/common_front_nav' %>
@@ -58,6 +58,7 @@
             <section class="panel-heading">
               <div id="form-text-wrapper" style="text-align: center;">
                 <h3>
+                  <i class="fa fa-wifi"></i>
                   Amenities
                 </h3>
               </div>
@@ -112,6 +113,7 @@
             <section class="panel-heading">
               <div id="form-text-wrapper" style="text-align: center;">
                 <h3>
+                  <i class="fa fa-star-o"></i>
                   Reviews
                 </h3>
               </div>
@@ -129,7 +131,7 @@
                     </div>
                     <div class="col-xs-3">
                       <% housing_review.rating.to_i.times do%>
-                        <i class="fa fa-star" style="font-size: 15px; padding: 0px; margin: 0px;"></i>
+                        <i class="fa fa-star custom-star" style="font-size: 15px; padding: 0px; margin: 0px;"></i>
                       <% end %>
                     </div>
                     <div class="col-xs-12 comment" style="font-size: 18px;">
@@ -140,7 +142,7 @@
                 <% else %>
                   <div id="no_review_warning" class="col-xs-12">
                     <div class="callout callout-info">
-                      No reviews for this listing yet
+                      No reviews for this listing yet. Be the first one to review this listing.
                     </div>
                   </div>
                 <% end %>
@@ -167,7 +169,7 @@
         <div class="col-md-5">
           <div style="width: 100%;">
             <h3>
-              <button id="send_message_btn" class="btn btn-lg btn-info"  style="width: 100%;">
+              <button id="send_message_btn" class="btn btn-lg btn-info btn-block btn-flat">
                 <i class="fa fa-envelope" style="color: #FFF"></i>
                 Message
               </button>
@@ -181,7 +183,7 @@
                 </div>
               <% else %>
                 <h3>
-                  <button id="favorite_btn" class="btn btn-lg btn-info"  style="width: 100%;">
+                  <button id="favorite_btn" class="btn btn-lg btn-info btn-block btn-flat">
                     <i class="fa fa-heart" style="color: red"></i>
                     Favorite
                   </button>
@@ -196,6 +198,7 @@
             <section class="panel-heading">
               <div id="form-text-wrapper" style="text-align: center;">
                 <h3>
+                  <i class="fa fa-info-circle"></i>
                   Details
                 </h3>
               </div>
@@ -303,6 +306,7 @@
             <section class="panel-heading">
               <div id="form-text-wrapper" style="text-align: center;">
                 <h3>
+                  <i class="fa fa-star-o"></i>
                   Rating
                 </h3>
               </div>
@@ -310,7 +314,7 @@
             <section class="panel-body" style="text-align: center;">
               <% if @housing_listing.overall_rating %>
                 <% @housing_listing.overall_rating.to_i.times do %>
-                  <i class="fa fa-star"></i>
+                  <i class="fa fa-star custom-star"></i>
                 <% end %>
               <% else %>
               <div class="callout callout-info">

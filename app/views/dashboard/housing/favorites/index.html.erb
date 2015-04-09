@@ -35,7 +35,7 @@
 						            		<div class="row">
 									            <div class="col-md-12 favorite_text" id="text" style="font-family: sans-serif; margin: 10px;">
 									              <strong style="font-size: 22px;">
-									              <h2><%= favorite.housing_listing.name %></h2>
+									              <h2><%= truncate(favorite.housing_listing.name, length: 32) %></h2>
 									              </strong>
 									            </div>
 									        </div>

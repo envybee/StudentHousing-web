@@ -23,40 +23,44 @@
       <div id="map-canvas" style="height:100%;"></div>
     </div>
     <div id="housing_listing_results_wrapper" class="col-md-3 col-sm-4 col-xs-5" style="height: 100%; overflow: scroll; padding-left: 0px;">
-      <% @housing_listings.each do |housing_listing| %>
-      <div style="">
-        <section class='panel'>
-          <section class='panel-body'>
-            <div style="background-color: black;">
-                <a href="<%= housing_listing_url(housing_listing) %>" target="_blank">  
-                  <% if housing_listing.housing_images.first %>
-                  <img class="img-responsive center-block" src="<%= housing_listing.housing_images.first.url %>" style="max-height: 230px;">
-                    </img>
-                  <% else %>
-                  <img class="img-responsive center-block" src="/images/no_photos_available.jpg" style="max-height: 230px;">
-                  <% end %>
-                </a>
-            </div>
-            <div id="text" style="font-family: sans-serif; text-align:center; margin: 10px;">
-              <strong style="font-size: 22px;">
-              <%= housing_listing.name %>
-              </strong>
-            </div>
-            <div style="margin: 10px;">
-              <i class="fa fa-map-marker"></i>
-              <%= truncate(housing_listing.location, :length => 32) %>
-            </div>
-            <div id="text" class="col-md-6 col-xs-12" style="font-family: sans-serif; text-align:left;">
-              <i class="fa fa-bed"></i>
-              <%= housing_listing.housing_setting.rooms_available %> bedrooms
-            </div>
-            <div id="text" class="col-md-6 col-xs-12" style="font-family: sans-serif; text-align:right;">
-              <i class="fa fa-dollar"></i>
-              <%= housing_listing.price %>
-            </div>
+      <% if @housing_listings.count(:all) > 0 %>
+        <% @housing_listings.each do |housing_listing| %>
+        <div style="">
+          <section class='panel'>
+            <section class='panel-body'>
+              <div style="background-color: black;">
+                  <a href="<%= housing_listing_url(housing_listing) %>" target="_blank">  
+                    <% if housing_listing.housing_images.first %>
+                    <img class="img-responsive center-block" src="<%= housing_listing.housing_images.first.url %>" style="max-height: 230px;">
+                      </img>
+                    <% else %>
+                    <img class="img-responsive center-block" src="/images/no_photos_available.jpg" style="max-height: 230px;">
+                    <% end %>
+                  </a>
+              </div>
+              <div id="text" style="font-family: sans-serif; text-align:center; margin: 10px;">
+                <strong style="font-size: 22px;">
+                <%= housing_listing.name %>
+                </strong>
+              </div>
+              <div style="margin: 10px;">
+                <i class="fa fa-map-marker"></i>
+                <%= truncate(housing_listing.location, :length => 32) %>
+              </div>
+              <div id="text" class="col-md-6 col-xs-12" style="font-family: sans-serif; text-align:left;">
+                <i class="fa fa-bed"></i>
+                <%= housing_listing.housing_setting.rooms_available %> bedrooms
+              </div>
+              <div id="text" class="col-md-6 col-xs-12" style="font-family: sans-serif; text-align:right;">
+                <i class="fa fa-dollar"></i>
+                <%= housing_listing.price %>
+              </div>
+            </section>
           </section>
-        </section>
-      </div>
+        </div>
+        <% end %>
+      <% else %>
+        <div class="callout callout-info">No housing listings available at this location.</div>
       <% end %>
     </div>
     <nav class="navbar navbar-default navbar-fixed-bottom">
@@ -125,8 +129,9 @@
     /*
       GOOGLE MAPS
   */
+  var centerLatLng = <%= Geocoder.coordinates(@city + " " + @province + " " + @country) %>;
   var mapOptions = {
-      center: new google.maps.LatLng(43.4304343, -80.4763151),
+      center: new google.maps.LatLng(centerLatLng[0], centerLatLng[1]),
       minZoom: 5,
       zoom: 10,
       maxZoom: 17,

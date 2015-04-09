@@ -12,6 +12,17 @@
 	margin-top: 100px;
 	opacity: 0.7;
 }
+.navbar-fixed-bottom {
+	opacity: 1;
+	color: #000000;
+	/*background-color: #000000;*/
+  	background-color: #FFFFFF;
+  	opacity: 0.8;
+}
+.sign_up_text {
+	font-size: 15px;
+	text-align: left;
+}
 .btn {
 	/*font-size: 24px;*/
 	/*font-family: Candara, Calibri, Segoe, 'Segoe UI', Optima, Arial, sans-serif;*/
@@ -34,5 +45,5 @@ body {
 	background-image: url("/images/homepage_bg.jpeg");
 	background-size: cover;
 	background-repeat: no-repeat;
-	opacity: 0.8
+	/*opacity: 0.8;*/
 }
