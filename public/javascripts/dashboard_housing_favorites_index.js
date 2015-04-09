@@ -1,5 +1,5 @@
 $(document).ready(function() {
-	$("#entry_listings").DataTable();
+	$("#entry_listings").dataTable();
 });
 
 $("#click_here_create_listing").on("click", function(e) {

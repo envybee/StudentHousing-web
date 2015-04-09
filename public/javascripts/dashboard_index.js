@@ -103,9 +103,56 @@ function callCompareNearbyListingsPrice(listing_id) {
       	id: listing_id
       },
       success: function(response){
-	    console.log(response);
 		showPriceComparisonChart(response.average_price, response.listing_price, response.max_price, response.address);
       },
+      error: function(response) {
+      	console.log(response);
+      }
+    });
+}
+
+function callNumAlerts(listing_id) {
+	$.ajax({
+      method: 'get',
+      url: num_alerts_api,
+      data: {
+      	id: listing_id
+      },
+      success: function(response){
+		$("#num_alerts").text(response.num_alerts);
+	  },
+      error: function(response) {
+      	console.log(response);
+      }
+    });
+}
+
+function callRating(listing_id) {
+	$.ajax({
+      method: 'get',
+      url: rating_api,
+      data: {
+      	id: listing_id
+      },
+      success: function(response){
+		$("#rating").text(response.rating);
+	  },
+      error: function(response) {
+      	console.log(response);
+      }
+    });
+}
+
+function callFavorited(listing_id) {
+	$.ajax({
+      method: 'get',
+      url: favorites_api,
+      data: {
+      	id: listing_id
+      },
+      success: function(response){
+		$("#favorited").text(response.favorites);
+	  },
       error: function(response) {
       	console.log(response);
       }
@@ -121,14 +168,23 @@ function callSourcesByLocation() {
 }
 
 var compare_nearby_listings_price_api = "/api/v1/housing/listings/compare_nearby_listings_price";
+var num_alerts_api = '/api/v1/housing/listings/num_alerts';
+var rating_api = '/api/v1/housing/listings/rating';
+var favorites_api = '/api/v1/housing/listings/favorites';
 
 callCompareNearbyListingsPrice(compare_listing_id);
+callNumAlerts(compare_listing_id);
+callRating(compare_listing_id);
+callFavorited(compare_listing_id);
 callPageViewsByLocation();
 callSourcesByLocation();
 
 $(document).on('shown.bs.tab', 'a[data-toggle="tab"]', function (e) {
 	var listing_id = $(this).data('listing-id');
 	callCompareNearbyListingsPrice(listing_id);
+	callNumAlerts(listing_id);
+	callRating(listing_id);
+	callFavorited(listing_id);
 	callPageViewsByLocation();
 	callSourcesByLocation();
 });

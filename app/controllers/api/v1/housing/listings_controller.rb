@@ -133,6 +133,31 @@ class Api::V1::Housing::ListingsController < ApplicationController
     end
   end
 
+  def num_alerts
+    housing_listing_id = params[:id]
+    housing_listing = HousingListing.find(housing_listing_id)
+    num_alerts = HousingAlert.near([housing_listing.latitude, housing_listing.longitude], 3).count(:all)
+    render :json => {:num_alerts => num_alerts }
+  end
+
+  def rating
+    housing_listing_id = params[:id]
+    housing_listing = HousingListing.find(housing_listing_id)
+    if housing_listing.overall_rating.nil?
+      rating = '-'
+    else
+      rating = housing_listing.overall_rating
+    end
+    render :json => {:rating => rating }
+  end
+
+  def favorites
+    housing_listing_id = params[:id]
+    housing_listing = HousingListing.find(housing_listing_id)
+    favorites = housing_listing.housing_favorites.count
+    render :json => {:favorites => favorites }
+  end
+
   def compare_nearby_listings_price
     listing_id = params[:id]
     housing_listing = HousingListing.find(listing_id)

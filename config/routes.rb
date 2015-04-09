@@ -33,6 +33,9 @@ Rails.application.routes.draw do
           collection do
             get 'near'
             get 'compare_nearby_listings_price'
+            get 'num_alerts'
+            get 'rating'
+            get 'favorites'
             post 'send_inquiry_email'
             post 'comment'
             post 'housing_with_filters'

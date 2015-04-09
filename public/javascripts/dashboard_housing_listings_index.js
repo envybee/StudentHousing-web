@@ -1,7 +1,7 @@
 var housing_listing_id = -1;
 
 $(document).ready(function() {
-	$("#entry_listings, #draft_listings_table").DataTable();
+	$("#entry_listings, #draft_listings_table").dataTable();
 });
 
 $("#click_here_create_listing").on("click", function(e) {

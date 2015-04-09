@@ -139,7 +139,7 @@
                   <% end %>
                 <% else %>
                   <div id="no_review_warning" class="col-xs-12">
-                    <div class="alert alert-warning">
+                    <div class="callout callout-info">
                       No reviews for this listing yet
                     </div>
                   </div>
@@ -176,7 +176,7 @@
           <div style="width: 100%;">
             <% if @show_favorite == true %>
               <% if @already_in_favorites%>
-                <div id="already_in_favorites" class="callout callout-warning" style="text-align:center; ">
+                <div id="already_in_favorites" class="callout callout-info" style="text-align:center; ">
                     In your favorites
                 </div>
               <% else %>
@@ -186,7 +186,7 @@
                     Favorite
                   </button>
                 </h3>
-                <div id="already_in_favorites" class="callout callout-warning" style="display:none; text-align: center;">
+                <div id="already_in_favorites" class="callout callout-info" style="display:none; text-align: center;">
                     In your favorites
                 </div>
               <% end %>
@@ -202,24 +202,6 @@
             </section>
             <section class='panel-body'>
               <div class="col-md-12 col-sm-12 col-xs-12">
-                <!-- <div id="" class="col-md-6 col-sm-6 col-xs-6" style="padding-left: 0px;">
-                  <h4>
-                  <i class="fa fa-bed"></i>
-                   <%= @housing_listing.housing_setting.rooms_available %> Bedrooms
-                  </h4>
-                  <h4>
-                  <i class="fa fa-tint"></i>
-                    <%= @housing_listing.housing_setting.num_washrooms %> Bathrooms
-                  </h4>
-                </div>
-                <div id="" class="col-md-6 col-sm-6 col-xs-6" style="padding-right: 0px; padding-top:15px; height: 100%">
-                  <span id="" style="font-size: 25px;">
-                    $<%= @housing_listing.price %>
-                  </span>
-                  <span style="font-size: 15px;">
-                    per month
-                  </span>
-                </div> -->
                 <div class="col-xs-12">
                   <div class="info-box">
                     <span class="info-box-icon bg-red"><i class="fa fa-bed"></i></span>
@@ -261,19 +243,6 @@
                   </div><!-- /.info-box -->
                 </div>
               </div>
-              <!-- <div class="col-md-12 col-sm-12 col-xs-12">
-                <div style="margin-top: 18px;">
-                  <i class="fa fa-clock-o"></i>
-                  Available
-                </div>
-                <div id="" style="font-size: 20px;">
-                  <h4>
-                    <%= @housing_listing.housing_setting.start_date.strftime("%B %e, %Y") %>
-                     to 
-                    <%= @housing_listing.housing_setting.end_date.strftime("%B %e, %Y") %>
-                  </h4>
-                </div>
-              </div> -->
             </section>
           </section>
 
@@ -344,7 +313,9 @@
                   <i class="fa fa-star"></i>
                 <% end %>
               <% else %>
-                No ratings for this listing yet.
+              <div class="callout callout-info">
+                No ratings for this listing yet
+              </div>
               <% end %>
             </section>
           </section>

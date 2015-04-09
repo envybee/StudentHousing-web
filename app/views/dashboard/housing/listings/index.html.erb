@@ -1,9 +1,10 @@
 <head>
-	<%= render 'shared/common_dash_head' %>
 	<!-- DataTables CSS -->
 	<link rel="stylesheet" type="text/css" href="//cdn.datatables.net/1.10.5/css/jquery.dataTables.css">
 	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.4/css/bootstrap-theme.min.css">
+	
 	<%= stylesheet_link_tag 'dashboard_housing_listings_index.css'%>
+	<%= render 'shared/common_dash_head' %>
 </head>
 <body class="skin-blue sidebar-mini">
 	<%= render 'shared/common_dash_nav' %>
@@ -50,7 +51,11 @@
 										<td><%= l.description %></td>
 										<td><%= l.location %></td>
 										<td>$<%= l.price %></td>
-										<td><%= l.overall_rating %></td>
+										<% if l.overall_rating.nil? %>
+											<td> -- </td>
+										<% else %>
+											<td><%= l.overall_rating %></td>
+										<% end %>
 										<td><a href="<%= edit_dashboard_housing_listing_url(l.id) %>" class="btn btn-sm btn-primary">Edit</a></td>
 										<td><button type="button" class="btn btn-sm btn-danger del_btn" data-toggle="modal" data-target="#confirm_diag">Delete</button></td>
 										<input type="hidden" id="listing_id" value="<%=l.id%>"/>
