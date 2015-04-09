@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20150324015318) do
+ActiveRecord::Schema.define(version: 20150409024258) do
 
   create_table "delayed_jobs", force: :cascade do |t|
     t.integer  "priority",   limit: 4,     default: 0, null: false
@@ -43,15 +43,15 @@ ActiveRecord::Schema.define(version: 20150324015318) do
     t.float   "longitude",      limit: 24
   end
 
-  add_index "housing_alerts", ["user_id"], name: "fk_rails_a61fa0c519", using: :btree
+  add_index "housing_alerts", ["user_id"], name: "fk_rails_93c885998c", using: :btree
 
   create_table "housing_favorites", force: :cascade do |t|
     t.integer "housing_listing_id", limit: 4
     t.integer "user_id",            limit: 4
   end
 
-  add_index "housing_favorites", ["housing_listing_id"], name: "fk_rails_5fa38b1f30", using: :btree
-  add_index "housing_favorites", ["user_id"], name: "fk_rails_ce73402bc5", using: :btree
+  add_index "housing_favorites", ["housing_listing_id"], name: "fk_rails_0e6138bcc9", using: :btree
+  add_index "housing_favorites", ["user_id"], name: "fk_rails_71a25d3c97", using: :btree
 
   create_table "housing_images", force: :cascade do |t|
     t.integer "housing_listing_id", limit: 4
@@ -80,8 +80,10 @@ ActiveRecord::Schema.define(version: 20150324015318) do
     t.integer  "user_id",        limit: 4
     t.boolean  "active",         limit: 1
     t.string   "street_address", limit: 255
+    t.datetime "deleted_at"
   end
 
+  add_index "housing_listings", ["deleted_at"], name: "index_housing_listings_on_deleted_at", using: :btree
   add_index "housing_listings", ["latitude", "longitude"], name: "index_housing_listings_on_latitude_and_longitude", using: :btree
 
   create_table "housing_reviews", force: :cascade do |t|

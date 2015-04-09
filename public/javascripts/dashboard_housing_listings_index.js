@@ -30,7 +30,7 @@ function deleteEntry() {
 	  	id: housing_listing_id
 	  },
 	  success: function(response){
-		window.location.href = dashboard_index;
+		window.location.reload();
 		console.log(response);
 	  },
 	  error: function(response) {
