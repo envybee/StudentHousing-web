@@ -1,40 +1,45 @@
 <html>
   <head>
     <%= render 'devise/shared/common_head' %>
+    <link rel="stylesheet" href="/assets/AdminLTE/dist/css/AdminLTE.min.css">
+    <link href="/assets/AdminLTE/dist/css/skins/_all-skins.min.css" rel="stylesheet" type="text/css" />
   </head>
 
-  <body>
+  <body class="login-page skin-blue">
     <%= render 'shared/common_front_nav' %>
-    <div class="container" id="homepage">
-      <div class="jumbotron">
-        <h2>Log in</h2>
+    <div class="login-box" id="homepage">
+      <div class="login-box-body">
+        <p class="login-box-msg">Log in</p>
 
         <%= form_for(resource, as: resource_name, url: session_path(resource_name)) do |f| %>
         <%= devise_error_messages! %>
-          <div class="field">
-            <%= f.label :email %><br />
-            <%= f.email_field :email, autofocus: true %>
+          <div class="form-group has-feedback">
+            <%= f.email_field :email, autofocus: true, :class => 'form-control', :placeholder => 'Email' %>
+            <span class="glyphicon glyphicon-envelope form-control-feedback"></span>
           </div>
 
-          <div class="field">
-            <%= f.label :password %><br />
-            <%= f.password_field :password, autocomplete: "off" %>
+          <div class="form-group has-feedback">
+            <%= f.password_field :password, autocomplete: "off", :class => 'form-control', :placeholder => 'Password' %>
+            <span class="glyphicon glyphicon-lock form-control-feedback"></span>
           </div>
 
           <% if devise_mapping.rememberable? -%>
-            <div class="field">
+            <div class="checkbox'">
               <%= f.check_box :remember_me %>
               <%= f.label :remember_me %>
             </div>
           <% end -%>
 
           <div class="actions">
-            <%= f.submit "Log in" %>
+            <%= f.submit "Log in", :class => 'btn btn-primary btn-block btn-flat' %>
           </div>
+          <br />
         <% end %>
 
         <%= render "devise/shared/links" %>
       </div>
     </div>
   </body>
+
+  <script src="/assets/AdminLTE/dist/js/app.min.js"></script>
 </html>

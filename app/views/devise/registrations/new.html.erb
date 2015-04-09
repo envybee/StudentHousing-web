@@ -1,46 +1,49 @@
 <html>
   <head>
     <%= render 'devise/shared/common_head' %>
+    <link rel="stylesheet" href="/assets/AdminLTE/dist/css/AdminLTE.min.css">
+    <link href="/assets/AdminLTE/dist/css/skins/_all-skins.min.css" rel="stylesheet" type="text/css" />
   </head>
 
-  <body>
+  <body class="register-page skin-blue">
     <%= render 'shared/common_front_nav' %>
-    <div class="container" id="homepage">
-      <div class="jumbotron">
-        <h2>Sign up</h2>
+    <div class="container register-box" id="homepage">
+      <div class="register-box-body">
+        <p class="login-box-msg">Sign up</p>
         <%= form_for(resource, as: resource_name, url: registration_path(resource_name)) do |f| %>
           <%= devise_error_messages! %>
 
-          <div class="field">
-            <%= f.label :email %><br />
-            <%= f.email_field :email, autofocus: true %>
+          <div class="form-group has-feedback">
+            <%= f.email_field :email, autofocus: true, :class => 'form-control', :placeholder => 'Email'  %>
+            <span class="glyphicon glyphicon-envelope form-control-feedback"></span>
           </div>
 
-          <div class="field">
-            <%= f.label :first_name %><br />
-            <%= f.text_field :first_name %>
+          <div class="form-group has-feedback">
+            <%= f.text_field :first_name, :class => 'form-control', :placeholder => 'First Name' %>
+            <span class="glyphicon glyphicon-user form-control-feedback"></span>
           </div>
 
-          <div class="field">
-            <%= f.label :last_name %><br />
-            <%= f.text_field :last_name %>
+          <div class="form-group has-feedback">
+            <%= f.text_field :last_name, :class => 'form-control', :placeholder => 'Last Name' %>
+            <span class="glyphicon glyphicon-user form-control-feedback"></span>
           </div>
 
-          <div class="field">
-            <%= f.label :password %>
+          <div class="form-group has-feedback">
             <% if @validatable %>
-            <em>(<%= @minimum_password_length %> characters minimum)</em>
-            <% end %><br />
-            <%= f.password_field :password, autocomplete: "off" %>
+              <%= f.password_field :password, autocomplete: "off", :class => 'form-control', :placeholder => 'Password (' + @minimum_password_length.to_s + ' characters minimum)' %>
+            <% else %>
+              <%= f.password_field :password, autocomplete: "off", :class => 'form-control', :placeholder => 'Password' %>
+            <% end %>
+            <span class="glyphicon glyphicon-lock form-control-feedback"></span>
           </div>
 
-          <div class="field">
-            <%= f.label :password_confirmation %><br />
-            <%= f.password_field :password_confirmation, autocomplete: "off" %>
+          <div class="form-group has-feedback">
+            <%= f.password_field :password_confirmation, autocomplete: "off", :class => 'form-control', :placeholder => 'Confirm Password'  %>
+            <span class="glyphicon glyphicon-log-in form-control-feedback"></span>
           </div>
 
           <div class="actions">
-            <%= f.submit "Sign up" %>
+            <%= f.submit "Sign up", :class => 'btn btn-primary btn-block btn-flat' %>
           </div>
         <% end %>
 
@@ -48,5 +51,7 @@
       </div>
     </div>
   </body>
+
+  <script src="/assets/AdminLTE/dist/js/app.min.js"></script>
 </html>
 
