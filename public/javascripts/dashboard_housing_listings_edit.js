@@ -368,6 +368,10 @@ $(".cloudinary-fileupload").on("cloudinarydone", function(e, data) {
   var cl_image_public_id = cloudinary_upload_response.public_id;
   var cl_image_id; // Corresponds to the row id of the image in the database
 
+  $("#carousel_next").show();
+  $("#carousel_previous").show();
+
+
   if(e.currentTarget.id == 'default_banner_image_file_upload') {
     image_category = 'banner';
   }
@@ -390,15 +394,27 @@ $(".cloudinary-fileupload").on("cloudinarydone", function(e, data) {
       
       var data_slide_to = $("#carousel_indicators").children().length;
       var $cloudinary_image_transformed = $.cloudinary.image(cloudinary_image_response.public_id, 
-                                          { width: 555, height: 315, crop: 'fill' });
+                                          { height: 315, crop: 'fill', class: 'center-block img-responsive' });
       
-      $("#carousel_indicators").append("<li data-target='#carousel-example-generic' data-slide-to= " + data_slide_to + "></li>");
+      if(data_slide_to == 0){
+        $("#carousel_indicators").append("<li data-target='#carousel-example-generic' data-slide-to='" + data_slide_to + "' class='active'></li>");
+      } else {
+        $("#carousel_indicators").append("<li data-target='#carousel-example-generic' data-slide-to='" + data_slide_to + "'></li>");
+      }
 
       var $title_description_html = $("<div class='carousel-caption'><h3>" + housing_image['title'] + "</h3><p>" + housing_image['description'] + "</p></div>");
 
-      var $div_item = $("<div class='item'></div>");
+      if(data_slide_to == 0){
+        var $div_item = $("<div class='item active' style='height: 315px;'></div>");
+      } else {
+        var $div_item = $("<div class='item' style='height: 315px;'></div>");
+      }
 
       $div_item.append($cloudinary_image_transformed).append($title_description_html);
+
+      if(data_slide_to == 0){
+        $("#carousel-example-generic").carousel();
+      }
 
       $("#carousel_inner").append($div_item);
 

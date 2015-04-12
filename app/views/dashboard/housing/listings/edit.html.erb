@@ -166,7 +166,11 @@
           <div class="col-md-4 col-sm-12 col-xs-12">
               <section class='panel'>
                 <section class='panel-body'>
-                  <div id="carousel-example-generic" class="carousel slide" data-ride="carousel">
+                  <% if @housing_listing.housing_images.length > 0 %>
+                    <div id="carousel-example-generic" class="carousel slide" data-ride="carousel">
+                  <% else %>
+                    <div id="carousel-example-generic" class="carousel slide">
+                  <% end %>
                     <!-- Indicators -->
                     <ol id="carousel_indicators" class="carousel-indicators">
                     <% i = 0%>
@@ -185,11 +189,11 @@
                       <% if @housing_listing.housing_images.length > 0%>
                         <% @housing_listing.housing_images.each do |housing_image| %>
                           <% if housing_image == @housing_listing.housing_images.first%>
-                          <div class="item active">
+                          <div class="item active" style="height: 315px;">
                           <% else %>
-                          <div class="item">
+                          <div class="item" style="height: 315px;">
                           <% end %>
-                            <img src="<%= housing_image.url %>" alt="..." style="width: 100%; height: 275px;"></img>
+                            <img class="center-block img-responsive" src="<%= housing_image.url %>" alt="..." style="max-height: 315px;"></img>
                             <div class="carousel-caption">
                               <h3><%= housing_image.title %></h3>
                               <p><%= housing_image.description %></p>
@@ -197,21 +201,30 @@
                           </div>
                         <% end %>
                       <% else %>
-                      <div id="no_photos_available" class="item active">
-                        <img alt="..." style="width: 100%; height: 275px;" src="/images/no_photos_available.jpg"></img>
-                      </div>
                       <% end %>
                     </div>
 
-                    <!-- Controls -->
-                    <a class="left carousel-control" href="#carousel-example-generic" role="button" data-slide="prev">
-                      <span class="glyphicon glyphicon-chevron-left" aria-hidden="true"></span>
-                      <span class="sr-only">Previous</span>
-                    </a>
-                    <a class="right carousel-control" href="#carousel-example-generic" role="button" data-slide="next">
-                      <span class="glyphicon glyphicon-chevron-right" aria-hidden="true"></span>
-                      <span class="sr-only">Next</span>
-                    </a>
+                    <% if @housing_listing.housing_images.length > 0%>
+                      <!-- Controls -->
+                      <a id="carousel_previous" class="left carousel-control" href="#carousel-example-generic" role="button" data-slide="prev">
+                        <span class="glyphicon glyphicon-chevron-left" aria-hidden="true"></span>
+                        <span class="sr-only">Previous</span>
+                      </a>
+                      <a id="carousel_next" class="right carousel-control" href="#carousel-example-generic" role="button" data-slide="next">
+                        <span class="glyphicon glyphicon-chevron-right" aria-hidden="true"></span>
+                        <span class="sr-only">Next</span>
+                      </a>
+                    <% else %>
+                      <!-- Controls -->
+                      <a id="carousel_previous" class="left carousel-control" href="#carousel-example-generic" role="button" data-slide="prev" style="display:none;">
+                        <span class="glyphicon glyphicon-chevron-left" aria-hidden="true"></span>
+                        <span class="sr-only">Previous</span>
+                      </a>
+                      <a id="carousel_next" class="right carousel-control" href="#carousel-example-generic" role="button" data-slide="next" style="display:none;">
+                        <span class="glyphicon glyphicon-chevron-right" aria-hidden="true"></span>
+                        <span class="sr-only">Next</span>
+                      </a>
+                    <% end %>
                   </div>
 
                   <button id="upload_photos_btn" class="btn btn-sm btn-success" style="width:100%; margin-top: 1%;">Upload photos</button>
