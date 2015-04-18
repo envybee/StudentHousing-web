@@ -27,3 +27,6 @@ test:
 production:
   <<: *default
   database: db/production.sqlite3
+  host: studenthousing.ctscjy64fggc.us-west-2.rds.amazonaws.com
+  user: root
+  password: vamsirama94
