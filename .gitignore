@@ -8,6 +8,7 @@
 /config/database.yml
 db/schema.rb
 Gemfile.lock
+.DS_Store
 
 # Ignore bundler config.
 /.bundle
