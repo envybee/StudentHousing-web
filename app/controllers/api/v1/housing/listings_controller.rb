@@ -33,8 +33,12 @@ class Api::V1::Housing::ListingsController < ApplicationController
   end
 
   def near
-  	test = HousingListing.near([43, -79], 200)
-  	render json:test
+    city = params[:city]
+    province = params[:province]
+    country = params[:country]
+    formatted_address = city + " " + province + ", " + country
+  	result = HousingListing.near(formatted_address, 50)
+  	render json:result
   end
 
   def comment
