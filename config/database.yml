@@ -27,7 +27,7 @@ test:
 production:
   <<: *default
   adapter: mysql
-  database: StudentHousing
+  database: studenthousing
   username: root
-  password: QXUajabm
-  host: localhost
+  password: vamsirama94
+  host: studenthousing.ctscjy64fggc.us-west-2.rds.amazonaws.com
