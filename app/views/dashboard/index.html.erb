@@ -21,82 +21,84 @@
 								<% end %>
 							<% end %>
 			  			</ul>
-					<% else %>
-						<p>No results found. Post your first entry by clicking <a id="click_here_create_listing" href="#">here</a></P>
-					<% end %>
-					<div id="my-tab-content" class="tab-content">
-						<section class="panel">
-							<section class="panel-body">
-								<div id="listing_analyticsss" class="tab-pane active">
-									<div class="row placeholders">
-										<!-- <div class="col-lg-3 col-md-6">
-											<div class="panel panel-primary">
-												<div class="panel-heading">
-													<i class="fa fa-binoculars fa-4x custom-fa"></i>
-													<div class="large">30</div>
-													<div class="subtext">Page Views</div>
+						<div id="my-tab-content" class="tab-content">
+							<section class="panel">
+								<section class="panel-body">
+									<div id="listing_analyticsss" class="tab-pane active">
+										<div class="row placeholders">
+											<!-- <div class="col-lg-3 col-md-6">
+												<div class="panel panel-primary">
+													<div class="panel-heading">
+														<i class="fa fa-binoculars fa-4x custom-fa"></i>
+														<div class="large">30</div>
+														<div class="subtext">Page Views</div>
+													</div>
 												</div>
-											</div>
-										</div> -->
-										<div class="col-lg-4 col-md-3">
-											<div class="small-box bg-aqua">
-								                <div class="inner">
-								                  <h3 id="num_alerts">0</h3>
-								                  <p>Alerts Sent</p>
-								                </div>
-								                <div class="icon">
-								                  <i class="fa fa-bell"></i>
-								                </div>
-								            </div>
-								        </div>
-								        <div class="col-lg-4 col-md-3">
-											<div class="small-box bg-teal">
-								                <div class="inner">
-								                  <h3 id="rating">0</h3>
-								                  <p>Rating</p>
-								                </div>
-								                <div class="icon">
-								                  <i class="fa fa-star"></i>
-								                </div>
-								            </div>
-								        </div>
-								        <div class="col-lg-4 col-md-3">
-											<div class="small-box bg-red">
-								                <div class="inner">
-								                  <h3 id="favorited">0</h3>
-								                  <p>Favorited</p>
-								                </div>
-								                <div class="icon">
-								                  <i class="fa fa-heart"></i>
-								                </div>
-								            </div>
-								        </div>
+											</div> -->
+											<div class="col-lg-4 col-md-3">
+												<div class="small-box bg-aqua">
+									                <div class="inner">
+									                  <h3 id="num_alerts">0</h3>
+									                  <p>Alerts Sent</p>
+									                </div>
+									                <div class="icon">
+									                  <i class="fa fa-bell"></i>
+									                </div>
+									            </div>
+									        </div>
+									        <div class="col-lg-4 col-md-3">
+												<div class="small-box bg-teal">
+									                <div class="inner">
+									                  <h3 id="rating">0</h3>
+									                  <p>Rating</p>
+									                </div>
+									                <div class="icon">
+									                  <i class="fa fa-star"></i>
+									                </div>
+									            </div>
+									        </div>
+									        <div class="col-lg-4 col-md-3">
+												<div class="small-box bg-red">
+									                <div class="inner">
+									                  <h3 id="favorited">0</h3>
+									                  <p>Favorited</p>
+									                </div>
+									                <div class="icon">
+									                  <i class="fa fa-heart"></i>
+									                </div>
+									            </div>
+									        </div>
+										</div>
 									</div>
-								</div>
-							</section>
-						</section>
-						<section class="panel panel-default">
-							<section class="panel-body">
-								<div id="chartdiv"></div>
-							</section>
-						</section>
-						<!-- <div class="col-lg-6 col-md-6">
-							<section class="panel panel-default">
-								<section class="panel-heading"><h3 class="panel-title">Page Views by Location</h3></section>
-								<section class="panel-body" style="padding-left: 0px; padding-right: 0px;">
-									<div id="pchart_pgviews"></div>
 								</section>
 							</section>
+							<section class="panel panel-default">
+								<section class="panel-body">
+									<div id="chartdiv"></div>
+								</section>
+							</section>
+							<!-- <div class="col-lg-6 col-md-6">
+								<section class="panel panel-default">
+									<section class="panel-heading"><h3 class="panel-title">Page Views by Location</h3></section>
+									<section class="panel-body" style="padding-left: 0px; padding-right: 0px;">
+										<div id="pchart_pgviews"></div>
+									</section>
+								</section>
+							</div>
+							<div class="col-lg-6 col-md-6">
+								<section class="panel panel-default">
+									<section class="panel-heading"><h3 class="panel-title">Sources</h3></section>
+									<section class="panel-body" style="padding-left: 0px; padding-right: 0px;">
+										<div id="pchart_sources"></div>
+									</section>
+								</section>
+							</div> -->
 						</div>
-						<div class="col-lg-6 col-md-6">
-							<section class="panel panel-default">
-								<section class="panel-heading"><h3 class="panel-title">Sources</h3></section>
-								<section class="panel-body" style="padding-left: 0px; padding-right: 0px;">
-									<div id="pchart_sources"></div>
-								</section>
-							</section>
-						</div> -->
-					</div>
+					<% else %>
+						<div class="callout callout-warning">
+							Post your first entry by clicking 'Post New Place' button above
+						</div>
+					<% end %>
 				</div>
 			</section>
 		</div>
@@ -112,6 +114,12 @@
 	/*
 		VARIABLES FOR SCRIPTS
 	*/
-	var compare_listing_id = <%= @my_listings.first.id %>;
+
+	var user_has_listings = true;
+	<% if @my_listings.length > 0 %>
+		var compare_listing_id = <%= @my_listings.first.id %>;
+	<% else %>
+		user_has_listings = false;
+	<% end %>
 </script>
 <%= javascript_include_tag "/javascripts/dashboard_index" %>
