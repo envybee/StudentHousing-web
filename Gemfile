@@ -47,6 +47,9 @@ gem 'geocoder'
 gem "paranoia", "~> 2.0"
 gem 'capistrano', '~> 3.4.0'
 
+# Sentry for error tracking
+gem "sentry-raven", :git => "https://github.com/getsentry/raven-ruby.git"
+
 group :development, :test do
   # Call 'byebug' anywhere in the code to stop execution and get a debugger console
   gem 'byebug'
