@@ -12,10 +12,10 @@ default: &default
 development:
   <<: *default
   adapter: mysql
-  database: studenthousing
+  database: StudentHousing
   username: root
-  password: vamsirama94
-  host: studenthousing.ctscjy64fggc.us-west-2.rds.amazonaws.com
+  password: QXUajabm
+  host: localhost
 
 # Warning: The database defined as "test" will be erased and
 # re-generated from your development database when you run "rake".
