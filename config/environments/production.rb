@@ -84,9 +84,9 @@ Rails.application.configure do
     port: 587,
     domain: "epithome.com",
     authentication: "plain",
-    enable_starttls_auto: true,
+    #enable_starttls_auto: true,
     user_name: "nvssproductions",
     password: "vamsirama94"
   }
-  
+
 end
