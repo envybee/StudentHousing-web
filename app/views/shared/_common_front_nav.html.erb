@@ -22,3 +22,77 @@
         </div>
     </nav>
 </header>
+
+<div class="modal" id="login_modal" tabindex="-1" role="dialog" aria-labelledby="login_modal" aria-hidden="true">
+    <div class="modal-dialog modal-sm">
+        <div class="modal-content">
+            <div class="modal-header">
+              <h2>Login</h2>
+            </div>
+            <div class="modal-body">
+                <%= form_for(:user, :url => session_path(:user)) do |f| %>
+                    <span>Email</span>
+                    <input type="text" class="form-control" name="user[email]" id="email" style="margin-bottom: 5px">
+                    <span>Password</span>
+                    <input type="password" class="form-control" name='user[password]'>
+                    <span class="help-block error" id="login_errors"></span>
+                    <span>
+                        <input type="checkbox" name='user[remember_me]' id='remember_me' checked> Remember me
+                        <span class="pull-right">
+                            <%= link_to "Forgot your password?", new_password_path(:user) %>
+                        </span>
+                    </span>
+                    <br />
+                    <button class="btn btn-lg btn-primary btn-block" id="login_btn" type="submit" style="margin-top:5px">Login</button>
+                    <span>Don't have an account yet? <a href="#" id="register_btn">Register</a> </span>
+                <% end %>
+            </div>
+            
+        </div>
+    </div>
+</div><!-- end of login_modal -->
+
+
+    <div class="modal" id="register_modal" tabindex="-1" role="dialog" aria-labelledby="register_modal" aria-hidden="true">
+        <div class="modal-dialog modal-md">
+            <div class="modal-content">
+                <div class="modal-header">
+                  <h2>Sign up</h2>
+                </div>
+                <div class="modal-body">
+                    <%= form_for(:user, :url => registration_path(:user)) do |f| %>
+                        <span>Email</span>
+                        <input type="text" class="form-control" name="user[email]" id="user_email" style="margin-bottom: 5px">
+
+                        <div class="field">
+                          <span>First Name</span> 
+                          <input type="text" class="form-control" name="user[first_name]" id="first_name" style="margin-bottom: 5px">
+                        </div>
+
+                        <div class="field">
+                          <span>Last Name</span> 
+                          <input type="text" class="form-control" name="user[last_name]" id="last_name" style="margin-bottom: 5px">
+
+                          <div class="field">
+                            <span>Password</span>
+                              <% if @validatable %>
+                              <em>(<%= @minimum_password_length %> characters minimum)</em>
+                              <% end %><br />
+                                <input type="password" class="form-control" name='user[password]' id="user_password">
+                                <span class="help-block error" id="login_errors"></span>
+                            </div>
+
+                            <div class="field">
+                            <span>Password Confirmation</span>
+                            <input type="password" class="form-control" name='user[password_confirmation]' id="user_password_confirmation">
+                         </div>
+
+                        <br />
+                        <button class="btn btn-lg btn-primary btn-block" id="login_btn" type="submit">Sign up</button>
+                    <% end %>
+                </div>
+                
+                </div>
+            </div>
+           </div>
+        </div><!-- end of register_modal -->

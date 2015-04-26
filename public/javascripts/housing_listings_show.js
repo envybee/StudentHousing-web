@@ -148,9 +148,13 @@ $('.datepicker').datepicker({
       },
       success: function(response){
         console.log(response);
+        $("#housing_inquiry_email_modal").modal("hide");
+        alert('Email has been sent successfully!');
       },
       error: function(response) {
         console.log(response);
+        $("#housing_inquiry_email_modal").modal("hide");
+        alert('There was an error sending the email. Please try again later!');
       }
     });
   });

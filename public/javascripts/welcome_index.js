@@ -6,19 +6,6 @@ $( document ).ready(function() {
         types: ['(cities)']
     });
 
-    $("#sign_in_btn").on("click", function(e) {
-    	e.preventDefault();
-
-    	$("#login_modal").modal("show");
-    });
-
-    $("#register_btn").on("click", function(e) {
-    	e.preventDefault(); 
-
-    	$("#login_modal").modal("hide");
-    	$("#register_modal").modal("show");
-    });
-
     var place;
 
     google.maps.event.addListener(address_autocomplete, 'place_changed', function() {
