@@ -36,6 +36,7 @@ Rails.application.routes.draw do
             get 'num_alerts'
             get 'rating'
             get 'favorites'
+            get 'reviews'
             post 'send_inquiry_email'
             post 'comment'
             post 'housing_with_filters'

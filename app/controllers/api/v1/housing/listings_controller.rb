@@ -173,4 +173,12 @@ class Api::V1::Housing::ListingsController < ApplicationController
                     :address => housing_listing.location.truncate(32)
                     }
   end
+
+  def reviews
+    housing_listing_id = params[:id]
+    housing_listing = HousingListing.find(housing_listing_id)
+    housing_reviews = housing_listing.housing_reviews
+    reviews = housing_reviews.joins(:user).select('housing_reviews.id, users.first_name, housing_reviews.comment, housing_reviews.rating, housing_reviews.created_at')
+    render json:reviews
+  end
 end
