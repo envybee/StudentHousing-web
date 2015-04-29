@@ -181,4 +181,11 @@ class Api::V1::Housing::ListingsController < ApplicationController
     reviews = housing_reviews.joins(:user).select('housing_reviews.id, users.first_name, housing_reviews.comment, housing_reviews.rating, housing_reviews.created_at')
     render json:reviews
   end
+
+  def images
+    housing_listing_id = params[:id]
+    housing_listing = HousingListing.find(housing_listing_id)
+    housing_images = housing_listing.housing_images
+    render json:housing_images
+  end
 end
