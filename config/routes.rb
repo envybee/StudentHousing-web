@@ -38,6 +38,7 @@ Rails.application.routes.draw do
             get 'favorites'
             get 'reviews'
             get 'images'
+            get 'amenities'
             post 'send_inquiry_email'
             post 'comment'
             post 'housing_with_filters'
