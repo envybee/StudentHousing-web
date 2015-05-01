@@ -39,6 +39,7 @@ Rails.application.routes.draw do
             get 'reviews'
             get 'images'
             get 'user_of_listing'
+            get 'amenities'
             post 'send_inquiry_email'
             post 'comment'
             post 'housing_with_filters'
