@@ -188,4 +188,11 @@ class Api::V1::Housing::ListingsController < ApplicationController
     housing_images = housing_listing.housing_images
     render json:housing_images
   end
+
+  def user_of_listing
+    housing_listing_id = params[:id]
+    housing_listing = HousingListing.find(housing_listing_id)
+    user = housing_listing.user
+    render json:user
+  end
 end
