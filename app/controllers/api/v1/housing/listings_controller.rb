@@ -194,6 +194,7 @@ class Api::V1::Housing::ListingsController < ApplicationController
     housing_listing = HousingListing.find(housing_listing_id)
     user = housing_listing.user
     render json:user
+  end
 
   def amenities
     housing_listing_id = params[:id]
