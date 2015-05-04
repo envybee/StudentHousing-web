@@ -229,7 +229,8 @@ $("#submit_btn").on("click", function(e) {
 
     var street_address = address_parts['street_number'] + " " + address_parts['route'];
     var city = address_parts['locality'];
-    var postal_code = address_parts['postal_code'].replace(" ", "");
+    var postal_code = address_parts['postal_code'] || address_parts['postal_code_prefix'];
+    postal_code = postal_code.replace(" ", "");
     var province = address_parts['administrative_area_level_1'];
     var country = address_parts['country'];
     var title = $("#housing_listing_title").val();
