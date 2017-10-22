@@ -13,6 +13,12 @@ Gemfile.lock
 # Ignore bundler config.
 /.bundle
 
+# Ignore config files
+/config/*
+
+# Ignore secret
+secret.pem
+
 # Ignore the default SQLite database.
 /db/*.sqlite3
 /db/*.sqlite3-journal
